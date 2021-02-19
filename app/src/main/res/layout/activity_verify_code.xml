@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".authentication.VerifyCodeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="40dp">
+
+        <TextView
+            style="@style/SemiBolTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Phone Verification"
+            android:textSize="34sp" />
+
+        <TextView
+            style="@style/RegularTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="10dp"
+            android:text="Enter your OTP code here"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/otpOne"
+                style="@style/RegularTextView"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edit_bottom_bg"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="15dp"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                tools:text="1" />
+
+            <EditText
+                android:id="@+id/otpTwo"
+                style="@style/RegularTextView"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edit_bottom_bg"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="15dp"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                tools:text="1" />
+
+            <EditText
+                android:id="@+id/otpThree"
+                style="@style/RegularTextView"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edit_bottom_bg"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="15dp"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                tools:text="1" />
+
+            <EditText
+                android:id="@+id/otpFour"
+                style="@style/RegularTextView"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/edit_bottom_bg"
+                android:inputType="number"
+                android:maxLength="1"
+                android:padding="15dp"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                tools:text="1" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/verify"
+            style="@style/SemiBolTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/sign_in_button_background"
+            android:text="verify now"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+</layout>
