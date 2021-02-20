@@ -22,13 +22,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/BoldTextView"
+                    android:id="@+id/signUpLabel"
+                    style="@style/RegularTextView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:background="@color/yellow"
                     android:padding="34dp"
-                    android:text="Sign Up with email and phone number"
-                    android:textSize="26sp" />
+                    tools:text="Sign Up with email and phone number"
+                    android:textSize="28sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -69,9 +70,9 @@
                             android:id="@+id/mobile"
                             style="@style/RegularTextView"
                             android:layout_width="match_parent"
-                            android:inputType="phone"
                             android:layout_height="wrap_content"
                             android:hint="Mobile number"
+                            android:inputType="phone"
                             android:textSize="17sp" />
 
                     </LinearLayout>

@@ -12,11 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.Home" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="DrawerText" parent="android:Widget.TextView">
@@ -30,27 +32,27 @@
     </style>
 
     <style name="RegularTextView" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/dark</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
     <style name="LightTextView" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/dark</item>
         <item name="android:fontFamily">@font/poppins_light</item>
     </style>
 
     <style name="SemiBolTextView" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/dark</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
     </style>
 
     <style name="BoldTextView" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/dark</item>
         <item name="android:fontFamily">@font/poppins_bold</item>
     </style>
 
     <style name="MediumTextView" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/dark</item>
         <item name="android:fontFamily">@font/poppins_medium</item>
     </style>
 

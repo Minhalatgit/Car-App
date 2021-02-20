@@ -53,8 +53,8 @@ class ServiceAdapter(
                 else -> R.drawable.purple_gradient
             }
 
-            layout.background = ContextCompat.getDrawable(context, gradientId);
-            serialNumber.text = position.toString()
+            layout.background = ContextCompat.getDrawable(context, gradientId)
+            serialNumber.text = (position + 1).toString()
             ratePrice.text = serviceItem.ratePrice
             distance.text = serviceItem.distance
             serviceName.text = serviceItem.serviceName
@@ -63,7 +63,7 @@ class ServiceAdapter(
 
     }
 
-    public interface ServiceListener {
+    interface ServiceListener {
         fun onServiceClick(position: Int)
     }
 }

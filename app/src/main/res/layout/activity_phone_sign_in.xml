@@ -39,12 +39,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/BoldTextView"
+                    android:id="@+id/loginLabel"
+                    style="@style/RegularTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="34dp"
-                    android:text="Login with your"
-                    android:textSize="26sp" />
+                    android:textSize="28sp"
+                    tools:text="Login with your" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
