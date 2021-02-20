@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             this,
             R.layout.activity_main
         )
-        //setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar)
         drawerLayout = binding.drawerLayout
 
         val navHostFragment =
@@ -48,13 +48,24 @@ class MainActivity : AppCompatActivity() {
                 R.id.serviceFragment -> setActionbarItems(
                     R.drawable.back_icon,
                     R.color.white,
-                    "Service"
+                    ""
                 )
                 R.id.chooseCarFragment -> setActionbarItems(
                     R.drawable.back_icon,
                     R.color.dark,
-                    "Choose Car"
+                    ""
                 )
+                R.id.paymentFragment -> setActionbarItems(
+                    R.drawable.back_icon,
+                    R.color.white,
+                    ""
+                )
+            }
+
+            if (destination.id == controller.graph.startDestination) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
     }

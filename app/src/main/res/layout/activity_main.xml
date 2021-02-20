@@ -13,29 +13,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-<!--            <androidx.appcompat.widget.Toolbar-->
-<!--                android:id="@+id/toolbar"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="?attr/actionBarSize">-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent">-->
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/dark"
+                    android:textSize="17sp"
+                    tools:text="Title" />
 
-<!--                    <com.suke.widget.SwitchButton-->
-<!--                        android:id="@+id/switch_button"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_alignParentEnd="true"-->
-<!--                        android:layout_centerVertical="true"-->
-<!--                        android:layout_marginEnd="10dp"-->
-<!--                        app:sb_button_color="@color/black"-->
-<!--                        app:sb_checked_color="@color/orange"-->
-<!--                        app:sb_checkline_color="@android:color/transparent"-->
-<!--                        app:sb_uncheckcircle_color="@android:color/transparent" />-->
+                <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:visibility="visible"
+                    app:sb_button_color="@color/black"
+                    app:sb_checked_color="@color/orange"
+                    app:sb_checkline_color="@android:color/transparent"
+                    app:sb_uncheckcircle_color="@android:color/transparent" />
 
-<!--                </RelativeLayout>-->
-<!--            </androidx.appcompat.widget.Toolbar>-->
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/navHostFragment"
@@ -54,6 +59,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:headerLayout="@layout/header_layout"
+            app:itemHorizontalPadding="30dp"
+            app:itemIconSize="35dp"
+            app:itemIconTint="@color/grey"
+            app:itemTextAppearance="@style/DrawerText"
             app:menu="@menu/drawer_menu" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

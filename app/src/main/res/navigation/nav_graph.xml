@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_serviceFragment_to_chooseCarFragment"
             app:destination="@id/chooseCarFragment" />
+        <argument
+            android:name="service_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/chooseCarFragment"
