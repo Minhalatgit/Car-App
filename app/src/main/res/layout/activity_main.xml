@@ -35,7 +35,7 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="10dp"
                     android:visibility="visible"
-                    app:sb_button_color="@color/black"
+                    app:sb_checked="false"
                     app:sb_checked_color="@color/orange"
                     app:sb_checkline_color="@android:color/transparent"
                     app:sb_uncheckcircle_color="@android:color/transparent" />

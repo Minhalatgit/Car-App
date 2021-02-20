@@ -77,6 +77,7 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
 
         setToolbarViews()
 
+
         switch.setOnCheckedChangeListener { view, isChecked ->
             if (isChecked) {
                 binding.statusLayout.visibility = View.VISIBLE
