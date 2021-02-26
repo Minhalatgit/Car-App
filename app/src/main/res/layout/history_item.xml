@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/profile" />
+
+            <TextView
+                android:id="@+id/username"
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@+id/profileImage"
+                android:textSize="17sp"
+                tools:text="Steve Bowen" />
+
+            <TextView
+                android:id="@+id/applePay"
+                style="@style/RegularTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/username"
+                android:layout_alignStart="@id/username"
+                android:background="@drawable/yellow_curve_bg"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="ApplePay" />
+
+            <TextView
+                android:id="@+id/discount"
+                style="@style/RegularTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/username"
+                android:layout_marginStart="6dp"
+                android:layout_toRightOf="@id/applePay"
+                android:background="@drawable/yellow_curve_bg"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Discount" />
+
+            <TextView
+                android:id="@+id/amount"
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:textSize="17sp"
+                tools:text="$25.00" />
+
+            <TextView
+                android:id="@+id/distance"
+                style="@style/MediumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/amount"
+                android:layout_alignEnd="@id/amount"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                tools:text="2.2 km" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/pickUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="PICK UP"
+            android:textColor="@color/grey"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/pickupAddress"
+            style="@style/RegularTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7958 Swift Village"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/dropOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="DROP OFF"
+            android:textColor="@color/grey"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/dropOffAddress"
+            style="@style/RegularTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="105 William St, Chicago, US"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

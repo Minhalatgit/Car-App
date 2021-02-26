@@ -40,4 +40,34 @@
         android:name="com.oip.carapp.home.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.oip.carapp.home.WalletFragment"
+        android:label="fragment_wallet"
+        tools:layout="@layout/fragment_wallet" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.oip.carapp.home.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.oip.carapp.home.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/inviteFriendFragment"
+        android:name="com.oip.carapp.home.InviteFriendFragment"
+        android:label="fragment_invite_friend"
+        tools:layout="@layout/fragment_invite_friend" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.oip.carapp.home.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.oip.carapp.home.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>
