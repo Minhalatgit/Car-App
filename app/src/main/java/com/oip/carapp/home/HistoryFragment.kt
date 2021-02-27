@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import com.michalsvec.singlerowcalendar.calendar.CalendarViewManager
 import com.michalsvec.singlerowcalendar.calendar.SingleRowCalendarAdapter
 import com.michalsvec.singlerowcalendar.selection.CalendarSelectionManager
 import com.michalsvec.singlerowcalendar.utils.DateUtils
+import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentHistoryBinding
 import com.oip.carapp.home.adapters.HistoryAdapter
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.calendar_item.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHistoryBinding
     private val calendar = Calendar.getInstance()
@@ -33,6 +35,8 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
+
+        setToolbarView()
 
         historyRecyclerView = binding.historyRecyclerView
 
@@ -182,5 +186,12 @@ class HistoryFragment : Fragment() {
         }
         calendar.add(Calendar.DATE, -1)
         return list
+    }
+
+    private fun setToolbarView() {
+        title.text = "History"
+        switch.visibility = View.GONE
+        navigationIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.yellow))
+        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
     }
 }

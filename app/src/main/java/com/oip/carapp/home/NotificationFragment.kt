@@ -1,20 +1,19 @@
 package com.oip.carapp.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
-import com.oip.carapp.databinding.FragmentHistoryBinding
 import com.oip.carapp.databinding.FragmentNotificationBinding
-import com.oip.carapp.databinding.FragmentWalletBinding
 import com.oip.carapp.home.adapters.NotificationAdapter
 import com.oip.carapp.home.models.Notification
 
-class NotificationFragment : Fragment() {
+class NotificationFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNotificationBinding
     private lateinit var notificationRecyclerView: RecyclerView
@@ -24,6 +23,8 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotificationBinding.inflate(inflater, container, false)
+
+        setToolbarView()
 
         val list = ArrayList<Notification>()
         list.apply {
@@ -39,5 +40,12 @@ class NotificationFragment : Fragment() {
         notificationRecyclerView.adapter = NotificationAdapter(list)
 
         return binding.root
+    }
+
+    private fun setToolbarView() {
+        title.text = "Notifications"
+        navigationIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.yellow))
+        switch.visibility = View.GONE
+        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
     }
 }

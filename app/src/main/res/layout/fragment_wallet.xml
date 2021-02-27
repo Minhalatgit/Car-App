@@ -72,8 +72,9 @@
             android:layout_centerInParent="true"
             android:layout_margin="20dp"
             android:background="@drawable/white_curve_bg"
+            android:elevation="5dp"
             android:orientation="horizontal"
-            android:padding="15dp">
+            android:padding="10dp">
 
             <RelativeLayout
                 android:id="@+id/dollarLayout"
@@ -105,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                tools:src="@drawable/call_icon" />
+                android:src="@drawable/right_arrow_icon" />
 
         </RelativeLayout>
 

@@ -1,18 +1,19 @@
 package com.oip.carapp.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentWalletBinding
 import com.oip.carapp.home.adapters.PaymentHistoryAdapter
 import com.oip.carapp.home.models.PaymentHistory
 
-class WalletFragment : Fragment() {
+class WalletFragment : BaseFragment() {
 
     private lateinit var binding: FragmentWalletBinding
     private lateinit var paymentHistoryRecyclerView: RecyclerView
@@ -22,6 +23,8 @@ class WalletFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWalletBinding.inflate(inflater, container, false)
+
+        setToolbarView()
 
         binding.tab.addTab(binding.tab.newTab().setText("Cash"))
         binding.tab.addTab(binding.tab.newTab().setText("Discount"))
@@ -40,5 +43,12 @@ class WalletFragment : Fragment() {
         paymentHistoryRecyclerView.adapter = PaymentHistoryAdapter(list)
 
         return binding.root
+    }
+
+    private fun setToolbarView() {
+        title.text = "My Wallet"
+        switch.visibility = View.GONE
+        navigationIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark))
+        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.yellow)
     }
 }

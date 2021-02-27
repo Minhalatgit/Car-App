@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.TypefaceSpan
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.oip.carapp.BaseFragment
 import com.oip.carapp.CustomTypefaceSpan
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentInviteFriendBinding
 
-class InviteFriendFragment : Fragment() {
+class InviteFriendFragment : BaseFragment() {
 
     lateinit var binding: FragmentInviteFriendBinding
 
@@ -22,6 +23,8 @@ class InviteFriendFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInviteFriendBinding.inflate(inflater, container, false)
+
+        setToolbarView()
 
         setInviteFriendStyle()
 
@@ -35,5 +38,11 @@ class InviteFriendFragment : Fragment() {
         val poppinsBoldSpan: TypefaceSpan = CustomTypefaceSpan("", poppinsBold)
         spannableString.setSpan(poppinsBoldSpan, 12, 15, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         binding.earn.text = spannableString
+    }
+
+    private fun setToolbarView() {
+        title.text = "Invite Friends"
+        switch.visibility = View.GONE
+        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
     }
 }

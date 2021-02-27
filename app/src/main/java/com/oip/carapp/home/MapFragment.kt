@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -23,22 +24,14 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
     private lateinit var binding: FragmentMapBinding
     private lateinit var servicesRecyclerView: RecyclerView
     private val list = ArrayList<Service>()
+
     lateinit var toolbar: Toolbar
     lateinit var title: TextView
     lateinit var switch: SwitchButton
+    lateinit var navigationIcon: ImageView
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding =
-            FragmentMapBinding.inflate(inflater, container, false)
-        servicesRecyclerView = binding.serviceRecyclerView
-        val supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-
-        servicesRecyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         list.add(
             Service(
                 "$ 25.00",
@@ -63,6 +56,20 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
                 "Lorem ipsum dolor"
             )
         )
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding =
+            FragmentMapBinding.inflate(inflater, container, false)
+        servicesRecyclerView = binding.serviceRecyclerView
+        val supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+
+        servicesRecyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
+
 
         servicesRecyclerView.adapter =
             ServiceAdapter(
@@ -77,7 +84,6 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
 
         setToolbarViews()
 
-
         switch.setOnCheckedChangeListener { view, isChecked ->
             if (isChecked) {
                 binding.statusLayout.visibility = View.VISIBLE
@@ -91,14 +97,19 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
 
     override fun onServiceClick(position: Int) {
         Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-            .navigate(MapFragmentDirections.actionMapFragmentToServiceFragment(list[position].serviceName));
+            .navigate(MapFragmentDirections.actionMapFragmentToServiceFragment(list[position].serviceName))
     }
 
     private fun setToolbarViews() {
         toolbar = activity?.findViewById(R.id.toolbar)!!
         title = toolbar.findViewById(R.id.title)
         switch = toolbar.findViewById(R.id.switch_button)
+        navigationIcon = toolbar.findViewById(R.id.navigationIcon)
+
+        navigationIcon.visibility = View.VISIBLE
         switch.visibility = View.VISIBLE
         title.text = "" // no title for map fragment
+        requireActivity().window.statusBarColor =
+            ContextCompat.getColor(requireContext(), R.color.white)
     }
 }
