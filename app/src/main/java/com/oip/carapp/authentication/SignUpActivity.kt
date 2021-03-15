@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.oip.carapp.CustomTypefaceSpan
 import com.oip.carapp.R
 import com.oip.carapp.databinding.ActivitySignUpBinding
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
 
 class SignUpActivity : AppCompatActivity() {
@@ -24,7 +25,11 @@ class SignUpActivity : AppCompatActivity() {
         setSignUpLabelStyle()
 
         binding.signIn.setOnClickListener {
-            startActivity(Intent(this, PhoneSignInActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
+        }
+
+        signUp.setOnClickListener {
+            startActivity(Intent(this, VerifyCodeActivity::class.java))
         }
     }
 

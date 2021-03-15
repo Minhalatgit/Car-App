@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.oip.carapp.R
 import com.oip.carapp.databinding.ActivitySignInBinding
+import com.oip.carapp.home.MainActivity
+import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity() {
 
@@ -15,8 +17,11 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
 
-        binding.signIn.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
+        signIn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        usePhone.setOnClickListener {
+            startActivity(Intent(this, PhoneSignInActivity::class.java))
         }
     }
 }

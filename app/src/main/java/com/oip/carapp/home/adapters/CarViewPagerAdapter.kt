@@ -3,7 +3,6 @@ package com.oip.carapp.home.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.oip.carapp.home.AllCarFragment
 import com.oip.carapp.home.HatchbackFragment
 import com.oip.carapp.home.PickUpTruckFragment
 import com.oip.carapp.home.SedanFragment

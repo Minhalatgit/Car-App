@@ -1,4 +1,4 @@
-package com.oip.carapp.home
+package com.oip.carapp.home.adapters
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentAllCarBinding
-import com.oip.carapp.home.adapters.ChooseCarAdapter
 import com.oip.carapp.home.models.Car
 
 class AllCarFragment : Fragment(), ChooseCarAdapter.ChooseCarListener {

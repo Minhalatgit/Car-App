@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".authentication.AuthenticationActivity">
 
@@ -57,7 +56,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/use_phone_button_background"
             android:fontFamily="@font/poppins"
-            android:text="Use Phone/Mobile"
+            android:text="Use Phone/Email"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
