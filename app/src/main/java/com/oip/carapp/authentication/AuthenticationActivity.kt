@@ -7,7 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.facebook.AccessToken
 import com.facebook.CallbackManager
+import com.facebook.Profile
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -37,7 +39,12 @@ class AuthenticationActivity : AppCompatActivity() {
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         // Facebook sign in object
-        callbackManager = CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create()
+
+        val accessToken = AccessToken.getCurrentAccessToken()
+        val isFbLoggedIn = accessToken != null && accessToken.isExpired
+        Log.d("Authentication", "onCreate: $isFbLoggedIn")
+        Log.d("Authentication", "onCreate: ${Profile.getCurrentProfile().firstName}")
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_authentication)
         binding.phone.setOnClickListener {
