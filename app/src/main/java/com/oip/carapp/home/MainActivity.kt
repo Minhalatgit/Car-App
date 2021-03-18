@@ -1,12 +1,17 @@
 package com.oip.carapp.home
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -15,7 +20,12 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.oip.carapp.R
+import com.oip.carapp.authentication.views.AuthenticationActivity
 import com.oip.carapp.databinding.ActivityMainBinding
+import com.oip.carapp.utils.PreferencesHandler
+import com.oip.carapp.utils.toast
+import com.vmadalin.easypermissions.EasyPermissions
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,8 +34,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationIcon: ImageView
     lateinit var navController: NavController
 
+    private lateinit var permissions: Array<String>
+
+    private val REQUEST_LOCATION = 1001
+    private val TAG = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        permissions = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION)
+        checkForPermissions(permissions)
+
         binding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_main
@@ -42,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         // connect menu items with fragments
         setupWithNavController(binding.navView, navController)
 
+        // Toolbar, hamburger and back button setup for all fragment
         navController.addOnDestinationChangedListener { controller, destination, _ ->
             when (destination.id) {
                 controller.graph.startDestination -> {
@@ -174,29 +194,55 @@ class MainActivity : AppCompatActivity() {
                 else -> drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             }
         }
+
+        // Navigation for logout
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.logout -> {
+                    PreferencesHandler.setIsLogin(false)
+                    val intent =
+                        Intent(this, AuthenticationActivity::class.java)
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+            }
+            NavigationUI.onNavDestinationSelected(it, navController)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private fun setActionbarItems(
-        actionBarColor: Int,
-        navigationIcon: Int,
-        displayNavigateIcon: Boolean
-    ) {
-        supportActionBar?.apply {
-            setIcon(navigationIcon)
-//            setDisplayShowHomeEnabled(displayNavigateIcon)
-//            setDisplayHomeAsUpEnabled(displayNavigateIcon)
-            setBackgroundDrawable(ContextCompat.getDrawable(this@MainActivity, actionBarColor))
-            this.title = ""
+    private fun openDrawerListener() {
+        navigationIcon.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
         }
     }
 
-    private fun openDrawerListener() {
-        navigationIcon.setOnClickListener {
-            drawerLayout.openDrawer(Gravity.LEFT)
+    private fun checkForPermissions(permissions: Array<String>) {
+        if (EasyPermissions.hasPermissions(this, *permissions)) {
+            Log.d(TAG, "checkForPermissions: Permissions are already granted")
+        } else {
+            Log.d(TAG, "checkForPermissions: Permissions not granted, now asking")
+            EasyPermissions.requestPermissions(
+                host = this,
+                rationale = "Location permission is required to continue using the app",
+                requestCode = REQUEST_LOCATION,
+                perms = *permissions
+            )
         }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 }

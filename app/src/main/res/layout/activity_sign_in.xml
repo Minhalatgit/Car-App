@@ -2,88 +2,112 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".authentication.SignInActivity">
+    tools:context=".authentication.views.SignInActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/app_logo" />
-
-        <TextView
-            android:id="@+id/nameLabel"
-            style="@style/BoldTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="40dp"
-            android:text="Name"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/name"
-            style="@style/LightTextView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/tick_icon"
-            android:inputType="textCapSentences"
-            android:padding="15dp"
-            android:textSize="14sp"
-            tools:text="Minhal" />
+            android:layout_height="match_parent"
+            android:background="@drawable/sign_in_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/passwordLabel"
-            style="@style/BoldTextView"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/app_logo" />
+
+            <TextView
+                android:id="@+id/emailLabel"
+                style="@style/BoldTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="40dp"
+                android:text="Email"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/email"
+                style="@style/LightTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/tick_icon"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textSize="14sp"
+                tools:text="xyz@gmail.com" />
+
+            <TextView
+                android:id="@+id/passwordLabel"
+                style="@style/BoldTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="10dp"
+                android:text="Password"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/password"
+                style="@style/LightTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:textSize="14sp"
+                tools:text="Minhal" />
+
+            <TextView
+                android:id="@+id/usePhone"
+                style="@style/LightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:text="Use Phone Number"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/forgotPassword"
+                style="@style/LightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Forgot Password?"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/signIn"
+                style="@style/SemiBolTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/sign_in_button_background"
+                android:text="Sign In"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <!--        <com.github.ybq.android.spinkit.SpinKitView-->
+        <!--            android:id="@+id/progress"-->
+        <!--            style="@style/SpinKitView.Circle"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:SpinKit_Color="@color/yellow" />-->
+
+        <ProgressBar
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="10dp"
-            android:text="Password"
-            android:textSize="12sp" />
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/dark"
+            android:visibility="gone" />
 
-        <EditText
-            android:id="@+id/password"
-            style="@style/LightTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textSize="14sp"
-            tools:text="Minhal" />
-
-        <TextView
-            android:id="@+id/usePhone"
-            style="@style/LightTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="Use Phone Number"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/forgotPassword"
-            style="@style/LightTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Forgot Password?"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/signIn"
-            style="@style/SemiBolTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/sign_in_button_background"
-            android:text="Sign In"
-            android:textAllCaps="false" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

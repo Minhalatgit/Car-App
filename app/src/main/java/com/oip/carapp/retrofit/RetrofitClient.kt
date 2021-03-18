@@ -12,7 +12,6 @@ object RetrofitClient {
 
     private val retrofitClient: Retrofit.Builder by lazy {
 
-        // For logging
         val levelType: Level = if (BuildConfig.BUILD_TYPE.contentEquals("debug"))
             Level.BODY else Level.NONE
         val logging = HttpLoggingInterceptor()

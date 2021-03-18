@@ -1,4 +1,4 @@
-package com.oip.carapp.home
+package com.oip.carapp.home.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.oip.carapp.R
 
-class HatchbackFragment : Fragment() {
+class SedanFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_hatchback, container, false)
+        return inflater.inflate(R.layout.fragment_sedan, container, false)
     }
 }

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.oip.carapp.authentication.AuthenticationActivity
+import com.oip.carapp.authentication.views.AuthenticationActivity
+import com.oip.carapp.home.MainActivity
+import com.oip.carapp.utils.PreferencesHandler
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +15,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, AuthenticationActivity::class.java)
+
+            val intent = if (PreferencesHandler.getIsLogin()) {
+                Intent(this, MainActivity::class.java)
+            } else {
+                Intent(this, AuthenticationActivity::class.java)
+            }
             startActivity(intent)
             finish()
         }, 2000)

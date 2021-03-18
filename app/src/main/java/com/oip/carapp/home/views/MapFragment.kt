@@ -1,4 +1,4 @@
-package com.oip.carapp.home
+package com.oip.carapp.home.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -57,19 +57,14 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
             )
         )
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding =
             FragmentMapBinding.inflate(inflater, container, false)
-        servicesRecyclerView = binding.serviceRecyclerView
-        val supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-
-        servicesRecyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-
-
+        initViews()
 
         servicesRecyclerView.adapter =
             ServiceAdapter(
@@ -78,11 +73,9 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
                 this
             )
 
+        val supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         supportFragment.getMapAsync {
-
         }
-
-        setToolbarViews()
 
         switch.setOnCheckedChangeListener { view, isChecked ->
             if (isChecked) {
@@ -96,11 +89,16 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
     }
 
     override fun onServiceClick(position: Int) {
+        // Sending service name to next Service fragment
         Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-            .navigate(MapFragmentDirections.actionMapFragmentToServiceFragment(list[position].serviceName))
+            .navigate(
+                MapFragmentDirections.actionMapFragmentToServiceFragment(
+                    list[position].serviceName
+                )
+            )
     }
 
-    private fun setToolbarViews() {
+    private fun initViews() {
         toolbar = activity?.findViewById(R.id.toolbar)!!
         title = toolbar.findViewById(R.id.title)
         switch = toolbar.findViewById(R.id.switch_button)
@@ -111,5 +109,9 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
         title.text = "" // no title for map fragment
         requireActivity().window.statusBarColor =
             ContextCompat.getColor(requireContext(), R.color.white)
+
+        servicesRecyclerView = binding.serviceRecyclerView
+        servicesRecyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
     }
 }

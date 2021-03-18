@@ -13,12 +13,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CarApp">
-        <activity android:name=".authentication.VerifyCodeActivity" />
-        <activity android:name=".authentication.PhoneSignInActivity" />
-        <activity android:name=".authentication.SignUpActivity" />
-        <activity android:name=".authentication.SignInActivity" />
-        <activity android:name=".authentication.AuthenticationActivity" />
+        android:theme="@style/Theme.CarApp"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".authentication.views.ForgotPasswordActivity" />
+        <activity android:name=".authentication.views.VerifyCodeActivity" />
+        <activity android:name=".authentication.views.PhoneSignInActivity" />
+        <activity android:name=".authentication.views.SignUpActivity" />
+        <activity android:name=".authentication.views.SignInActivity" />
+        <activity android:name=".authentication.views.AuthenticationActivity" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait">
@@ -32,29 +34,27 @@
             android:name=".home.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Home">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDl1MifvjQxVbCeThlY1IMt58_8BhJxZ8A" />
-
         <meta-data
             android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
-
         <meta-data
             android:name="com.facebook.accountkit.ClientToken"
             android:value="@string/account_key_client_token" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -63,7 +63,6 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -76,7 +75,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

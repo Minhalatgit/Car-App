@@ -3,4 +3,10 @@
     <string name="facebook_app_id">260738538966444</string>
     <string name="fb_login_protocol_scheme">fb260738538966444</string>
     <string name="account_key_client_token">4675e7469b9459f24371129b1e54ce47</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

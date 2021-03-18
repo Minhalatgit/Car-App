@@ -1,4 +1,4 @@
-package com.oip.carapp.home
+package com.oip.carapp.home.views
 
 import android.os.Bundle
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.oip.carapp.authentication
+package com.oip.carapp.authentication.views
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
-import com.facebook.Profile
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -19,7 +18,6 @@ import com.google.android.gms.tasks.Task
 import com.oip.carapp.R
 import com.oip.carapp.databinding.ActivityAuthenticationBinding
 import kotlinx.android.synthetic.main.activity_authentication.*
-import java.util.*
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -44,7 +42,7 @@ class AuthenticationActivity : AppCompatActivity() {
         val accessToken = AccessToken.getCurrentAccessToken()
         val isFbLoggedIn = accessToken != null && accessToken.isExpired
         Log.d("Authentication", "onCreate: $isFbLoggedIn")
-        Log.d("Authentication", "onCreate: ${Profile.getCurrentProfile().firstName}")
+        //Log.d("Authentication", "onCreate: ${Profile.getCurrentProfile().firstName}")
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_authentication)
         binding.phone.setOnClickListener {

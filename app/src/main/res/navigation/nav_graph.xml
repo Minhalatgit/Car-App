@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.oip.carapp.home.MapFragment"
+        android:name="com.oip.carapp.home.views.MapFragment"
         tools:layout="@layout/fragment_map">
         <action
             android:id="@+id/action_mapFragment_to_serviceFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/serviceFragment"
-        android:name="com.oip.carapp.home.ServiceFragment"
+        android:name="com.oip.carapp.home.views.ServiceFragment"
         tools:layout="@layout/fragment_service" >
         <action
             android:id="@+id/action_serviceFragment_to_chooseCarFragment"
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseCarFragment"
-        android:name="com.oip.carapp.home.ChooseCarFragment"
+        android:name="com.oip.carapp.home.views.ChooseCarFragment"
         tools:layout="@layout/fragment_choose_car" >
         <action
             android:id="@+id/action_chooseCarFragment_to_paymentFragment"
@@ -34,27 +34,27 @@
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
-        android:name="com.oip.carapp.home.PaymentFragment"
+        android:name="com.oip.carapp.home.views.PaymentFragment"
         tools:layout="@layout/fragment_payment" />
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.oip.carapp.home.WalletFragment"
+        android:name="com.oip.carapp.home.views.WalletFragment"
         tools:layout="@layout/fragment_wallet" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.oip.carapp.home.HistoryFragment"
+        android:name="com.oip.carapp.home.views.HistoryFragment"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.oip.carapp.home.NotificationFragment"
+        android:name="com.oip.carapp.home.views.NotificationFragment"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/inviteFriendFragment"
-        android:name="com.oip.carapp.home.InviteFriendFragment"
+        android:name="com.oip.carapp.home.views.InviteFriendFragment"
         tools:layout="@layout/fragment_invite_friend" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.oip.carapp.home.SettingsFragment"
+        android:name="com.oip.carapp.home.views.SettingsFragment"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_accountFragment"
@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.oip.carapp.home.AccountFragment"
+        android:name="com.oip.carapp.home.views.AccountFragment"
         tools:layout="@layout/fragment_account" >
         <action
             android:id="@+id/action_accountFragment_to_settingsFragment"

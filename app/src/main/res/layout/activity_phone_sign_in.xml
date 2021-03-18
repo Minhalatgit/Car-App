@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".authentication.PhoneSignInActivity">
+    tools:context=".authentication.views.PhoneSignInActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:padding="34dp"
                     android:textSize="28sp"
-                    tools:text="Login with your" />
+                    tools:text="Login with your number" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -59,9 +59,18 @@
                         android:layout_marginTop="20dp"
                         android:orientation="horizontal">
 
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/countryCodeSpinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            app:ccp_autoDetectCountry="true"
+                            app:ccp_showNameCode="false" />
+
                         <Spinner
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/countryCode"
@@ -70,10 +79,11 @@
                             android:layout_height="wrap_content"
                             android:text="+84"
                             android:textColor="@color/black"
-                            android:textSize="17sp" />
+                            android:textSize="17sp"
+                            android:visibility="gone" />
 
                         <EditText
-                            android:id="@+id/mobile"
+                            android:id="@+id/phone"
                             style="@style/RegularTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
