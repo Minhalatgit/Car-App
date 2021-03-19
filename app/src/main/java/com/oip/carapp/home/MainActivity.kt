@@ -1,14 +1,8 @@
 package com.oip.carapp.home
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -23,8 +17,6 @@ import com.oip.carapp.R
 import com.oip.carapp.authentication.views.AuthenticationActivity
 import com.oip.carapp.databinding.ActivityMainBinding
 import com.oip.carapp.utils.PreferencesHandler
-import com.oip.carapp.utils.toast
-import com.vmadalin.easypermissions.EasyPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,16 +26,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationIcon: ImageView
     lateinit var navController: NavController
 
-    private lateinit var permissions: Array<String>
-
-    private val REQUEST_LOCATION = 1001
     private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        permissions = arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION)
-        checkForPermissions(permissions)
 
         binding = DataBindingUtil.setContentView(
             this,
@@ -221,28 +207,5 @@ class MainActivity : AppCompatActivity() {
         navigationIcon.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
-    }
-
-    private fun checkForPermissions(permissions: Array<String>) {
-        if (EasyPermissions.hasPermissions(this, *permissions)) {
-            Log.d(TAG, "checkForPermissions: Permissions are already granted")
-        } else {
-            Log.d(TAG, "checkForPermissions: Permissions not granted, now asking")
-            EasyPermissions.requestPermissions(
-                host = this,
-                rationale = "Location permission is required to continue using the app",
-                requestCode = REQUEST_LOCATION,
-                perms = *permissions
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 }

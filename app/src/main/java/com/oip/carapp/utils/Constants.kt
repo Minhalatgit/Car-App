@@ -8,4 +8,7 @@ object Constants {
     const val PREF_NAME = "car_app_preferences"
     const val IS_LOGIN = "is_login"
 
+    const val LOCATION_SERVICE_ID = 175
+    const val ACTION_START_LOCATION_SERVICE = "startLocationService"
+    const val ACTION_STOP_LOCATION_SERVICE = "stopLocationService"
 }

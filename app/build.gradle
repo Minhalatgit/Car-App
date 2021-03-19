@@ -79,9 +79,6 @@ dependencies {
     // Toggle button
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
 
-    // Map
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-
     // Circle Image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
@@ -90,6 +87,12 @@ dependencies {
 
     // Horizontal Calendar
     implementation 'com.michalsvec:single-row-calednar:1.0.0'
+
+    // Map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    // Fused Location
+    implementation "com.google.android.gms:play-services-location:18.0.0"
 
     // Google play service login
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
