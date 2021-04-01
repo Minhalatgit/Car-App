@@ -1,6 +1,7 @@
 package com.oip.carapp.home.adapters
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -85,6 +86,6 @@ class AllCarFragment : Fragment(), ChooseCarAdapter.ChooseCarListener {
     }
 
     override fun onCarClick(position: Int) {
-        TODO("Not yet implemented")
+        Log.d("AllCarFragment", "onCarClick: $position")
     }
 }

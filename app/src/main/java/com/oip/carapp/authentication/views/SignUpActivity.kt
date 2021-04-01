@@ -46,42 +46,48 @@ class SignUpActivity : AppCompatActivity() {
 
         signUp.setOnClickListener {
 
-            val email = email.text.toString().trim()
-            val password = password.text.toString().trim()
-            val phone = phone.text.toString().replace("[\\s\\-]".toRegex(), "")
+            startActivity(
+                Intent(
+                    this@SignUpActivity,
+                    VerifyCodeActivity::class.java
+                )
+            )
 
-            if (isValid(email, password, phone)) {
-
-                RetrofitClient.apiInterface.register(email, password, countryCode + phone)
-                    .enqueue(object : Callback<BaseResponse<AuthResponse>> {
-                        override fun onFailure(
-                            call: Call<BaseResponse<AuthResponse>>,
-                            t: Throwable
-                        ) {
-                            toast(t.message!!)
-                        }
-
-                        override fun onResponse(
-                            call: Call<BaseResponse<AuthResponse>>,
-                            response: Response<BaseResponse<AuthResponse>>
-                        ) {
-                            response.body()?.apply {
-                                if (success) {
-                                    toast(message)
-                                    startActivity(
-                                        Intent(
-                                            this@SignUpActivity,
-                                            VerifyCodeActivity::class.java
-                                        )
-                                    )
-                                } else {
-                                    toast(message)
-                                }
-                            }
-                        }
-
-                    })
-            }
+//            val email = email.text.toString().trim()
+//            val password = password.text.toString().trim()
+//            val phone = phone.text.toString().replace("[\\s\\-]".toRegex(), "")
+//            if (isValid(email, password, phone)) {
+//
+//                RetrofitClient.apiInterface.register(email, password, countryCode + phone)
+//                    .enqueue(object : Callback<BaseResponse<AuthResponse>> {
+//                        override fun onFailure(
+//                            call: Call<BaseResponse<AuthResponse>>,
+//                            t: Throwable
+//                        ) {
+//                            toast(t.message!!)
+//                        }
+//
+//                        override fun onResponse(
+//                            call: Call<BaseResponse<AuthResponse>>,
+//                            response: Response<BaseResponse<AuthResponse>>
+//                        ) {
+//                            response.body()?.apply {
+//                                if (success) {
+//                                    toast(message)
+//                                    startActivity(
+//                                        Intent(
+//                                            this@SignUpActivity,
+//                                            VerifyCodeActivity::class.java
+//                                        )
+//                                    )
+//                                } else {
+//                                    toast(message)
+//                                }
+//                            }
+//                        }
+//
+//                    })
+//            }
         }
 
         countryCodePicker.setOnCountryChangeListener {

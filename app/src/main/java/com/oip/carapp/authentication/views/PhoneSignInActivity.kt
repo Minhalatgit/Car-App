@@ -29,9 +29,11 @@ class PhoneSignInActivity : AppCompatActivity() {
         setSignInStyle()
 
         binding.next.setOnClickListener {
-            if (isValid(phone.text.toString().trim().replace("[\\s\\-]".toRegex(), ""))) {
-                startActivity(Intent(this, VerifyCodeActivity::class.java))
-            }
+            // for alpha build
+            startActivity(Intent(this, VerifyCodeActivity::class.java))
+//            if (isValid(phone.text.toString().trim().replace("[\\s\\-]".toRegex(), ""))) {
+//                startActivity(Intent(this, VerifyCodeActivity::class.java))
+//            }
         }
         countryCodePicker.setOnCountryChangeListener {
             countryCode = countryCodePicker.selectedCountryCodeWithPlus

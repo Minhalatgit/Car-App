@@ -38,12 +38,19 @@ class SignInActivity : AppCompatActivity() {
         progress = binding.progress
 
         signIn.setOnClickListener {
-            val email = email.text.toString().trim()
-            val password = password.text.toString().trim()
 
-            if (isValid(email, password)) {
-                login(email, password)
-            }
+            // For alpha build
+            val intent =
+                Intent(this@SignInActivity, MainActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+//            val email = email.text.toString().trim()
+//            val password = password.text.toString().trim()
+//            if (isValid(email, password)) {
+//                login(email, password)
+//            }
         }
         usePhone.setOnClickListener {
             startActivity(Intent(this, PhoneSignInActivity::class.java))
