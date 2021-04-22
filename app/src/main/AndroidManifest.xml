@@ -19,10 +19,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".authentication.views.ForgotPasswordActivity" />
         <activity android:name=".authentication.views.VerifyCodeActivity" />
-        <activity android:name=".authentication.views.PhoneSignInActivity" />
         <activity android:name=".authentication.views.SignUpActivity" />
-        <activity android:name=".authentication.views.SignInActivity" />
-        <activity android:name=".authentication.views.AuthenticationActivity" />
+        <activity android:name=".authentication.views.LoginActivity" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait">

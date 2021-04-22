@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import com.oip.carapp.CustomTypefaceSpan
 import com.oip.carapp.R
 import com.oip.carapp.databinding.ActivityForgotPasswordBinding
-import com.oip.carapp.databinding.ActivitySignInBinding
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -21,6 +20,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_password)
         setForgotPasswordStyle()
+
+
     }
 
     private fun setForgotPasswordStyle() {

@@ -43,50 +43,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:background="@drawable/edit_text_border_bg"
                         android:hint="name@example.com"
                         android:inputType="textEmailAddress"
+                        android:padding="10dp"
                         android:textSize="17sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
-
-                        <com.hbb20.CountryCodePicker
-                            android:id="@+id/countryCodeSpinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            app:ccp_autoDetectCountry="true"
-                            app:ccp_showNameCode="false" />
-
-                        <Spinner
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone" />
-
-                        <TextView
-                            android:id="@+id/countryCode"
-                            style="@style/RegularTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="+84"
-                            android:textColor="@color/black"
-                            android:textSize="17sp"
-                            android:visibility="gone" />
-
-                        <EditText
-                            android:id="@+id/phone"
-                            style="@style/RegularTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Mobile number"
-                            android:inputType="phone"
-                            android:textSize="17sp" />
-
-                    </LinearLayout>
 
                     <EditText
                         android:id="@+id/password"
@@ -94,8 +55,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:background="@drawable/edit_text_border_bg"
                         android:hint="Password"
                         android:inputType="textPassword"
+                        android:padding="10dp"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/repeatPassword"
+                        style="@style/RegularTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edit_text_border_bg"
+                        android:hint="Repeat Password"
+                        android:inputType="textPassword"
+                        android:padding="10dp"
                         android:textSize="17sp" />
 
                     <Button

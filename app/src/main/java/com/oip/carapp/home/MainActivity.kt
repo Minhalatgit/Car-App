@@ -14,7 +14,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.oip.carapp.R
-import com.oip.carapp.authentication.views.AuthenticationActivity
+import com.oip.carapp.authentication.views.LoginActivity
 import com.oip.carapp.databinding.ActivityMainBinding
 import com.oip.carapp.utils.PreferencesHandler
 import kotlinx.android.synthetic.main.activity_main.*
@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.logout -> {
                     PreferencesHandler.setIsLogin(false)
                     val intent =
-                        Intent(this, AuthenticationActivity::class.java)
+                        Intent(this, LoginActivity::class.java)
                     intent.flags =
                         Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)

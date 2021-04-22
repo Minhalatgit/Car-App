@@ -14,38 +14,26 @@ import androidx.databinding.DataBindingUtil
 import com.hbb20.CountryCodePicker
 import com.oip.carapp.CustomTypefaceSpan
 import com.oip.carapp.R
-import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.databinding.ActivitySignUpBinding
-import com.oip.carapp.retrofit.BaseResponse
-import com.oip.carapp.retrofit.RetrofitClient
+import com.oip.carapp.home.MainActivity
 import com.oip.carapp.utils.toast
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.activity_sign_up.email
-import kotlinx.android.synthetic.main.activity_sign_up.password
 import kotlinx.android.synthetic.main.activity_sign_up.signIn
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var countryCodePicker: CountryCodePicker
-
-    private var countryCode: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
-        countryCodePicker = binding.countryCodeSpinner
         setSignUpLabelStyle()
 
         signIn.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
+            onBackPressed()
         }
 
         signUp.setOnClickListener {
-
             startActivity(
                 Intent(
                     this@SignUpActivity,
@@ -90,10 +78,6 @@ class SignUpActivity : AppCompatActivity() {
 //            }
         }
 
-        countryCodePicker.setOnCountryChangeListener {
-            countryCode = countryCodePicker.selectedCountryCodeWithPlus
-            countryCodePicker.registerCarrierNumberEditText(phone)
-        }
     }
 
     private fun isValid(email: String, password: String, number: String): Boolean {

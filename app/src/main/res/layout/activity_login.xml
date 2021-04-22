@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".authentication.views.SignInActivity">
+    tools:context=".authentication.views.LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -63,20 +62,12 @@
                 tools:text="Minhal" />
 
             <TextView
-                android:id="@+id/usePhone"
-                style="@style/LightTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:text="Use Phone Number"
-                android:textSize="14sp" />
-
-            <TextView
                 android:id="@+id/forgotPassword"
                 style="@style/LightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_gravity="start"
                 android:text="Forgot Password?"
                 android:textSize="14sp" />
 
@@ -89,6 +80,39 @@
                 android:background="@drawable/sign_in_button_background"
                 android:text="Sign In"
                 android:textAllCaps="false" />
+
+            <TextView
+                android:id="@+id/signUp"
+                style="@style/LightTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Don't have an account? SignUp!"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/google"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/google" />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/facebook" />
+            </LinearLayout>
 
         </LinearLayout>
 

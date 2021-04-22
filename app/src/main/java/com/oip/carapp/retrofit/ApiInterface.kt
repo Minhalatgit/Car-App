@@ -9,14 +9,14 @@ import retrofit2.http.POST
 interface ApiInterface {
 
     @FormUrlEncoded
-    @POST("login")
+    @POST("auth/login")
     fun login(
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<BaseResponse<AuthResponse>>
 
     @FormUrlEncoded
-    @POST("register")
+    @POST("auth/register")
     fun register(
         @Field("email") email: String,
         @Field("password") password: String,

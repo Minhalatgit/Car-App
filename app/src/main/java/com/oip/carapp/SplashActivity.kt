@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.oip.carapp.authentication.views.AuthenticationActivity
+import com.oip.carapp.authentication.views.LoginActivity
 import com.oip.carapp.home.MainActivity
 import com.oip.carapp.utils.PreferencesHandler
 
@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
             val intent = if (PreferencesHandler.getIsLogin()) {
                 Intent(this, MainActivity::class.java)
             } else {
-                Intent(this, AuthenticationActivity::class.java)
+                Intent(this, LoginActivity::class.java)
             }
             startActivity(intent)
             finish()
