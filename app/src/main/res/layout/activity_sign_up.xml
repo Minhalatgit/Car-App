@@ -62,13 +62,13 @@
                         android:textSize="17sp" />
 
                     <EditText
-                        android:id="@+id/repeatPassword"
+                        android:id="@+id/confirmPassword"
                         style="@style/RegularTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/edit_text_border_bg"
-                        android:hint="Repeat Password"
+                        android:hint="Confirm Password"
                         android:inputType="textPassword"
                         android:padding="10dp"
                         android:textSize="17sp" />
@@ -111,6 +111,14 @@
                 android:text="Sign In" />
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:elevation="2dp"
+            android:indeterminateTint="@color/dark"
+            android:visibility="gone" />
 
     </RelativeLayout>
 </layout>

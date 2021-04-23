@@ -96,20 +96,20 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
         binding =
             FragmentMapBinding.inflate(inflater, container, false)
         initViews()
-        locationRequest = LocationRequest.create().apply {
-            interval = 1000 * 5
-            fastestInterval = 1000 * 2
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                super.onLocationResult(locationResult)
-                Log.d(TAG, "Requesting location")
-                getLocationData(locationResult.lastLocation)
-            }
-        }
+//        locationRequest = LocationRequest.create().apply {
+//            interval = 1000 * 5
+//            fastestInterval = 1000 * 2
+//            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//        }
+//        locationCallback = object : LocationCallback() {
+//            override fun onLocationResult(locationResult: LocationResult) {
+//                super.onLocationResult(locationResult)
+//                Log.d(TAG, "Requesting location")
+//                getLocationData(locationResult.lastLocation)
+//            }
+//        }
 
-        updateGps()
+//        updateGps()
 
         supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 

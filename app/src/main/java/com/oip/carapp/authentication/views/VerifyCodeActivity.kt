@@ -3,71 +3,72 @@ package com.oip.carapp.authentication.views
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Patterns
+import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.oip.carapp.home.MainActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.oip.carapp.R
+import com.oip.carapp.authentication.viewmodel.VerifyCodeViewModel
 import com.oip.carapp.databinding.ActivityVerifyCodeBinding
+import com.oip.carapp.home.MainActivity
+import com.oip.carapp.utils.hideProgressBar
+import com.oip.carapp.utils.showProgressBar
 import com.oip.carapp.utils.toast
 import kotlinx.android.synthetic.main.activity_verify_code.*
 
-
 class VerifyCodeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityVerifyCodeBinding
+    private val TAG = "VerifyCodeActivity"
 
-    private lateinit var otpOne: EditText
-    private lateinit var otpTwo: EditText
-    private lateinit var otpThree: EditText
-    private lateinit var otpFour: EditText
+    private lateinit var binding: ActivityVerifyCodeBinding
+    private lateinit var viewModel: VerifyCodeViewModel
+
+    private lateinit var email: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_verify_code)
+
+        viewModel = ViewModelProvider(this).get(VerifyCodeViewModel::class.java)
+
+        if (intent.hasExtra("email"))
+            email = intent.getStringExtra("email")!!
+
+        viewModel.result.observe(this, Observer {
+            Log.d(TAG, "Result observer called")
+            hideProgressBar(window, progress)
+            if (it.isValid) {
+                toast(it.message)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            } else {
+                toast(it.message)
+            }
+        })
+
         initViews()
 
         verify.setOnClickListener {
-
-
-            startActivity(Intent(this, MainActivity::class.java))
+            val code = otpOne.text.toString() + otpTwo.text + otpThree.text + otpFour.text
+            Log.d(TAG, code)
+            if (this::email.isInitialized) {
+                Log.d(TAG, "Email $email $code")
+                showProgressBar(window, progress)
+                viewModel.verify(email, code)
+            }
         }
 
     }
 
     private fun initViews() {
-        otpOne = binding.otpOne
-        otpTwo = binding.otpTwo
-        otpThree = binding.otpThree
-        otpFour = binding.otpFour
-
-        otpOne.addTextChangedListener(GenericTextWatcher(otpOne));
-        otpTwo.addTextChangedListener(GenericTextWatcher(otpTwo));
-        otpThree.addTextChangedListener(GenericTextWatcher(otpThree));
-        otpFour.addTextChangedListener(GenericTextWatcher(otpFour));
-    }
-
-    private fun isValid(email: String, code: String): Boolean {
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Email must not be empty", Toast.LENGTH_SHORT).show()
-            return false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            toast("Email is invalid")
-            return false
-        }
-        if (TextUtils.isEmpty(code)) {
-            Toast.makeText(this, "Please enter code", Toast.LENGTH_SHORT).show()
-            return false
-        } else if (code.length < 6) {
-            toast("Please complete the code")
-            return false
-        }
-        return true
+        otpOne.addTextChangedListener(GenericTextWatcher(otpOne))
+        otpTwo.addTextChangedListener(GenericTextWatcher(otpTwo))
+        otpThree.addTextChangedListener(GenericTextWatcher(otpThree))
+        otpFour.addTextChangedListener(GenericTextWatcher(otpFour))
     }
 
     inner class GenericTextWatcher(private var view: View) : TextWatcher {

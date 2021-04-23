@@ -20,13 +20,13 @@ interface ApiInterface {
     fun register(
         @Field("email") email: String,
         @Field("password") password: String,
-        @Field("number") number: String
+        @Field("confirm_password") confirmPassword: String
     ): Call<BaseResponse<AuthResponse>>
 
     @FormUrlEncoded
-    @POST("verify_code")
+    @POST("auth/verify")
     fun verifyCode(
         @Field("email") email: String,
-        @Field("code") code: String
+        @Field("verification_code") code: String
     ): Call<BaseResponse<AuthResponse>>
 }
