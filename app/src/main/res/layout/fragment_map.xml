@@ -62,7 +62,7 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/top_curve_bg"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <View
                 android:layout_width="50dp"

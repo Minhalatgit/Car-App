@@ -3,23 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mapFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.oip.carapp.home.views.MapFragment"
-        tools:layout="@layout/fragment_map">
-        <action
-            android:id="@+id/action_mapFragment_to_serviceFragment"
-            app:destination="@id/serviceFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_map"/>
     <fragment
         android:id="@+id/serviceFragment"
         android:name="com.oip.carapp.home.views.ServiceFragment"
-        tools:layout="@layout/fragment_service" >
-        <action
-            android:id="@+id/action_serviceFragment_to_chooseCarFragment"
-            app:destination="@id/chooseCarFragment" />
+        tools:layout="@layout/fragment_service">
         <argument
             android:name="service_name"
             app:argType="string" />
@@ -27,7 +20,7 @@
     <fragment
         android:id="@+id/chooseCarFragment"
         android:name="com.oip.carapp.home.views.ChooseCarFragment"
-        tools:layout="@layout/fragment_choose_car" >
+        tools:layout="@layout/fragment_choose_car">
         <action
             android:id="@+id/action_chooseCarFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
@@ -55,7 +48,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.oip.carapp.home.views.SettingsFragment"
-        tools:layout="@layout/fragment_settings" >
+        tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
@@ -63,11 +56,16 @@
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.oip.carapp.home.views.AccountFragment"
-        tools:layout="@layout/fragment_account" >
+        tools:layout="@layout/fragment_account">
         <action
             android:id="@+id/action_accountFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
             app:popUpTo="@id/settingsFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.oip.carapp.home.views.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
 </navigation>

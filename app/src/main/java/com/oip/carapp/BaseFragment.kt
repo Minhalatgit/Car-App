@@ -22,7 +22,5 @@ open class BaseFragment : Fragment() {
         mactivity = requireActivity() as AppCompatActivity
         toolbar = mactivity.findViewById(R.id.toolbar)!!
         title = toolbar.findViewById(R.id.title)
-        switch = toolbar.findViewById(R.id.switch_button)
-        navigationIcon = toolbar.findViewById(R.id.navigationIcon)
     }
 }

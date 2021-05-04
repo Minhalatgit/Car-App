@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="bottom_view">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/home_icon"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/serviceFragment"
+        android:icon="@drawable/group_icon"
+        android:title="Services" />
+
+    <item
+        android:id="@+id/offers"
+        android:icon="@drawable/offer_icon"
+        android:title="Offers" />
+
+    <item
+        android:id="@+id/stores"
+        android:icon="@drawable/store_icon"
+        android:title="Stores" />
+
+    <item
+        android:id="@+id/more"
+        android:icon="@drawable/more_icon"
+        android:title="More" />
+</menu>

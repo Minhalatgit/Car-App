@@ -4,72 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".home.MainActivity">
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/navigationIcon"
+                    android:id="@+id/search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/hamburger_icon" />
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/dark"
-                    android:textSize="17sp"
-                    tools:text="Title" />
-
-                <com.suke.widget.SwitchButton
-                    android:id="@+id/switch_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:layout_centerVertical="true"
                     android:layout_marginEnd="10dp"
-                    android:visibility="visible"
-                    app:sb_checked="false"
-                    app:sb_checked_color="@color/orange"
-                    app:sb_checkline_color="@android:color/transparent"
-                    app:sb_uncheckcircle_color="@android:color/transparent" />
+                    android:layout_toStartOf="@id/profileImage"
+                    android:src="@drawable/search_icon" />
 
-            </androidx.appcompat.widget.Toolbar>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/profile" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/navHostFragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/toolbar"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_graph" />
-
-        </RelativeLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navView"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/header_layout"
-            app:itemHorizontalPadding="30dp"
-            app:itemIconSize="35dp"
-            app:itemIconTint="@color/grey"
-            app:itemTextAppearance="@style/DrawerText"
-            app:menu="@menu/drawer_menu" />
+            android:layout_above="@id/bottomView"
+            android:layout_below="@+id/toolbar"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/yellow"
+            app:itemIconTint="@color/dark"
+            app:itemTextColor="@color/dark"
+            app:menu="@menu/bottom_menu" />
+
+    </RelativeLayout>
+
 </layout>

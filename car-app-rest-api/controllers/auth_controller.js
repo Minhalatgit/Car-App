@@ -4,21 +4,6 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const { authSchema } = require('../helper/validation_schema');
 
-// const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//         user: '@gmail.com',
-//         pass: 'password'
-//     }
-// });
-
-// const mailOptions = {
-//     from: 'test@gmail.com',
-//     to: 'test@gmail.com',
-//     subject: 'Sending email',
-//     text: `Testing email`
-// };
-
 async function sendEmail(email, code) {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com', // Gmail Host
@@ -75,13 +60,13 @@ exports.register = async (req, res) =>{
                             console.log('Email sent')
                                 return res.json({
                                     status: true,
-                                    msg: "User registered successfully",
+                                    msg: "User registered successfully, check your email",
                                 })
                         }).catch(()=>{
                             console.log('Email sending failed')
                             return res.json({
                                 status: false,
-                                msg: "Something went wrong",
+                                msg: "Verification failed, try again",
                             })
                         })
 

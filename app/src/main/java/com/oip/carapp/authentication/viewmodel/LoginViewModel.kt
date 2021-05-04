@@ -47,6 +47,13 @@ class LoginViewModel : ViewModel() {
                     ) {
                         response.body()?.apply {
                             if (status) {
+                                if (data.status == 1) {
+                                    //verified account
+                                    Log.d(TAG, "Account verified")
+                                } else {
+                                    //Not verified account
+                                    Log.d(TAG, "Not Verified")
+                                }
                                 _result.value =
                                     Result(true, msg)
                                 Log.d(TAG, msg)

@@ -45,8 +45,13 @@ class LoginActivity : AppCompatActivity() {
         })
 
         signIn.setOnClickListener {
-            showProgressBar(window, progress)
-            viewModel.login(email.text.toString().trim(), password.text.toString().trim())
+            val intent =
+                Intent(this@LoginActivity, MainActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+//            showProgressBar(window, progress)
+//            viewModel.login(email.text.toString().trim(), password.text.toString().trim())
         }
         signUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))

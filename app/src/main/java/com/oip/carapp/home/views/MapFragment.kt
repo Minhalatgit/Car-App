@@ -144,8 +144,6 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
     private fun initViews() {
         toolbar = activity?.findViewById(R.id.toolbar)!!
         title = toolbar.findViewById(R.id.title)
-        switch = toolbar.findViewById(R.id.switch_button)
-        navigationIcon = toolbar.findViewById(R.id.navigationIcon)
 
         navigationIcon.visibility = View.VISIBLE
         switch.visibility = View.VISIBLE
