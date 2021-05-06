@@ -132,13 +132,6 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
     }
 
     override fun onServiceClick(position: Int) {
-        // Sending service name to next Service fragment
-        Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-            .navigate(
-                MapFragmentDirections.actionMapFragmentToServiceFragment(
-                    list[position].serviceName
-                )
-            )
     }
 
     private fun initViews() {
