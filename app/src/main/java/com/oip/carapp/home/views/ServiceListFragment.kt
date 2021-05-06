@@ -1,47 +1,50 @@
 package com.oip.carapp.home.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
-import com.oip.carapp.databinding.FragmentOfferBinding
-import com.oip.carapp.home.adapters.DiscountAdapter
-import com.oip.carapp.home.models.Discount
+import com.oip.carapp.databinding.FragmentServiceListBinding
+import com.oip.carapp.home.adapters.ServicePagerAdapter
 
-class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
+class ServiceListFragment : BaseFragment() {
 
-    private val TAG = "OfferFragment"
-
-    private lateinit var binding: FragmentOfferBinding
-    private val discountList = ArrayList<Discount>()
+    private lateinit var binding: FragmentServiceListBinding
+    lateinit var args: ServiceFragmentArgs
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOfferBinding.inflate(layoutInflater, container, false)
+        binding = FragmentServiceListBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
 
-        binding.discountList.layoutManager = LinearLayoutManager(activity)
-        binding.discountList.adapter =
-            DiscountAdapter(discountList, requireContext(), this)
+//        args = ServiceFragmentArgs.fromBundle(requireArguments())
+//        binding.title.text = args.serviceType
+
+        val list = arrayListOf("Oil", "Engine", "Tune", "Belt", "Fluid")
+        binding.viewPager.adapter =
+            ServicePagerAdapter(
+                list,
+                requireActivity()
+            )
+        TabLayoutMediator(
+            binding.tab,
+            binding.viewPager,
+            TabLayoutMediator.TabConfigurationStrategy { tab: TabLayout.Tab, position: Int ->
+                tab.text = list[position]
+            }).attach()
 
         return binding.root
     }
 
-    override fun onDiscountClick(position: Int) {
-        Log.d(TAG, "onDiscountClick: $position")
-    }
 }

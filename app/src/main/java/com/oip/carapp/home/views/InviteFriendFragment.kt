@@ -24,7 +24,6 @@ class InviteFriendFragment : BaseFragment() {
     ): View? {
         binding = FragmentInviteFriendBinding.inflate(inflater, container, false)
 
-        setToolbarView()
 
         setInviteFriendStyle()
 
@@ -40,9 +39,4 @@ class InviteFriendFragment : BaseFragment() {
         binding.earn.text = spannableString
     }
 
-    private fun setToolbarView() {
-        title.text = "Invite Friends"
-        switch.visibility = View.GONE
-        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
-    }
 }

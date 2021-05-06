@@ -35,7 +35,6 @@ class HistoryFragment : BaseFragment() {
     ): View? {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
 
-        setToolbarView()
 
         historyRecyclerView = binding.historyRecyclerView
 
@@ -187,10 +186,4 @@ class HistoryFragment : BaseFragment() {
         return list
     }
 
-    private fun setToolbarView() {
-        title.text = "History"
-        switch.visibility = View.GONE
-        navigationIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.yellow))
-        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
-    }
 }

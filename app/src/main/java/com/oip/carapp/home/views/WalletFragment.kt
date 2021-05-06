@@ -24,7 +24,6 @@ class WalletFragment : BaseFragment() {
     ): View? {
         binding = FragmentWalletBinding.inflate(inflater, container, false)
 
-        setToolbarView()
 
         binding.tab.addTab(binding.tab.newTab().setText("Cash"))
         binding.tab.addTab(binding.tab.newTab().setText("Discount"))
@@ -45,10 +44,4 @@ class WalletFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun setToolbarView() {
-        title.text = "My Wallet"
-        switch.visibility = View.GONE
-        navigationIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark))
-        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.yellow)
-    }
 }

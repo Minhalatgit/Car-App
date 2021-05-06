@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentServiceBinding
 
-class ServiceFragment : Fragment() {
+class ServiceFragment : BaseFragment() {
 
     private lateinit var binding: FragmentServiceBinding
 
@@ -21,7 +19,12 @@ class ServiceFragment : Fragment() {
     ): View? {
         binding =
             FragmentServiceBinding.inflate(inflater, container, false)
+        window.statusBarColor = requireActivity().getColor(R.color.white)
 
+        binding.mechanic.setOnClickListener {
+            Navigation.findNavController(requireActivity(), R.id.navHostFragment)
+                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment())
+        }
 
         return binding.root
     }

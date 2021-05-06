@@ -24,8 +24,6 @@ class NotificationFragment : BaseFragment() {
     ): View? {
         binding = FragmentNotificationBinding.inflate(inflater, container, false)
 
-        setToolbarView()
-
         val list = ArrayList<Notification>()
         list.apply {
             add(Notification("System", "Booking #1234 has been success..."))
@@ -42,10 +40,4 @@ class NotificationFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun setToolbarView() {
-        title.text = "Notifications"
-        navigationIcon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.yellow))
-        switch.visibility = View.GONE
-        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
-    }
 }

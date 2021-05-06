@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -12,7 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrate
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentChooseCarBinding
-import com.oip.carapp.home.adapters.CarViewPagerAdapter
+import com.oip.carapp.home.adapters.ServicePagerAdapter
 
 class ChooseCarFragment : BaseFragment() {
 
@@ -27,7 +26,7 @@ class ChooseCarFragment : BaseFragment() {
 
         val list = arrayListOf("All Car", "Sedan", "Hatchback", "Pick Up Truck")
         binding.viewPager.adapter =
-            CarViewPagerAdapter(
+            ServicePagerAdapter(
                 list,
                 requireActivity()
             )
@@ -43,16 +42,8 @@ class ChooseCarFragment : BaseFragment() {
                 .navigate(R.id.action_chooseCarFragment_to_paymentFragment)
         }
 
-        setToolbarViews()
 
         return binding.root
     }
 
-    private fun setToolbarViews() {
-        title.text = "Choose Car"
-        title.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-        switch.visibility = View.GONE
-        navigationIcon.visibility = View.GONE
-        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.dark)
-    }
 }

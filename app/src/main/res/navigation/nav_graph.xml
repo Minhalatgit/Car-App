@@ -6,16 +6,19 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.oip.carapp.home.views.MapFragment"
-        tools:layout="@layout/fragment_map"/>
+        android:id="@+id/storeFragment"
+        android:name="com.oip.carapp.home.views.StoreFragment"
+        tools:layout="@layout/fragment_store" />
     <fragment
         android:id="@+id/serviceFragment"
         android:name="com.oip.carapp.home.views.ServiceFragment"
         tools:layout="@layout/fragment_service">
         <argument
-            android:name="service_name"
+            android:name="service_type"
             app:argType="string" />
+        <action
+            android:id="@+id/action_serviceFragment_to_serviceListFragment"
+            app:destination="@id/serviceListFragment" />
     </fragment>
     <fragment
         android:id="@+id/chooseCarFragment"
@@ -68,4 +71,19 @@
         android:name="com.oip.carapp.home.views.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/offerFragment"
+        android:name="com.oip.carapp.home.views.OfferFragment"
+        android:label="OfferFragment"
+        tools:layout="@layout/fragment_offer" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.oip.carapp.home.views.MoreFragment"
+        android:label="MoreFragment"
+        tools:layout="@layout/fragment_more" />
+    <fragment
+        android:id="@+id/serviceListFragment"
+        android:name="com.oip.carapp.home.views.ServiceListFragment"
+        android:label="ServiceListFragment"
+        tools:layout="@layout/fragment_service_list" />
 </navigation>

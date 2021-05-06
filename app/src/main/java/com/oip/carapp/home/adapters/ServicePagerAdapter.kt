@@ -7,7 +7,7 @@ import com.oip.carapp.home.views.HatchbackFragment
 import com.oip.carapp.home.views.PickUpTruckFragment
 import com.oip.carapp.home.views.SedanFragment
 
-class CarViewPagerAdapter(private val titles: ArrayList<String>, val fragment: FragmentActivity) :
+class ServicePagerAdapter(private val titles: ArrayList<String>, val fragment: FragmentActivity) :
     FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int {

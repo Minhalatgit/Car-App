@@ -14,17 +14,17 @@
         android:title="Services" />
 
     <item
-        android:id="@+id/offers"
+        android:id="@+id/offerFragment"
         android:icon="@drawable/offer_icon"
         android:title="Offers" />
 
     <item
-        android:id="@+id/stores"
+        android:id="@+id/storeFragment"
         android:icon="@drawable/store_icon"
         android:title="Stores" />
 
     <item
-        android:id="@+id/more"
+        android:id="@+id/moreFragment"
         android:icon="@drawable/more_icon"
         android:title="More" />
 </menu>

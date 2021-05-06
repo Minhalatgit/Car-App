@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".home.views.MapFragment">
+    tools:context=".home.views.StoreFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/statusLayout" />
 
         <LinearLayout
             android:id="@+id/statusLayout"
@@ -21,305 +13,23 @@
             android:layout_height="wrap_content"
             android:background="@color/yellow"
             android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/moon_icon" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/SemiBolTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You are offline !"
-                    android:textSize="14sp" />
-
-                <TextView
-                    style="@style/RegularTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Turn Location ON"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/servicesLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/top_curve_bg"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <View
-                android:layout_width="50dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/curve_dash_bg" />
+            android:padding="15dp">
 
             <TextView
-                style="@style/SemiBolTextView"
+                style="@style/BoldTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:text="Services"
+                android:text="Stores"
                 android:textSize="17sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/serviceRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp" />
-
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/bookingLayout"
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/top_curve_bg"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <View
-                android:layout_width="50dp"
-                android:layout_height="5dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/curve_dash_bg" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profileImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/profile" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/name"
-                        style="@style/SemiBolTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Jermiah Curtis"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/service"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:text="Two Truck Driver"
-                        android:textColor="@color/grey"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/ratePrice"
-                        style="@style/RegularTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$20.00"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/per"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
-                        android:text="Per hour"
-                        android:textColor="@color/grey"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:paddingStart="40dp">
-
-                <TextView
-                    android:id="@+id/pickUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="PICK UP"
-                    android:textColor="@color/grey"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/pickupAddress"
-                    style="@style/RegularTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7958 Swift Village" />
-
-                <TextView
-                    android:id="@+id/dropOff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="DROP OFF"
-                    android:textColor="@color/grey"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/dropOffAddress"
-                    style="@style/RegularTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="105 William St, Chicago, US" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@drawable/yellow_curve_bg"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-                <LinearLayout
-                    android:id="@+id/onlineHoursLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/clock_icon" />
-
-                    <TextView
-                        android:id="@+id/hoursOnline"
-                        style="@style/BoldTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10.2"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/hoursOnlineLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="HOURS ONLINE"
-                        android:textColor="@color/grey_four"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/totalDistanceLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/speed_icon" />
-
-                    <TextView
-                        android:id="@+id/totalDistance"
-                        style="@style/BoldTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30 KM"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/totalDistanceLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="TOTAL DISTANCE"
-                        android:textColor="@color/grey_four"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/totalJobsLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/total_jobs_icon"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:id="@+id/totalJobs"
-                        style="@style/BoldTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/totalJobsLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="TOTAL JOBS"
-                        android:textColor="@color/grey_four"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@id/statusLayout" />
 
     </RelativeLayout>
 </layout>

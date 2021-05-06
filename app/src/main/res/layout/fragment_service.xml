@@ -29,6 +29,7 @@
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
+                    android:id="@+id/mechanic"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:background="@drawable/service_bg"

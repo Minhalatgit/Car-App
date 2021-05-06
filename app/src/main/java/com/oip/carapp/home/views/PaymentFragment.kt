@@ -19,16 +19,7 @@ class PaymentFragment : BaseFragment() {
     ): View? {
         binding = FragmentPaymentBinding.inflate(inflater, container, false)
 
-        setToolbarViews()
 
         return binding.root
-    }
-
-    private fun setToolbarViews() {
-        title.setTextColor(ContextCompat.getColor(requireContext(), R.color.dark))
-        title.text = "Payment Fragment"
-        switch.visibility = View.GONE
-        navigationIcon.visibility = View.GONE
-        mactivity.window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
     }
 }

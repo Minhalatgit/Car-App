@@ -13,15 +13,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -32,23 +25,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
-import com.oip.carapp.databinding.FragmentMapBinding
-import com.oip.carapp.home.adapters.ServiceAdapter
-import com.oip.carapp.home.models.Service
-import com.suke.widget.SwitchButton
+import com.oip.carapp.databinding.FragmentStoreBinding
 import java.lang.Exception
 
-class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
+class StoreFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentMapBinding
+    private lateinit var binding: FragmentStoreBinding
     private lateinit var servicesRecyclerView: RecyclerView
-    private val list = ArrayList<Service>()
-
-    lateinit var toolbar: Toolbar
-    lateinit var title: TextView
-    lateinit var switch: SwitchButton
-    lateinit var navigationIcon: ImageView
 
     private val REQUEST_LOCATION = 1001
     private lateinit var googleMap: GoogleMap
@@ -62,31 +47,6 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        list.add(
-            Service(
-                "$ 25.00",
-                "22 km",
-                "Jump",
-                "Lorem ipsum dolor"
-            )
-        )
-        list.add(
-            Service(
-                "$ 25.00",
-                "22 km",
-                "Tow",
-                "Lorem ipsum dolor"
-            )
-        )
-        list.add(
-            Service(
-                "$ 25.00",
-                "22 km",
-                "Lockout",
-                "Lorem ipsum dolor"
-            )
-        )
     }
 
     override fun onCreateView(
@@ -94,8 +54,8 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            FragmentMapBinding.inflate(inflater, container, false)
-        initViews()
+            FragmentStoreBinding.inflate(inflater, container, false)
+        window.statusBarColor = requireActivity().getColor(R.color.white)
 //        locationRequest = LocationRequest.create().apply {
 //            interval = 1000 * 5
 //            fastestInterval = 1000 * 2
@@ -113,40 +73,7 @@ class MapFragment : Fragment(), ServiceAdapter.ServiceListener {
 
         supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
-        servicesRecyclerView.adapter =
-            ServiceAdapter(
-                list,
-                requireContext(),
-                this
-            )
-
-        switch.setOnCheckedChangeListener { view, isChecked ->
-            if (isChecked) {
-                binding.statusLayout.visibility = View.VISIBLE
-            } else {
-                binding.statusLayout.visibility = View.GONE
-            }
-        }
-
         return binding.root
-    }
-
-    override fun onServiceClick(position: Int) {
-    }
-
-    private fun initViews() {
-        toolbar = activity?.findViewById(R.id.toolbar)!!
-        title = toolbar.findViewById(R.id.title)
-
-        navigationIcon.visibility = View.VISIBLE
-        switch.visibility = View.VISIBLE
-        title.text = "" // no title for map fragment
-        requireActivity().window.statusBarColor =
-            ContextCompat.getColor(requireContext(), R.color.white)
-
-        servicesRecyclerView = binding.serviceRecyclerView
-        servicesRecyclerView.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun moveCamera(

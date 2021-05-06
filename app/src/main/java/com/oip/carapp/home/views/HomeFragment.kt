@@ -2,11 +2,12 @@ package com.oip.carapp.home.views
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.oip.carapp.BaseFragment
+import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentHomeBinding
 import com.oip.carapp.home.adapters.AppointmentAdapter
 import com.oip.carapp.home.adapters.DiscountAdapter
@@ -15,7 +16,7 @@ import com.oip.carapp.home.models.Appointment
 import com.oip.carapp.home.models.Discount
 import com.oip.carapp.home.models.Service
 
-class HomeFragment : Fragment(), ServiceAdapter.ServiceListener,
+class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
     AppointmentAdapter.AppointmentListener, DiscountAdapter.DiscountListener {
 
     private val TAG = "HomeFragment"
@@ -105,17 +106,21 @@ class HomeFragment : Fragment(), ServiceAdapter.ServiceListener,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        window.statusBarColor = requireActivity().getColor(R.color.white)
 
         // service list
-        binding.serviceList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        binding.serviceList.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.serviceList.adapter = ServiceAdapter(serviceList, requireContext(), this)
 
         // appointment list
-        binding.appointmentList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        binding.appointmentList.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.appointmentList.adapter =
             AppointmentAdapter(appointmentList, requireContext(), this)
 
-        binding.discountList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        binding.discountList.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.discountList.adapter =
             DiscountAdapter(discountList, requireContext(), this)
         return binding.root
