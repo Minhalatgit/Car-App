@@ -5,13 +5,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".home.adapters.AllCarFragment">
+        tools:context=".home.views.TuneFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/carsRecyclerView"
+            android:id="@+id/tuneServiceList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp" />
+            android:padding="10dp"
+            tools:listitem="@layout/car_service_item" />
 
     </RelativeLayout>
 </layout>

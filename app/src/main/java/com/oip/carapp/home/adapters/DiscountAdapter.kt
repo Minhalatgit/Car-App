@@ -15,9 +15,9 @@ class DiscountAdapter(
     val context: Context,
     private val listener: DiscountListener
 ) :
-    RecyclerView.Adapter<DiscountAdapter.ServiceViewHolder>() {
+    RecyclerView.Adapter<DiscountAdapter.DiscountViewHolder>() {
 
-    inner class ServiceViewHolder(itemView: View, listener: DiscountListener) :
+    inner class DiscountViewHolder(itemView: View, listener: DiscountListener) :
         RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image)
         val name: TextView = itemView.findViewById(R.id.name)
@@ -30,7 +30,7 @@ class DiscountAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ServiceViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DiscountViewHolder(
         LayoutInflater.from(context).inflate(R.layout.discount_item, parent, false), listener
     )
 
@@ -38,7 +38,7 @@ class DiscountAdapter(
         return list.size
     }
 
-    override fun onBindViewHolder(holder: ServiceViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DiscountViewHolder, position: Int) {
         val discount = list[position]
 
         holder.apply {

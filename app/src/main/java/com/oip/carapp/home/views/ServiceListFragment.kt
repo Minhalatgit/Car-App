@@ -32,11 +32,7 @@ class ServiceListFragment : BaseFragment() {
 //        binding.title.text = args.serviceType
 
         val list = arrayListOf("Oil", "Engine", "Tune", "Belt", "Fluid")
-        binding.viewPager.adapter =
-            ServicePagerAdapter(
-                list,
-                requireActivity()
-            )
+        binding.viewPager.adapter = ServicePagerAdapter(list, requireActivity())
         TabLayoutMediator(
             binding.tab,
             binding.viewPager,

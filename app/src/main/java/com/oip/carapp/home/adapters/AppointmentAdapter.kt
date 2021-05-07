@@ -14,9 +14,9 @@ class AppointmentAdapter(
     val context: Context,
     private val listener: AppointmentListener
 ) :
-    RecyclerView.Adapter<AppointmentAdapter.ServiceViewHolder>() {
+    RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder>() {
 
-    inner class ServiceViewHolder(itemView: View, listener: AppointmentListener) :
+    inner class AppointmentViewHolder(itemView: View, listener: AppointmentListener) :
         RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.appointmentName)
         val date: TextView = itemView.findViewById(R.id.appointmentDate)
@@ -29,7 +29,7 @@ class AppointmentAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ServiceViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AppointmentViewHolder(
         LayoutInflater.from(context).inflate(R.layout.item_appointment, parent, false), listener
     )
 
@@ -37,7 +37,7 @@ class AppointmentAdapter(
         return list.size
     }
 
-    override fun onBindViewHolder(holder: ServiceViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AppointmentViewHolder, position: Int) {
         val appointment = list[position]
 
         holder.apply {

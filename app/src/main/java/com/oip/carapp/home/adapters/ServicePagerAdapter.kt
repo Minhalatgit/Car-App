@@ -3,9 +3,7 @@ package com.oip.carapp.home.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.oip.carapp.home.views.HatchbackFragment
-import com.oip.carapp.home.views.PickUpTruckFragment
-import com.oip.carapp.home.views.SedanFragment
+import com.oip.carapp.home.views.*
 
 class ServicePagerAdapter(private val titles: ArrayList<String>, val fragment: FragmentActivity) :
     FragmentStateAdapter(fragment) {
@@ -16,11 +14,12 @@ class ServicePagerAdapter(private val titles: ArrayList<String>, val fragment: F
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> AllCarFragment()
-            1 -> SedanFragment()
-            2 -> HatchbackFragment()
-            3 -> PickUpTruckFragment()
-            else -> AllCarFragment()
+            0 -> OilFragment()
+            1 -> EngineFragment()
+            2 -> TuneFragment()
+            3 -> BeltFragment()
+            4 -> FluidFragment()
+            else -> OilFragment()
         }
     }
 }

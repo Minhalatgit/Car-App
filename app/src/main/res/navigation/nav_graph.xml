@@ -85,5 +85,14 @@
         android:id="@+id/serviceListFragment"
         android:name="com.oip.carapp.home.views.ServiceListFragment"
         android:label="ServiceListFragment"
-        tools:layout="@layout/fragment_service_list" />
+        tools:layout="@layout/fragment_service_list" >
+        <action
+            android:id="@+id/action_serviceListFragment_to_serviceBookingFragment"
+            app:destination="@id/serviceBookingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serviceBookingFragment"
+        android:name="com.oip.carapp.home.views.ServiceBookingFragment"
+        android:label="ServiceBookingFragment"
+        tools:layout="@layout/fragment_service_booking" />
 </navigation>

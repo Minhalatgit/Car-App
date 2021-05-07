@@ -25,6 +25,12 @@ class ServiceFragment : BaseFragment() {
             Navigation.findNavController(requireActivity(), R.id.navHostFragment)
                 .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment())
         }
+        binding.denting.setOnClickListener {
+
+        }
+        binding.electrician.setOnClickListener {
+
+        }
 
         return binding.root
     }

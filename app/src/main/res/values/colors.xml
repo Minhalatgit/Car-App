@@ -11,6 +11,8 @@
     <color name="yellow_two">#F5A623</color>
     <color name="yellow_three">#FBD249</color>
     <color name="orange">#FF8900</color>
+    <color name="orange_two">#FEF6EA</color>
+    <color name="orange_three">#F6A530</color>
     <color name="dark">#242A37</color>
     <color name="white_two">#F1F2F6</color>
     <color name="white_three">#F7F8FA</color>
@@ -19,6 +21,7 @@
     <color name="grey_three">#CBCDCC</color>
     <color name="grey_four">#707070</color>
     <color name="grey_five">#A8ABBE</color>
+    <color name="grey_six">#F2F2F2</color>
     <color name="light_grey">#957D1B</color>
     <color name="green">#B4EC51</color>
     <color name="green_two">#429321</color>

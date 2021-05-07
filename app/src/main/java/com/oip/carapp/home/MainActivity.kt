@@ -37,7 +37,14 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.moreFragment -> toolbar.visibility = View.GONE
-                else -> toolbar.visibility = View.VISIBLE
+                R.id.serviceBookingFragment -> {
+                    toolbar.visibility = View.GONE
+                    bottomView.visibility = View.GONE
+                }
+                else -> {
+                    toolbar.visibility = View.VISIBLE
+                    bottomView.visibility = View.VISIBLE
+                }
             }
         }
 
