@@ -9,22 +9,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentHomeBinding
-import com.oip.carapp.home.adapters.AppointmentAdapter
+import com.oip.carapp.home.adapters.UpcomingAppointmentAdapter
 import com.oip.carapp.home.adapters.DiscountAdapter
 import com.oip.carapp.home.adapters.ServiceAdapter
-import com.oip.carapp.home.models.Appointment
+import com.oip.carapp.home.models.UpcomingAppointment
 import com.oip.carapp.home.models.Discount
 import com.oip.carapp.home.models.Service
 
 class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
-    AppointmentAdapter.AppointmentListener, DiscountAdapter.DiscountListener {
+    UpcomingAppointmentAdapter.AppointmentListener, DiscountAdapter.DiscountListener {
 
     private val TAG = "HomeFragment"
 
     private lateinit var binding: FragmentHomeBinding
 
     private val serviceList = ArrayList<Service>()
-    private val appointmentList = ArrayList<Appointment>()
+    private val appointmentList = ArrayList<UpcomingAppointment>()
     private val discountList = ArrayList<Discount>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
         )
 
         appointmentList.add(
-            Appointment(
+            UpcomingAppointment(
                 "image url",
                 "Engine replacement",
                 "12/11/2021",
@@ -64,7 +64,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
             )
         )
         appointmentList.add(
-            Appointment(
+            UpcomingAppointment(
                 "image url",
                 "Engine replacement",
                 "12/11/2021",
@@ -72,7 +72,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
             )
         )
         appointmentList.add(
-            Appointment(
+            UpcomingAppointment(
                 "image url",
                 "Engine replacement",
                 "12/11/2021",
@@ -80,7 +80,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
             )
         )
         appointmentList.add(
-            Appointment(
+            UpcomingAppointment(
                 "image url",
                 "Engine replacement",
                 "12/11/2021",
@@ -88,7 +88,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
             )
         )
         appointmentList.add(
-            Appointment(
+            UpcomingAppointment(
                 "image url",
                 "Engine replacement",
                 "12/11/2021",
@@ -117,7 +117,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
         binding.appointmentList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.appointmentList.adapter =
-            AppointmentAdapter(appointmentList, requireContext(), this)
+            UpcomingAppointmentAdapter(appointmentList, requireContext(), this)
 
         binding.discountList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)

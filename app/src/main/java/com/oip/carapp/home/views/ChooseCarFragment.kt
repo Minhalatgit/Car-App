@@ -37,12 +37,6 @@ class ChooseCarFragment : BaseFragment() {
                 tab.text = list[position]
             }).attach()
 
-        binding.proceed.setOnClickListener {
-            Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-                .navigate(R.id.action_chooseCarFragment_to_paymentFragment)
-        }
-
-
         return binding.root
     }
 

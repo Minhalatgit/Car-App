@@ -1,8 +1,11 @@
 package com.oip.carapp.home.models
 
 data class Appointment(
-    val image: String,
-    val title: String,
+    val profileImage: String,
+    val username: String,
+    val amount: String,
     val date: String,
-    val day: String
+    val service: String,
+    val provider: String,
+    val time: String
 )

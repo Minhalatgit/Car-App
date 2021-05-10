@@ -117,7 +117,7 @@
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_appointment" />
+                tools:listitem="@layout/upcoming_appointment_item" />
 
         </LinearLayout>
     </ScrollView>

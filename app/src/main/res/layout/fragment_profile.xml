@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".home.views.AccountFragment">
+    tools:context=".home.views.ProfileFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,17 +22,20 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:src="@drawable/back_icon" />
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:src="@drawable/back_icon"
+                android:visibility="gone"
+                app:tint="@color/yellow" />
 
             <TextView
+                android:id="@+id/edit"
                 style="@style/MediumTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:paddingEnd="10dp"
+                android:padding="10dp"
                 android:text="Edit"
                 android:textColor="@color/orange"
                 android:textSize="17sp" />
@@ -46,7 +49,9 @@
             android:layout_below="@id/topLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:src="@drawable/profile_history" />
+            android:src="@drawable/profile_history"
+            app:civ_border_color="@color/yellow"
+            app:civ_border_width="2dp" />
 
         <TextView
             android:id="@+id/username"
@@ -59,21 +64,11 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/memberType"
-            style="@style/MediumTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/username"
-            android:layout_centerHorizontal="true"
-            android:text="Gold Member"
-            android:textColor="@color/grey" />
-
-        <TextView
             android:id="@+id/info"
             style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/memberType"
+            android:layout_below="@id/username"
             android:layout_marginTop="30dp"
             android:text="INFORMATION"
             android:textColor="@color/grey" />
@@ -92,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/usernameTwo"
@@ -100,10 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:layout_toLeftOf="@id/arrow_right"
+                android:layout_toStartOf="@id/arrow_right"
                 android:text="Martha Banks"
                 android:textColor="@color/grey"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/arrow_right"
@@ -129,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phone number"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/phone"
@@ -137,10 +132,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:layout_toLeftOf="@id/arrow_right_phone"
+                android:layout_toStartOf="@id/arrow_right_phone"
                 android:text="584-490-9153"
                 android:textColor="@color/grey"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/arrow_right_phone"
@@ -166,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/email"
@@ -174,10 +169,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:layout_toLeftOf="@id/arrow_right_email"
+                android:layout_toStartOf="@id/arrow_right_email"
                 android:text="martha@gmail.com"
                 android:textColor="@color/grey"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/arrow_right_email"
@@ -203,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gender"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/gender"
@@ -211,10 +206,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:layout_toLeftOf="@id/arrow_right_gender"
+                android:layout_toStartOf="@id/arrow_right_gender"
                 android:text="Female"
                 android:textColor="@color/grey"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/arrow_right_gender"
@@ -240,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Birthday"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/birthday"
@@ -248,10 +243,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:layout_toLeftOf="@id/arrow_right_birthday"
+                android:layout_toStartOf="@id/arrow_right_birthday"
                 android:text="April 16, 1988"
                 android:textColor="@color/grey"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/arrow_right_birthday"

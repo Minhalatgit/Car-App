@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
-import com.oip.carapp.databinding.FragmentAccountBinding
+import com.oip.carapp.databinding.FragmentProfileBinding
 
-class AccountFragment : BaseFragment() {
+class ProfileFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentAccountBinding
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAccountBinding.inflate(inflater, container, false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        window.statusBarColor = requireActivity().getColor(R.color.yellow)
 
 
 

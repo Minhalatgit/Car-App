@@ -1,54 +1,34 @@
 package com.oip.carapp.home.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
 import com.oip.carapp.home.models.Appointment
+import kotlinx.android.synthetic.main.appointment_item.view.*
 
-class AppointmentAdapter(
-    private val list: ArrayList<Appointment>,
-    val context: Context,
-    private val listener: AppointmentListener
-) :
-    RecyclerView.Adapter<AppointmentAdapter.AppointmentViewHolder>() {
+class AppointmentAdapter(private val list: ArrayList<Appointment>) :
+    RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
 
-    inner class AppointmentViewHolder(itemView: View, listener: AppointmentListener) :
-        RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.appointmentName)
-        val date: TextView = itemView.findViewById(R.id.appointmentDate)
-        val day: TextView = itemView.findViewById(R.id.day)
+    inner class AppointmentHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-        init {
-            itemView.setOnClickListener {
-                listener.onAppointmentClick(adapterPosition)
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AppointmentViewHolder(
-        LayoutInflater.from(context).inflate(R.layout.item_appointment, parent, false), listener
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AppointmentHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.appointment_item, parent, false)
     )
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount() = list.size
 
-    override fun onBindViewHolder(holder: AppointmentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AppointmentHolder, position: Int) {
         val appointment = list[position]
 
-        holder.apply {
-            name.text = appointment.title
+        holder.itemView.apply {
+            username.text = appointment.username
+            amount.text = appointment.amount
             date.text = appointment.date
-            day.text = appointment.day
+            serviceText.text = appointment.service
+            providerText.text = appointment.provider
+            timeText.text = appointment.time
         }
-
-    }
-
-    interface AppointmentListener {
-        fun onAppointmentClick(position: Int)
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentServiceBookingBinding
@@ -19,6 +20,9 @@ class ServiceBookingFragment : BaseFragment() {
         binding = FragmentServiceBookingBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
 
+
+        binding.back.setOnClickListener {
+        }
 
         return binding.root
     }

@@ -85,9 +85,6 @@ dependencies {
     // Round Image
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    // Horizontal Calendar
-    implementation 'com.michalsvec:single-row-calednar:1.0.0'
-
     // Map
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
@@ -100,14 +97,10 @@ dependencies {
     // Facebook login
     //implementation 'com.facebook.android:facebook-login:8.1'
 
-    // Country code picker
-    implementation 'com.hbb20:ccp:2.4.5'
-
     // Progress Bar
     implementation 'com.github.shadowalker77:wp7progressbar:1.0.5'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     // Run-time Permissions
     implementation 'com.vmadalin:easypermissions-ktx:0.1.0'
-
 }

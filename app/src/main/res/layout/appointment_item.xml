@@ -73,7 +73,7 @@
                 tools:text="$25.00" />
 
             <TextView
-                android:id="@+id/distance"
+                android:id="@+id/date"
                 style="@style/MediumTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,44 +81,74 @@
                 android:layout_alignEnd="@id/amount"
                 android:textColor="@color/grey"
                 android:textSize="15sp"
-                tools:text="2.2 km" />
+                tools:text="05-06-2021" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Service"
+                android:textColor="@color/grey"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Time"
+                android:textColor="@color/grey"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/serviceText"
+                style="@style/RegularTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tow"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/timeText"
+                style="@style/RegularTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="03:00 PM"
+                android:textSize="17sp" />
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/pickUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="PICK UP"
-            android:textColor="@color/grey"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/pickupAddress"
-            style="@style/RegularTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7958 Swift Village"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/dropOff"
+            android:id="@+id/provider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="DROP OFF"
+            android:text="Provider"
             android:textColor="@color/grey"
             android:textSize="13sp" />
 
         <TextView
-            android:id="@+id/dropOffAddress"
+            android:id="@+id/providerText"
             style="@style/RegularTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="105 William St, Chicago, US"
+            android:text="Moin Motor Workshop"
             android:textSize="17sp" />
     </LinearLayout>
 

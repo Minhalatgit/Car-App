@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
                     toolbar.visibility = View.GONE
                     bottomView.visibility = View.GONE
                 }
+                R.id.profileFragment -> toolbar.visibility = View.GONE
+                R.id.notificationFragment -> toolbar.visibility = View.GONE
+                R.id.appointmentFragment -> toolbar.visibility = View.GONE
+                R.id.settingsFragment -> toolbar.visibility = View.GONE
                 else -> {
                     toolbar.visibility = View.VISIBLE
                     bottomView.visibility = View.VISIBLE

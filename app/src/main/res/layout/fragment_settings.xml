@@ -7,296 +7,332 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white_three"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/profileLayout"
+            android:id="@+id/topLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="25dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:src="@drawable/profile" />
-
-            <TextView
-                android:id="@+id/username"
-                style="@style/MediumTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_toRightOf="@id/profileImage"
-                android:text="Martha Banks"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/memberType"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/username"
-                android:layout_alignStart="@id/username"
-                android:text="Gold Member"
-                android:textSize="17sp" />
+            android:padding="10dp">
 
             <ImageView
+                android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:src="@drawable/back_icon"
+                android:visibility="gone"
+                app:tint="@color/yellow" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/BoldTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Settings"
+                android:textSize="17sp" />
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/vehicleManagementLayout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="25dp"
-            android:gravity="center_vertical">
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/vehicleManagementIcon"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/vehicleManagementLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/vehicle_management_bg"
-                android:src="@drawable/vehicle_management_icon" />
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-            <TextView
-                android:id="@+id/vehicleManagement"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/vehicleManagementIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yellow_rectangle_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/vehicle_management_icon"
+                    app:tint="@color/dark" />
+
+                <TextView
+                    android:id="@+id/vehicleManagement"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/vehicleManagementIcon"
+                    android:text="Vehicle Management"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/documentManagementLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@id/vehicleManagementIcon"
-                android:text="Vehicle Management"
-                android:textSize="17sp" />
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/documentManagementIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yellow_rectangle_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/document_management_icon"
+                    app:tint="@color/dark" />
+
+                <TextView
+                    android:id="@+id/documentManagement"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/documentManagementIcon"
+                    android:text="Document Management"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/reviewsLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/reviewsIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yellow_rectangle_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/review_icon"
+                    app:tint="@color/dark" />
 
-        <RelativeLayout
-            android:id="@+id/documentManagementLayout"
+                <TextView
+                    android:id="@+id/reviews"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/reviewsIcon"
+                    android:text="Reviews"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/languageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <ImageView
+                    android:id="@+id/languageIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yellow_rectangle_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/language_icon"
+                    app:tint="@color/dark" />
+
+                <TextView
+                    android:id="@+id/language"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/languageIcon"
+                    android:text="Language"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
-            android:gravity="center_vertical">
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/documentManagementIcon"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/notificationLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/document_management_bg"
-                android:src="@drawable/document_management_icon" />
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-            <TextView
-                android:id="@+id/documentManagement"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/notificationIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yellow_rectangle_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/notification_icon"
+                    app:tint="@color/dark" />
+
+                <TextView
+                    android:id="@+id/notification"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/notificationIcon"
+                    android:text="Notification"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/termsLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@id/documentManagementIcon"
-                android:text="Document Management"
-                android:textSize="17sp" />
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-            <ImageView
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/termsIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yellow_rectangle_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/terms_icon"
+                    app:tint="@color/dark" />
+
+                <TextView
+                    android:id="@+id/terms"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/termsIcon"
+                    android:text="Terms &amp; Privacy Policy"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contactUsLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="25dp"
+                android:gravity="center_vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/contactUsIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/yellow_rectangle_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/contact_icon"
+                    app:tint="@color/dark" />
 
-        <RelativeLayout
-            android:id="@+id/reviewsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
-            android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/contactUs"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/contactUsIcon"
+                    android:text="Contact us"
+                    android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/reviewsIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/review_bg"
-                android:src="@drawable/review_icon" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/right_arrow_icon" />
 
-            <TextView
-                android:id="@+id/reviews"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@id/reviewsIcon"
-                android:text="Reviews"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/languageLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/languageIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/language_bg"
-                android:src="@drawable/language_icon" />
-
-            <TextView
-                android:id="@+id/language"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@id/languageIcon"
-                android:text="Language"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/notificationLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="25dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/notificationIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/notification_bg"
-                android:src="@drawable/notification_icon"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/notification"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@id/notificationIcon"
-                android:text="Notification"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/termsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/termsIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/terms_bg"
-                android:src="@drawable/terms_icon" />
-
-            <TextView
-                android:id="@+id/terms"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@id/termsIcon"
-                android:text="Terms &amp; Privacy Policy"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/contactUsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/contactUsIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/contact_bg"
-                android:src="@drawable/contact_icon" />
-
-            <TextView
-                android:id="@+id/contactUs"
-                style="@style/RegularTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_toRightOf="@id/contactUsIcon"
-                android:text="Contact us"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/right_arrow_icon" />
-
-        </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

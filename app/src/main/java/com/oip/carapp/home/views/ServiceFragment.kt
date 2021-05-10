@@ -16,20 +16,22 @@ class ServiceFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =
             FragmentServiceBinding.inflate(inflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
 
         binding.mechanic.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment())
+                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment("Car Mechanic Service"))
         }
         binding.denting.setOnClickListener {
-
+            Navigation.findNavController(requireActivity(), R.id.navHostFragment)
+                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment("Car Denting Service"))
         }
         binding.electrician.setOnClickListener {
-
+            Navigation.findNavController(requireActivity(), R.id.navHostFragment)
+                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment("Car Electrician Service"))
         }
 
         return binding.root

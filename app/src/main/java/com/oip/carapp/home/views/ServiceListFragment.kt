@@ -14,12 +14,7 @@ import com.oip.carapp.home.adapters.ServicePagerAdapter
 class ServiceListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentServiceListBinding
-    lateinit var args: ServiceFragmentArgs
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    lateinit var args: ServiceListFragmentArgs
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,17 +23,17 @@ class ServiceListFragment : BaseFragment() {
         binding = FragmentServiceListBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
 
-//        args = ServiceFragmentArgs.fromBundle(requireArguments())
-//        binding.title.text = args.serviceType
+        args = ServiceListFragmentArgs.fromBundle(requireArguments())
+        binding.title.text = args.serviceType
 
         val list = arrayListOf("Oil", "Engine", "Tune", "Belt", "Fluid")
         binding.viewPager.adapter = ServicePagerAdapter(list, requireActivity())
         TabLayoutMediator(
             binding.tab,
-            binding.viewPager,
-            TabLayoutMediator.TabConfigurationStrategy { tab: TabLayout.Tab, position: Int ->
-                tab.text = list[position]
-            }).attach()
+            binding.viewPager
+        ) { tab: TabLayout.Tab, position: Int ->
+            tab.text = list[position]
+        }.attach()
 
         return binding.root
     }
