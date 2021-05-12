@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_margin="10dp">
@@ -28,8 +29,8 @@
                 style="@style/SemiBolTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Car Diagnostic"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                tools:text="Car Diagnostic" />
 
             <TextView
                 android:id="@+id/address"
@@ -37,8 +38,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"
-                android:text="Moin Motor Workshop"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="Moin Motor Workshop" />
 
             <TextView
                 android:id="@+id/distance"
@@ -46,8 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/address"
-                android:text="2.5 Km"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="2.5 Km" />
 
             <ImageView
                 android:layout_width="wrap_content"

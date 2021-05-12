@@ -23,15 +23,30 @@ class ServiceFragment : BaseFragment() {
 
         binding.mechanic.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment("Car Mechanic Service"))
+                .navigate(
+                    ServiceFragmentDirections.actionServiceFragmentToServiceListFragment(
+                        "Car Mechanic Service",
+                        "1"
+                    )
+                )
         }
         binding.denting.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment("Car Denting Service"))
+                .navigate(
+                    ServiceFragmentDirections.actionServiceFragmentToServiceListFragment(
+                        "Car Denting Service",
+                        "2"
+                    )
+                )
         }
         binding.electrician.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.navHostFragment)
-                .navigate(ServiceFragmentDirections.actionServiceFragmentToServiceListFragment("Car Electrician Service"))
+                .navigate(
+                    ServiceFragmentDirections.actionServiceFragmentToServiceListFragment(
+                        "Car Electrician Service",
+                        "3"
+                    )
+                )
         }
 
         return binding.root

@@ -57,7 +57,11 @@ class LoginViewModel : ViewModel() {
                                 _result.value =
                                     Result(true, msg)
                                 Log.d(TAG, msg)
-                                PreferencesHandler.setIsLogin(true)
+                                PreferencesHandler.apply {
+                                    setToken(data.token)
+                                    setUserId(data.id)
+                                    setIsLogin(true)
+                                }
                             } else {
                                 _result.value =
                                     Result(false, msg)
@@ -82,7 +86,7 @@ class LoginViewModel : ViewModel() {
         if (TextUtils.isEmpty(password)) {
             return Result(false, "Password must not be empty")
         } else if (password.length < 6) {
-            return Result(false, "Password is short")
+            return Result(false, "Password is too short")
         }
         return Result(true, "Success")
     }

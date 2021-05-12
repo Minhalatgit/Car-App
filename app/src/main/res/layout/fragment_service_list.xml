@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:padding="10dp"
         tools:context=".home.views.ServiceListFragment">
 
@@ -14,22 +13,26 @@
             style="@style/BoldTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Car Mechanic Services"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            tools:text="Car Mechanic Services" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/serviceList"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"
+            tools:listitem="@layout/car_service_item" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progress"
+            style="@style/SpinKitView.Circle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            app:tabIndicatorColor="@color/orange"
-            app:tabIndicatorFullWidth="false"
-            app:tabTextAppearance="@style/TabText" />
+            android:layout_centerInParent="true"
+            android:elevation="2dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/dark" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    </RelativeLayout>
 
-    </LinearLayout>
 </layout>

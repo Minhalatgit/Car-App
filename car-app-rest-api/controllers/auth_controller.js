@@ -2,7 +2,7 @@
 const sql = require('../connection');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const { authSchema } = require('../helper/validation_schema');
+const { loginSchema, registerSchema } = require('../helper/validation_schema');
 
 async function sendEmail(email, code) {
     let transporter = nodemailer.createTransport({
@@ -33,6 +33,22 @@ exports.register = async (req, res) =>{
 
     try {
         const body = req.body;
+
+        //validating email, password and repeat password
+
+        // try {
+        //     const result = await registerSchema.validateAsync(body);
+        //     console.log(result);
+        //     return res.json({
+        //         status: true,
+        //         msg: result
+        //     })
+        // } catch (err) {
+        //     return res.json({
+        //         status: false,
+        //         msg: err.message
+        //     })
+        // }
 
         // checking if user exists against this email
         sql.query('SELECT * FROM user WHERE user_email = ?', [ body.email ], (err, row) => {
@@ -148,7 +164,18 @@ exports.login = async (req, res) =>{
 
     try {
         const body = req.body;
-        console.log(body);
+
+        //validatiing email and password here
+        try {
+            const result = await loginSchema.validateAsync(body);
+            console.log(result);
+        } catch (err) {
+            return res.json({
+                status: false,
+                msg: err.message
+            })
+        }
+
         //checking if user exists against this email
         sql.query('SELECT * FROM user WHERE user_email = ?', [ body.email ], (err, row) => {
             if(!err) {
@@ -169,26 +196,36 @@ exports.login = async (req, res) =>{
 
                     if(email == body.email && password == body.password){
 
-                    const token = jwt.sign({ password: id }, 'todo-app-super-shared-secret');
+                    const token = jwt.sign({ password: password }, 'todo-app-super-shared-secret');
 
-                    return res.json({
-                        status: true,
-                        msg: "Login successful",
-                        data: {
-                            id,
-                            email,
-                            username,
-                            user_number,
-                            user_address,
-                            member_type,
-                            gender,
-                            birthday,
-                            user_img,
-                            status,
-                            token
-                        }
-                    })
-                    
+                        sql.query('UPDATE User SET user_token = ? WHERE user_id = ?', [token, id] , (err, row) => {
+                            if(!err){
+                                return res.json({
+                                    status: true,
+                                    msg: "Login successful",
+                                    data: {
+                                        id,
+                                        email,
+                                        username,
+                                        user_number,
+                                        user_address,
+                                        member_type,
+                                        gender,
+                                        birthday,
+                                        user_img,
+                                        status,
+                                        token
+                                    }
+                                })
+                            } else {
+                                console.log(err);
+                                return res.json({
+                                    status: false,
+                                    msg: "Token not updated"
+                                })
+                            }
+                        })
+            
                    } else {
                         return res.json({
                             status: false,

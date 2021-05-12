@@ -4,6 +4,8 @@ import android.content.Context
 import com.oip.carapp.CarApplication
 import com.oip.carapp.utils.Constants.IS_LOGIN
 import com.oip.carapp.utils.Constants.PREF_NAME
+import com.oip.carapp.utils.Constants.TOKEN
+import com.oip.carapp.utils.Constants.USER_ID
 
 object PreferencesHandler {
 
@@ -18,4 +20,17 @@ object PreferencesHandler {
 
     fun getIsLogin() = preferences.getBoolean(IS_LOGIN, false)
 
+    fun setUserId(userId: String) {
+        editor.putString(USER_ID, userId)
+        editor.apply()
+    }
+
+    fun getUserId() = preferences.getString(USER_ID, "")
+
+    fun setToken(token: String) {
+        editor.putString(TOKEN, token)
+        editor.apply()
+    }
+
+    fun getToken() = preferences.getString(TOKEN, "")
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".authentication.views.LoginActivity">
 
@@ -59,15 +60,15 @@
                 android:inputType="textPassword"
                 android:padding="15dp"
                 android:textSize="14sp"
-                tools:text="Minhal" />
+                tools:text="123456" />
 
             <TextView
                 android:id="@+id/forgotPassword"
                 style="@style/LightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="start"
+                android:layout_marginTop="10dp"
                 android:text="Forgot Password?"
                 android:textSize="14sp" />
 
@@ -116,22 +117,15 @@
 
         </LinearLayout>
 
-        <!--        <com.github.ybq.android.spinkit.SpinKitView-->
-        <!--            android:id="@+id/progress"-->
-        <!--            style="@style/SpinKitView.Circle"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_centerInParent="true"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:SpinKit_Color="@color/yellow" />-->
-
-        <ProgressBar
+        <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/progress"
+            style="@style/SpinKitView.Circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:indeterminateTint="@color/dark"
-            android:visibility="gone" />
+            android:elevation="2dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/dark" />
 
     </RelativeLayout>
 </layout>

@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
 import com.oip.carapp.home.models.CarService
+import com.oip.carapp.home.models.ServiceResponse
+import com.oip.carapp.utils.toast
 
 class CarServiceAdapter(
-    private val list: ArrayList<CarService>,
+    private val list: List<ServiceResponse>,
     val context: Context,
     private val listener: ServiceListener
 ) :
@@ -44,14 +47,24 @@ class CarServiceAdapter(
         val service = list[position]
 
         holder.apply {
-//            carImage.setImageResource(car.carImage)
-            title.text = service.title
-            address.text = service.address
-            distance.text = service.distance
+            title.text = service.serviceTitle
+            address.text = service.service_description
+            distance.text = "${service.serviceDistance} Km"
+
+            if (service.isFavourite == "1") {
+                favourite.setColorFilter(
+                    ContextCompat.getColor(context, R.color.red)
+                )
+            } else {
+                favourite.setColorFilter(
+                    ContextCompat.getColor(context, R.color.grey)
+                )
+            }
         }
     }
 
     interface ServiceListener {
         fun onServiceClick(position: Int)
     }
+
 }

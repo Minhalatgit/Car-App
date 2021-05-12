@@ -7,5 +7,7 @@ object Constants {
     // SP
     const val PREF_NAME = "car_app_preferences"
     const val IS_LOGIN = "is_login"
+    const val USER_ID = "user_id"
+    const val TOKEN = "token"
 
 }
