@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
-import com.oip.carapp.home.models.CarService
 import com.oip.carapp.home.models.ServiceResponse
-import com.oip.carapp.utils.toast
+import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
+import com.squareup.picasso.Picasso
 
 class CarServiceAdapter(
     private val list: List<ServiceResponse>,
@@ -24,7 +24,7 @@ class CarServiceAdapter(
         RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image)
         val title: TextView = itemView.findViewById(R.id.title)
-        val address: TextView = itemView.findViewById(R.id.address)
+        val subtitle: TextView = itemView.findViewById(R.id.subtitle)
         val distance: TextView = itemView.findViewById(R.id.distance)
         val favourite: ImageView = itemView.findViewById(R.id.favourite)
 
@@ -47,8 +47,10 @@ class CarServiceAdapter(
         val service = list[position]
 
         holder.apply {
+            Picasso.get().load(BASE_URL_IMAGES + service.serviceImage)
+                .placeholder(R.drawable.service_image).into(holder.image);
             title.text = service.serviceTitle
-            address.text = service.service_description
+            subtitle.text = service.serviceSubtitle
             distance.text = "${service.serviceDistance} Km"
 
             if (service.isFavourite == "1") {

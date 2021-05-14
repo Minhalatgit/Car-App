@@ -79,5 +79,9 @@
         android:id="@+id/serviceBookingFragment"
         android:name="com.oip.carapp.home.views.ServiceBookingFragment"
         android:label="ServiceBookingFragment"
-        tools:layout="@layout/fragment_service_booking" />
+        tools:layout="@layout/fragment_service_booking" >
+        <argument
+            android:name="service_image"
+            app:argType="string" />
+    </fragment>
 </navigation>

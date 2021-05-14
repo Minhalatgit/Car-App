@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const route = require('./routes/route');
 const app = express();
 
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json({ limit: '10mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 

@@ -19,6 +19,10 @@ class ServiceListViewModel() : ViewModel() {
     val serviceList: LiveData<List<ServiceResponse>>
         get() = _serviceList
 
+    private val _noService = MutableLiveData<Boolean>()
+    val noService: LiveData<Boolean>
+        get() = _noService
+
     fun getServices(catId: String) {
         RetrofitClient.apiInterface.getServices(catId)
             .enqueue(object : Callback<BaseResponse<List<ServiceResponse>>> {
@@ -29,6 +33,7 @@ class ServiceListViewModel() : ViewModel() {
                     Log.d(TAG, "onResponse: ${response.body()?.data}")
                     response.body()?.apply {
                         _serviceList.value = data!!
+                        _noService.value = data.isEmpty()
                     }
                 }
 
