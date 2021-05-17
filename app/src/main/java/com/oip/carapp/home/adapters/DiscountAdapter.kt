@@ -8,10 +8,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
-import com.oip.carapp.home.models.Discount
+import com.oip.carapp.home.models.OfferResponse
+import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
+import com.squareup.picasso.Picasso
 
 class DiscountAdapter(
-    private val list: ArrayList<Discount>,
+    private val list: List<OfferResponse>,
     val context: Context,
     private val listener: DiscountListener
 ) :
@@ -42,8 +44,10 @@ class DiscountAdapter(
         val discount = list[position]
 
         holder.apply {
-            name.text = discount.title
-            percentage.text = discount.percent
+            name.text = discount.offerTitle
+            percentage.text = discount.offerDiscount + "%"
+            Picasso.get().load(BASE_URL_IMAGES + discount.offerImage)
+                .placeholder(R.drawable.discount).into(image)
         }
 
     }

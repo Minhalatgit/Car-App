@@ -4,41 +4,41 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.oip.carapp.home.models.ServiceResponse
+import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ServiceListViewModel : ViewModel() {
+class OfferViewModel : ViewModel() {
 
-    private val TAG = "ServiceListViewModel"
+    private val TAG = "OfferListViewModel"
 
-    private val _serviceList = MutableLiveData<List<ServiceResponse>>()
-    val serviceList: LiveData<List<ServiceResponse>>
-        get() = _serviceList
+    private val _offerList = MutableLiveData<List<OfferResponse>>()
+    val offerList: LiveData<List<OfferResponse>>
+        get() = _offerList
 
-    private val _noService = MutableLiveData<Boolean>()
-    val noService: LiveData<Boolean>
-        get() = _noService
+    private val _noOffer = MutableLiveData<Boolean>()
+    val noOffer: LiveData<Boolean>
+        get() = _noOffer
 
-    fun getServices(catId: String) {
-        RetrofitClient.apiInterface.getServices(catId)
-            .enqueue(object : Callback<BaseResponse<List<ServiceResponse>>> {
+    fun getOffers() {
+        RetrofitClient.apiInterface.getOffers()
+            .enqueue(object : Callback<BaseResponse<List<OfferResponse>>> {
                 override fun onResponse(
-                    call: Call<BaseResponse<List<ServiceResponse>>>,
-                    response: Response<BaseResponse<List<ServiceResponse>>>
+                    call: Call<BaseResponse<List<OfferResponse>>>,
+                    response: Response<BaseResponse<List<OfferResponse>>>
                 ) {
                     Log.d(TAG, "onResponse: ${response.body()?.data}")
                     response.body()?.apply {
-                        _serviceList.value = data!!
-                        _noService.value = data.isEmpty()
+                        _offerList.value = data!!
+                        _noOffer.value = data.isEmpty()
                     }
                 }
 
                 override fun onFailure(
-                    call: Call<BaseResponse<List<ServiceResponse>>>,
+                    call: Call<BaseResponse<List<OfferResponse>>>,
                     t: Throwable
                 ) {
                     Log.e(TAG, "onFailure: ${t.message}")

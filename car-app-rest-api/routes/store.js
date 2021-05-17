@@ -1,6 +1,6 @@
 var express = require('express');
 var Router = express.Router();
-var serviceController = require('../controllers/service_controller');
+var storeController = require('../controllers/store_controller');
 
 const multer = require('multer');
 
@@ -20,10 +20,10 @@ const upload = multer({storage: storage, limits: {
 
 var router = function(){
 
-    Router.post('/createservice', upload.single('service_image'), serviceController.createService);
-    Router.post('/updateservice', upload.single('service_image'), serviceController.updateService);
-    Router.post('/getservices', serviceController.getServices);
-    Router.post('/deleteservice', serviceController.deleteService);
+    Router.post('/createstore', upload.single('store_image'), storeController.createStore);
+    Router.post('/updatestore', upload.single('store_image'), storeController.updateStore);
+    Router.post('/getstores', storeController.getStores);
+    Router.post('/deletestore', storeController.deleteStore);
 
     return Router
 }

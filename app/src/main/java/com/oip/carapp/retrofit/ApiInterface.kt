@@ -1,11 +1,12 @@
 package com.oip.carapp.retrofit
 
 import com.oip.carapp.authentication.model.AuthResponse
+import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.home.models.ServiceResponse
+import com.oip.carapp.home.models.StoreResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiInterface {
@@ -37,4 +38,14 @@ interface ApiInterface {
     fun getServices(
         @Field("cat_id") catId: String
     ): Call<BaseResponse<List<ServiceResponse>>>
+
+    @POST("offer/getoffers")
+    fun getOffers(): Call<BaseResponse<List<OfferResponse>>>
+
+    @POST("store/getstores")
+    fun getStores(): Call<BaseResponse<List<StoreResponse>>>
+
+    @FormUrlEncoded
+    @POST("profile/getprofile")
+    fun getProfile(@Field("profile_id") userId: String): Call<BaseResponse<AuthResponse>>
 }

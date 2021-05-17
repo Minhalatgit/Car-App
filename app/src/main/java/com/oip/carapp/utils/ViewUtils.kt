@@ -14,15 +14,15 @@ fun Context.toast(message: String) {
 
 fun showProgressBar(window: Window, progress: ProgressBar) {
     progress.visibility = View.VISIBLE
-    window.setFlags(
-        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-    )
+//    window.setFlags(
+//        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+//        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+//    )
 }
 
 fun hideProgressBar(window: Window, progress: ProgressBar) {
     progress.visibility = View.GONE
-    window.clearFlags(
-        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-    )
+//    window.clearFlags(
+//        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+//    )
 }

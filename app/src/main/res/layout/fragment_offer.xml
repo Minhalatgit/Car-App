@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:padding="10dp"
         tools:context=".home.views.OfferFragment">
 
@@ -21,7 +20,18 @@
             android:id="@+id/discountList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/discount"
             tools:listitem="@layout/discount_item" />
 
-    </LinearLayout>
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progress"
+            style="@style/SpinKitView.Circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:elevation="2dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/dark" />
+
+    </RelativeLayout>
 </layout>

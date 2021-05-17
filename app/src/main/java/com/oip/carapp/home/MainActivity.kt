@@ -9,6 +9,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.oip.carapp.R
 import com.oip.carapp.databinding.ActivityMainBinding
+import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
+import com.oip.carapp.utils.PreferencesHandler
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +30,15 @@ class MainActivity : AppCompatActivity() {
         )
 
         setSupportActionBar(binding.toolbar)
+
+        profileImage.setOnClickListener {
+            //to navigate to profile fragment in proper flow
+            bottomView.selectedItemId = R.id.moreFragment //select more fragment menu item
+            navController.navigate(R.id.profileFragment)    // navigate to profile fragment
+        }
+
+        Picasso.get().load(BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
+            .placeholder(R.drawable.profile_placeholder).into(profileImage)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment

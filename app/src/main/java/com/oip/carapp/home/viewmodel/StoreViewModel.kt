@@ -4,41 +4,36 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.oip.carapp.home.models.ServiceResponse
+import com.oip.carapp.home.models.StoreResponse
 import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ServiceListViewModel : ViewModel() {
+class StoreViewModel : ViewModel() {
 
-    private val TAG = "ServiceListViewModel"
+    private val TAG = "StoreViewModel"
 
-    private val _serviceList = MutableLiveData<List<ServiceResponse>>()
-    val serviceList: LiveData<List<ServiceResponse>>
-        get() = _serviceList
+    private val _storeList = MutableLiveData<List<StoreResponse>>()
+    val storeList: LiveData<List<StoreResponse>>
+        get() = _storeList
 
-    private val _noService = MutableLiveData<Boolean>()
-    val noService: LiveData<Boolean>
-        get() = _noService
-
-    fun getServices(catId: String) {
-        RetrofitClient.apiInterface.getServices(catId)
-            .enqueue(object : Callback<BaseResponse<List<ServiceResponse>>> {
+    fun getStores() {
+        RetrofitClient.apiInterface.getStores()
+            .enqueue(object : Callback<BaseResponse<List<StoreResponse>>> {
                 override fun onResponse(
-                    call: Call<BaseResponse<List<ServiceResponse>>>,
-                    response: Response<BaseResponse<List<ServiceResponse>>>
+                    call: Call<BaseResponse<List<StoreResponse>>>,
+                    response: Response<BaseResponse<List<StoreResponse>>>
                 ) {
                     Log.d(TAG, "onResponse: ${response.body()?.data}")
                     response.body()?.apply {
-                        _serviceList.value = data!!
-                        _noService.value = data.isEmpty()
+                        _storeList.value = data!!
                     }
                 }
 
                 override fun onFailure(
-                    call: Call<BaseResponse<List<ServiceResponse>>>,
+                    call: Call<BaseResponse<List<StoreResponse>>>,
                     t: Throwable
                 ) {
                     Log.e(TAG, "onFailure: ${t.message}")

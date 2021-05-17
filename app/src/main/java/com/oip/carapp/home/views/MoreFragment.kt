@@ -10,7 +10,9 @@ import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.authentication.views.LoginActivity
 import com.oip.carapp.databinding.FragmentMoreBinding
+import com.oip.carapp.utils.Constants
 import com.oip.carapp.utils.PreferencesHandler
+import com.squareup.picasso.Picasso
 
 class MoreFragment : BaseFragment() {
 
@@ -22,6 +24,9 @@ class MoreFragment : BaseFragment() {
     ): View {
         binding = FragmentMoreBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.yellow)
+
+        Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
+            .placeholder(R.drawable.profile_placeholder).into(binding.profileImage)
 
         binding.profile.setOnClickListener {
             it.findNavController().navigate(R.id.action_moreFragment_to_profileFragment)

@@ -4,6 +4,7 @@ import android.content.Context
 import com.oip.carapp.CarApplication
 import com.oip.carapp.utils.Constants.IS_LOGIN
 import com.oip.carapp.utils.Constants.PREF_NAME
+import com.oip.carapp.utils.Constants.PROFILE_IMAGE_URL
 import com.oip.carapp.utils.Constants.TOKEN
 import com.oip.carapp.utils.Constants.USER_ID
 
@@ -26,6 +27,13 @@ object PreferencesHandler {
     }
 
     fun getUserId() = preferences.getString(USER_ID, "")
+
+    fun setProfileImageUrl(imageUrl: String) {
+        editor.putString(PROFILE_IMAGE_URL, imageUrl)
+        editor.apply()
+    }
+
+    fun getProfileImageUrl() = preferences.getString(PROFILE_IMAGE_URL, "")
 
     fun setToken(token: String) {
         editor.putString(TOKEN, token)

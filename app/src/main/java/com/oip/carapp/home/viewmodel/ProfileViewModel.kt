@@ -4,41 +4,37 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.oip.carapp.home.models.ServiceResponse
+import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
+import com.oip.carapp.utils.PreferencesHandler
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ServiceListViewModel : ViewModel() {
+class ProfileViewModel : ViewModel() {
 
-    private val TAG = "ServiceListViewModel"
+    private val TAG = "ProfileViewModel"
 
-    private val _serviceList = MutableLiveData<List<ServiceResponse>>()
-    val serviceList: LiveData<List<ServiceResponse>>
-        get() = _serviceList
+    private val _profileData = MutableLiveData<AuthResponse>()
+    val profileData: LiveData<AuthResponse>
+        get() = _profileData
 
-    private val _noService = MutableLiveData<Boolean>()
-    val noService: LiveData<Boolean>
-        get() = _noService
-
-    fun getServices(catId: String) {
-        RetrofitClient.apiInterface.getServices(catId)
-            .enqueue(object : Callback<BaseResponse<List<ServiceResponse>>> {
+    fun getProfile() {
+        RetrofitClient.apiInterface.getProfile(PreferencesHandler.getUserId()!!)
+            .enqueue(object : Callback<BaseResponse<AuthResponse>> {
                 override fun onResponse(
-                    call: Call<BaseResponse<List<ServiceResponse>>>,
-                    response: Response<BaseResponse<List<ServiceResponse>>>
+                    call: Call<BaseResponse<AuthResponse>>,
+                    response: Response<BaseResponse<AuthResponse>>
                 ) {
                     Log.d(TAG, "onResponse: ${response.body()?.data}")
                     response.body()?.apply {
-                        _serviceList.value = data!!
-                        _noService.value = data.isEmpty()
+                        _profileData.value = data!!
                     }
                 }
 
                 override fun onFailure(
-                    call: Call<BaseResponse<List<ServiceResponse>>>,
+                    call: Call<BaseResponse<AuthResponse>>,
                     t: Throwable
                 ) {
                     Log.e(TAG, "onFailure: ${t.message}")

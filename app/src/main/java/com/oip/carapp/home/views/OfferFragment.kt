@@ -5,38 +5,44 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentOfferBinding
 import com.oip.carapp.home.adapters.DiscountAdapter
-import com.oip.carapp.home.models.Discount
+import com.oip.carapp.home.models.OfferResponse
+import com.oip.carapp.home.viewmodel.OfferViewModel
+import com.oip.carapp.utils.hideProgressBar
+import com.oip.carapp.utils.showProgressBar
 
 class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
 
     private val TAG = "OfferFragment"
 
     private lateinit var binding: FragmentOfferBinding
-    private val discountList = ArrayList<Discount>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-    }
+    private val discountList = ArrayList<OfferResponse>()
+    private lateinit var viewModel: OfferViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentOfferBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
-
         binding.discountList.layoutManager = LinearLayoutManager(activity)
-        binding.discountList.adapter =
-            DiscountAdapter(discountList, requireContext(), this)
+
+        viewModel = ViewModelProvider(this).get(OfferViewModel::class.java)
+
+        showProgressBar(window, binding.progress)
+        viewModel.getOffers()
+
+        viewModel.offerList.observe(viewLifecycleOwner, Observer {
+            hideProgressBar(window, binding.progress)
+            binding.discountList.adapter =
+                DiscountAdapter(it, requireContext(), this)
+        })
 
         return binding.root
     }

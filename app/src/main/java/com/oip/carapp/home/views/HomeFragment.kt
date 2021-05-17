@@ -13,7 +13,7 @@ import com.oip.carapp.home.adapters.UpcomingAppointmentAdapter
 import com.oip.carapp.home.adapters.DiscountAdapter
 import com.oip.carapp.home.adapters.ServiceAdapter
 import com.oip.carapp.home.models.UpcomingAppointment
-import com.oip.carapp.home.models.Discount
+import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.home.models.Service
 
 class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
@@ -25,7 +25,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
 
     private val serviceList = ArrayList<Service>()
     private val appointmentList = ArrayList<UpcomingAppointment>()
-    private val discountList = ArrayList<Discount>()
+    private val discountList = ArrayList<OfferResponse>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,16 +95,16 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
                 "Tomorrow"
             )
         )
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
-        discountList.add(Discount("image url", "Engine Analysis", "20%"))
+        discountList.add(OfferResponse("1", "Engine Analysis", "20%","image url"))
+        discountList.add(OfferResponse("2", "Engine Analysis", "20%","image url"))
+        discountList.add(OfferResponse("3", "Engine Analysis", "20%","image url"))
+        discountList.add(OfferResponse("4", "Engine Analysis", "20%","image url"))
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
 
