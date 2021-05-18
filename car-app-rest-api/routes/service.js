@@ -22,7 +22,8 @@ var router = function(){
 
     Router.post('/createservice', upload.single('service_image'), serviceController.createService);
     Router.post('/updateservice', upload.single('service_image'), serviceController.updateService);
-    Router.post('/getservices', serviceController.getServices);
+    Router.post('/getclientservices', serviceController.getClientServices);
+    Router.post('/getadminservices', serviceController.getAdminServices);
     Router.post('/deleteservice', serviceController.deleteService);
 
     return Router

@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
@@ -15,6 +17,8 @@ import com.oip.carapp.home.adapters.ServiceAdapter
 import com.oip.carapp.home.models.UpcomingAppointment
 import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.home.models.Service
+import com.oip.carapp.home.models.ServiceResponse
+import com.oip.carapp.home.viewmodel.HomeViewModel
 
 class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
     UpcomingAppointmentAdapter.AppointmentListener, DiscountAdapter.DiscountListener {
@@ -23,38 +27,15 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val serviceList = ArrayList<Service>()
-    private val appointmentList = ArrayList<UpcomingAppointment>()
     private val discountList = ArrayList<OfferResponse>()
+    private val serviceList = ArrayList<ServiceResponse>()
+    private val appointmentList = ArrayList<UpcomingAppointment>()
+
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        serviceList.add(
-            Service(
-                "$ 25.00",
-                "22 km",
-                "Jump",
-                "Lorem ipsum dolor"
-            )
-        )
-        serviceList.add(
-            Service(
-                "$ 25.00",
-                "22 km",
-                "Tow",
-                "Lorem ipsum dolor"
-            )
-        )
-        serviceList.add(
-            Service(
-                "$ 25.00",
-                "22 km",
-                "Lockout",
-                "Lorem ipsum dolor"
-            )
-        )
-
         appointmentList.add(
             UpcomingAppointment(
                 "image url",
@@ -95,10 +76,6 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
                 "Tomorrow"
             )
         )
-        discountList.add(OfferResponse("1", "Engine Analysis", "20%","image url"))
-        discountList.add(OfferResponse("2", "Engine Analysis", "20%","image url"))
-        discountList.add(OfferResponse("3", "Engine Analysis", "20%","image url"))
-        discountList.add(OfferResponse("4", "Engine Analysis", "20%","image url"))
     }
 
     override fun onCreateView(
@@ -108,21 +85,28 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
 
-        // service list
+        binding.discountList.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.serviceList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        binding.serviceList.adapter = ServiceAdapter(serviceList, requireContext(), this)
-
-        // appointment list
         binding.appointmentList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel.getHomeData()
+
+        viewModel.homeResponse.observe(viewLifecycleOwner, Observer {
+            if (it.offers.isNotEmpty()) {
+                binding.discount.text = "FLAT ${it.offers[0].offerDiscount}% OFF"
+            }
+
+            binding.serviceList.adapter = ServiceAdapter(it.services, requireContext(), this)
+            binding.discountList.adapter = DiscountAdapter(it.offers, requireContext(), this)
+        })
+
         binding.appointmentList.adapter =
             UpcomingAppointmentAdapter(appointmentList, requireContext(), this)
 
-        binding.discountList.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        binding.discountList.adapter =
-            DiscountAdapter(discountList, requireContext(), this)
         return binding.root
     }
 

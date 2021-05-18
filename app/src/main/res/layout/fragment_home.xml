@@ -19,13 +19,16 @@
                 style="@style/BoldTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Flat 20 % OFF"
+                android:text="Flat OFF"
                 android:textSize="22sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/discountList"
                 android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                android:layout_height="250dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/discount_item" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

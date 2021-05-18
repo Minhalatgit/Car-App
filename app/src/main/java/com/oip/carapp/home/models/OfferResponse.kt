@@ -6,5 +6,6 @@ data class OfferResponse(
     @SerializedName("id") val id: String,
     @SerializedName("offer_title") val offerTitle: String,
     @SerializedName("offer_discount") val offerDiscount: String,
-    @SerializedName("offer_image") val offerImage: String
+    @SerializedName("offer_image") val offerImage: String,
+    @SerializedName("is_deleted") val isDeleted: String
 )

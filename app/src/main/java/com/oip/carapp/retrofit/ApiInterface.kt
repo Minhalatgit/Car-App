@@ -1,13 +1,14 @@
 package com.oip.carapp.retrofit
 
 import com.oip.carapp.authentication.model.AuthResponse
+import com.oip.carapp.home.models.HomeResponse
 import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.home.models.ServiceResponse
 import com.oip.carapp.home.models.StoreResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiInterface {
 
@@ -34,18 +35,32 @@ interface ApiInterface {
     ): Call<BaseResponse<AuthResponse>>
 
     @FormUrlEncoded
-    @POST("service/getservices")
+    @POST("service/getClientServices")
     fun getServices(
         @Field("cat_id") catId: String
     ): Call<BaseResponse<List<ServiceResponse>>>
 
-    @POST("offer/getoffers")
+    @POST("offer/getclientoffers")
     fun getOffers(): Call<BaseResponse<List<OfferResponse>>>
 
-    @POST("store/getstores")
+    @POST("store/getclientstores")
     fun getStores(): Call<BaseResponse<List<StoreResponse>>>
 
     @FormUrlEncoded
     @POST("profile/getprofile")
     fun getProfile(@Field("profile_id") userId: String): Call<BaseResponse<AuthResponse>>
+
+    @Multipart
+    @POST("profile/updateprofile")
+    fun updateProfile(
+        @Part("user_name") username: RequestBody,
+        @Part("user_number") phone: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("birthday") birthday: RequestBody,
+        @Part image: MultipartBody.Part,
+        @Part("profile_id") profileId: RequestBody
+    ): Call<BaseResponse<AuthResponse>>
+
+    @POST("home/gethome")
+    fun getHomeData(): Call<BaseResponse<HomeResponse>>
 }

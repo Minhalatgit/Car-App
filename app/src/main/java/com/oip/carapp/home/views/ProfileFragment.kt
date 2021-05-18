@@ -1,5 +1,8 @@
 package com.oip.carapp.home.views
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,15 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.databinding.FragmentProfileBinding
 import com.oip.carapp.home.viewmodel.ProfileViewModel
-import com.oip.carapp.utils.Constants
-import com.oip.carapp.utils.PreferencesHandler
+import com.oip.carapp.utils.*
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 class ProfileFragment : BaseFragment() {
 
@@ -23,6 +26,9 @@ class ProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var viewModel: ProfileViewModel
+
+    private var profileData: AuthResponse? = null
+    private var fileUri: Uri? = null
 
     private var isEditMode = false
 
@@ -39,10 +45,32 @@ class ProfileFragment : BaseFragment() {
 
         binding.cancel.setOnClickListener {
             editModeOff()
+            if (profileData != null)
+                setProfileData(profileData!!)
         }
 
         binding.done.setOnClickListener {
             editModeOff()
+            showProgressBar(window, binding.progress)
+            viewModel.updateProfile(
+                binding.usernameTwo.text.toString(),
+                binding.phone.text.toString(),
+                binding.gender.text.toString(),
+                binding.birthday.text.toString(),
+                PreferencesHandler.getUserId()!!,
+                File(fileUri?.path!!)
+            )
+        }
+
+        binding.uploadIcon.setOnClickListener {
+            ImagePicker.with(this)
+                .crop()                    //Crop image(Optional), Check Customization for more option
+                .compress(1024)            //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(
+                    1080,
+                    1080
+                )    //Final image resolution will be less than 1080 x 1080(Optional)
+                .start()
         }
 
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
@@ -50,12 +78,15 @@ class ProfileFragment : BaseFragment() {
 
         viewModel.profileData.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: $it")
-
+            profileData = it
             setProfileData(it)
         })
-
-        Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
-            .placeholder(R.drawable.profile_placeholder).into(binding.profileImage)
+        viewModel.updatedProfileData.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "Updated profile data: $it")
+            profileData = it
+            hideProgressBar(window, binding.progress)
+            setProfileData(it)
+        })
 
         return binding.root
     }
@@ -86,6 +117,29 @@ class ProfileFragment : BaseFragment() {
             email.text = profileData.email
             gender.setText(profileData.gender)
             birthday.setText(profileData.birthday)
+            Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
+                .placeholder(R.drawable.profile_placeholder).into(profileImage)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            RESULT_OK -> {
+                //Image Uri will not be null for RESULT_OK
+                val uri: Uri = data?.data!!
+
+                fileUri = uri
+
+                // Use Uri object instead of File to avoid storage permissions
+                binding.profileImage.setImageURI(uri)
+            }
+            ImagePicker.RESULT_ERROR -> {
+                Log.e(TAG, "onActivityResult: ${ImagePicker.getError(data)}")
+            }
+            else -> {
+                Log.d(TAG, "onActivityResult: Task Cancelled")
+            }
         }
     }
 }

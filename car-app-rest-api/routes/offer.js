@@ -22,7 +22,8 @@ var router = function(){
 
     Router.post('/createoffer', upload.single('offer_image'), offerController.createOffer);
     Router.post('/updateoffer', upload.single('offer_image'), offerController.updateOffer);
-    Router.post('/getoffers', offerController.getOffers);
+    Router.post('/getclientoffers', offerController.getClientOffers);
+    Router.post('/getadminoffers', offerController.getAdminOffers);
     Router.post('/deleteoffer', offerController.deleteOffer);
 
     return Router

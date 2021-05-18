@@ -22,6 +22,7 @@ var router = function(){
 
     Router.post('/updateprofile', upload.single('profile_image'), profileController.updateProfile);
     Router.post('/getprofile', profileController.getProfile);
+    Router.post('/getUsers', profileController.getUsers);
 
     return Router
 }

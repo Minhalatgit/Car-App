@@ -6,6 +6,7 @@ import com.oip.carapp.utils.Constants.IS_LOGIN
 import com.oip.carapp.utils.Constants.PREF_NAME
 import com.oip.carapp.utils.Constants.PROFILE_IMAGE_URL
 import com.oip.carapp.utils.Constants.TOKEN
+import com.oip.carapp.utils.Constants.USERNAME
 import com.oip.carapp.utils.Constants.USER_ID
 
 object PreferencesHandler {
@@ -34,6 +35,13 @@ object PreferencesHandler {
     }
 
     fun getProfileImageUrl() = preferences.getString(PROFILE_IMAGE_URL, "")
+
+    fun setUsername(username: String) {
+        editor.putString(USERNAME, username)
+        editor.apply()
+    }
+
+    fun getUsername() = preferences.getString(USERNAME, "")
 
     fun setToken(token: String) {
         editor.putString(TOKEN, token)

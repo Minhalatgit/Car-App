@@ -11,5 +11,6 @@ data class ServiceResponse(
     @SerializedName("is_favourite") val isFavourite: String,
     @SerializedName("service_image") val serviceImage: String,
     @SerializedName("created_at") val createdAt: String,
-    @SerializedName("updated_at") val updatedAt: String
+    @SerializedName("updated_at") val updatedAt: String,
+    @SerializedName("is_deleted") val isDeleted: String
 )

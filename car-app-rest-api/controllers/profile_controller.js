@@ -1,7 +1,6 @@
 'user strict';
 const sql = require('../connection');
 
-
 exports.getProfile = async (req, res) =>{
 
     try {
@@ -62,6 +61,31 @@ exports.updateProfile = async (req, res) =>{
                     } else{
                         res.send(err);
                     }
+                })
+            } else{
+                res.send(err);
+            }
+        })
+    } catch(e) {
+        console.log('Catch an error: ', e)
+        return res.json({
+            status: false,
+            msg: "Something went wrong",
+        }) 
+    }
+};
+
+exports.getUsers = async (req, res) =>{
+
+    try {
+        const body = req.body;
+        sql.query('SELECT * FROM user', [ body.profile_id ], (err, result) => {
+            if(!err) {
+                console.log(result[0])
+                return res.json({
+                    status: true,
+                    msg: "Users fetched successfully",
+                    data: result
                 })
             } else{
                 res.send(err);

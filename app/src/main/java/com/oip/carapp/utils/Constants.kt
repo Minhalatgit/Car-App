@@ -11,6 +11,7 @@ object Constants {
     const val USER_ID = "user_id"
     const val TOKEN = "token"
     const val PROFILE_IMAGE_URL = "profile_image_url"
+    const val USERNAME = "username"
 
     //Date formats
 

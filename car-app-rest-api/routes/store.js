@@ -22,7 +22,8 @@ var router = function(){
 
     Router.post('/createstore', upload.single('store_image'), storeController.createStore);
     Router.post('/updatestore', upload.single('store_image'), storeController.updateStore);
-    Router.post('/getstores', storeController.getStores);
+    Router.post('/getclientstores', storeController.getClientStores);
+    Router.post('/getadminstores', storeController.getAdminStores);
     Router.post('/deletestore', storeController.deleteStore);
 
     return Router

@@ -22,7 +22,7 @@ class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
     private val TAG = "OfferFragment"
 
     private lateinit var binding: FragmentOfferBinding
-    private val discountList = ArrayList<OfferResponse>()
+    private val offers = ArrayList<OfferResponse>()
     private lateinit var viewModel: OfferViewModel
 
     override fun onCreateView(
@@ -31,7 +31,7 @@ class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
     ): View {
         binding = FragmentOfferBinding.inflate(layoutInflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.white)
-        binding.discountList.layoutManager = LinearLayoutManager(activity)
+        binding.offerList.layoutManager = LinearLayoutManager(activity)
 
         viewModel = ViewModelProvider(this).get(OfferViewModel::class.java)
 
@@ -39,8 +39,11 @@ class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
         viewModel.getOffers()
 
         viewModel.offerList.observe(viewLifecycleOwner, Observer {
+            if (it.isNotEmpty()) {
+                binding.offer.text = "FLAT ${it[0].offerDiscount}% OFF"
+            }
             hideProgressBar(window, binding.progress)
-            binding.discountList.adapter =
+            binding.offerList.adapter =
                 DiscountAdapter(it, requireContext(), this)
         })
 

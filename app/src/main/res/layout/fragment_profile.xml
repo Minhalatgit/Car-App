@@ -10,7 +10,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/white_three">
 
             <RelativeLayout
@@ -83,7 +83,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/profile_history"
+                        tools:src="@drawable/profile_history"
                         app:civ_border_color="@color/yellow"
                         app:civ_border_width="2dp" />
 
@@ -105,7 +105,7 @@
                     android:layout_below="@+id/profileImageLayout"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="Martha Banks"
+                    tools:text="Martha Banks"
                     android:textSize="20sp" />
 
             </RelativeLayout>
@@ -153,7 +153,7 @@
                         android:layout_toStartOf="@id/arrow_right"
                         android:background="@null"
                         android:enabled="false"
-                        android:text="Martha Banks"
+                        tools:text="Martha Banks"
                         android:textColor="@color/grey"
                         android:textSize="17sp" />
 
@@ -193,7 +193,7 @@
                         android:layout_toStartOf="@id/arrow_right_phone"
                         android:background="@null"
                         android:enabled="false"
-                        android:text="584-490-9153"
+                        tools:text="584-490-9153"
                         android:textColor="@color/grey"
                         android:textSize="17sp" />
 
@@ -231,7 +231,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:layout_toStartOf="@id/arrow_right_email"
-                        android:text="martha@gmail.com"
+                        tools:text="martha@gmail.com"
                         android:textColor="@color/grey"
                         android:textSize="17sp" />
 
@@ -271,7 +271,7 @@
                         android:layout_toStartOf="@id/arrow_right_gender"
                         android:background="@null"
                         android:enabled="false"
-                        android:text="Female"
+                        tools:text="Female"
                         android:textColor="@color/grey"
                         android:textSize="17sp" />
 
@@ -311,7 +311,7 @@
                         android:layout_toStartOf="@id/arrow_right_birthday"
                         android:background="@null"
                         android:enabled="false"
-                        android:text="April 16, 1988"
+                        tools:text="April 16, 1988"
                         android:textColor="@color/grey"
                         android:textSize="17sp" />
 
@@ -326,6 +326,16 @@
                 </RelativeLayout>
 
             </RelativeLayout>
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progress"
+                style="@style/SpinKitView.Circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:elevation="2dp"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/dark" />
 
         </RelativeLayout>
 

@@ -28,6 +28,8 @@ class MoreFragment : BaseFragment() {
         Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
             .placeholder(R.drawable.profile_placeholder).into(binding.profileImage)
 
+        binding.username.text = PreferencesHandler.getUsername()
+
         binding.profile.setOnClickListener {
             it.findNavController().navigate(R.id.action_moreFragment_to_profileFragment)
         }

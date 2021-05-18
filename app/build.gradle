@@ -106,4 +106,7 @@ dependencies {
 
     // Run-time Permissions
     implementation 'com.vmadalin:easypermissions-ktx:0.1.0'
+
+    // Image picker
+    implementation 'com.github.dhaval2404:imagepicker:2.0'
 }

@@ -9,18 +9,18 @@
         tools:context=".home.views.OfferFragment">
 
         <TextView
-            android:id="@+id/discount"
+            android:id="@+id/offer"
             style="@style/BoldTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Flat 20 % OFF"
+            android:text="Flat OFF"
             android:textSize="22sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/discountList"
+            android:id="@+id/offerList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/discount"
+            android:layout_below="@id/offer"
             tools:listitem="@layout/discount_item" />
 
         <com.github.ybq.android.spinkit.SpinKitView

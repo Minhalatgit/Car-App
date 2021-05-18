@@ -10,9 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
 import com.oip.carapp.home.models.Service
+import com.oip.carapp.home.models.ServiceResponse
 
 class ServiceAdapter(
-    private val list: ArrayList<Service>,
+    private val list: List<ServiceResponse>,
     val context: Context,
     private val listener: ServiceListener
 ) :
@@ -55,12 +56,10 @@ class ServiceAdapter(
 
             layout.background = ContextCompat.getDrawable(context, gradientId)
             serialNumber.text = (position + 1).toString()
-            ratePrice.text = serviceItem.ratePrice
-            distance.text = serviceItem.distance
-            serviceName.text = serviceItem.serviceName
-            serviceDescription.text = serviceItem.serviceDescription
-        }
 
+            serviceName.text = serviceItem.serviceTitle
+            serviceDescription.text = serviceItem.serviceSubtitle
+        }
     }
 
     interface ServiceListener {

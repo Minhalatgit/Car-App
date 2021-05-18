@@ -1,7 +1,31 @@
 'user strict';
 const sql = require('../connection');
 
-exports.getStores = async (req, res) =>{
+exports.getClientStores = async (req, res) =>{
+
+    try {
+        const body = req.body;
+        sql.query('SELECT * FROM store WHERE is_deleted = 0', (err, result) => {
+            if(!err) {
+                return res.json({
+                    status: true,
+                    msg: "Stores fetched successfully",
+                    data : result
+                })
+            } else{
+                res.send(err);
+            }
+        })
+    } catch(e) {
+        console.log('Catch an error: ', e)
+        return res.json({
+            status: false,
+            msg: "Something went wrong",
+        }) 
+    }
+};
+
+exports.getAdminStores = async (req, res) =>{
 
     try {
         const body = req.body;
@@ -55,7 +79,7 @@ exports.updateStore = async (req, res) =>{
     try {
         const body = req.body;
         console.log(body);
-        sql.query('UPDATE store SET store_title = ? , store_address = ? , store_lat = ? , store_long = ? , store_image = ? WHERE id = ?', [ body.store_title, body.store_address, body.store_lat, body.store_long, req.file.path , body.store_id], (err, result) => {
+        sql.query('UPDATE store SET store_title = ? , store_address = ? , store_lat = ? , store_long = ? , store_image = ? , is_deleted = ? WHERE id = ?', [ body.store_title, body.store_address, body.store_lat, body.store_long, req.file.path, body.is_deleted , body.store_id], (err, result) => {
             if(!err) {
                 return res.json({
                     status: true,
@@ -78,7 +102,7 @@ exports.deleteStore = async (req, res) =>{
 
     try {
         const body = req.body;
-        sql.query('DELETE FROM store WHERE id = ? ', [ body.store_id ], (err, result) => {
+        sql.query('UPDATE store SET is_deleted = 1 WHERE id = ? ', [ body.store_id ], (err, result) => {
             if(!err) {
                 console.log(result)
                 return res.json({
