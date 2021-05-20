@@ -1,25 +1,35 @@
 package com.oip.carapp.home.views
 
-import android.R.attr
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentServiceBookingBinding
+import com.oip.carapp.home.models.ServiceResponse
+import com.oip.carapp.home.viewmodel.ServiceBookingViewModel
 import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
+import com.oip.carapp.utils.PreferencesHandler
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
-
 class ServiceBookingFragment : BaseFragment() {
 
+    companion object {
+        private const val TAG = "ServiceBookingFragment"
+    }
+
     private lateinit var binding: FragmentServiceBookingBinding
-    lateinit var args: ServiceBookingFragmentArgs
+    private lateinit var args: ServiceBookingFragmentArgs
+    private lateinit var serviceData: ServiceResponse
+    private lateinit var viewModel: ServiceBookingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,20 +39,17 @@ class ServiceBookingFragment : BaseFragment() {
         window.statusBarColor = requireActivity().getColor(R.color.white)
         args = ServiceBookingFragmentArgs.fromBundle(requireArguments())
 
-        Picasso.get().load(BASE_URL_IMAGES + args.serviceImage).placeholder(R.drawable.booking)
-            .into(object : Target {
-                override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                    binding.mainLayout.background =
-                        BitmapDrawable(requireContext().resources, bitmap)
-                }
+        serviceData = args.serviceData
 
-                override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                }
+        Log.d(TAG, "Service data: $serviceData")
 
-                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                }
+        setServiceData()
 
-            })
+        viewModel = ViewModelProvider(this).get(ServiceBookingViewModel::class.java)
+
+        binding.bookService.setOnClickListener {
+            //viewModel.bookService("")
+        }
 
         binding.back.setOnClickListener {
 
@@ -51,14 +58,38 @@ class ServiceBookingFragment : BaseFragment() {
         return binding.root
     }
 
-    //below code is to make screen full screen
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-    }
+    private fun setServiceData() {
+        binding.off.text = PreferencesHandler.getOffer() + "% OFF"
+        serviceData.apply {
+            Picasso.get().load(BASE_URL_IMAGES + serviceImage)
+                .placeholder(R.drawable.booking)
+                .into(object : Target {
+                    override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                        binding.mainLayout.background =
+                            BitmapDrawable(requireContext().resources, bitmap)
+                    }
 
-    override fun onDetach() {
-        super.onDetach()
-//        window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+                    override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                    }
+
+                    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                    }
+
+                })
+
+            if (isFavourite == "1") {
+                binding.favourite.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.red)
+                )
+            } else {
+                binding.favourite.setColorFilter(
+                    ContextCompat.getColor(requireContext(), R.color.grey)
+                )
+            }
+            binding.serviceTitle.text = serviceTitle
+            binding.subtitle.text = serviceSubtitle
+            binding.amount.text = "$$serviceAmount"
+            binding.distance.text = "$serviceDistance Km"
+        }
     }
 }

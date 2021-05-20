@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".home.views.ProfileFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -83,9 +83,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        tools:src="@drawable/profile_history"
                         app:civ_border_color="@color/yellow"
-                        app:civ_border_width="2dp" />
+                        app:civ_border_width="2dp"
+                        tools:src="@drawable/profile_history" />
 
                     <ImageView
                         android:id="@+id/uploadIcon"
@@ -105,8 +105,8 @@
                     android:layout_below="@+id/profileImageLayout"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    tools:text="Martha Banks"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    tools:text="Martha Banks" />
 
             </RelativeLayout>
 
@@ -152,10 +152,9 @@
                         android:layout_marginEnd="20dp"
                         android:layout_toStartOf="@id/arrow_right"
                         android:background="@null"
-                        android:enabled="false"
-                        tools:text="Martha Banks"
                         android:textColor="@color/grey"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        tools:text="Martha Banks" />
 
                     <ImageView
                         android:id="@+id/arrow_right"
@@ -192,10 +191,9 @@
                         android:layout_marginEnd="20dp"
                         android:layout_toStartOf="@id/arrow_right_phone"
                         android:background="@null"
-                        android:enabled="false"
-                        tools:text="584-490-9153"
                         android:textColor="@color/grey"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        tools:text="584-490-9153" />
 
                     <ImageView
                         android:id="@+id/arrow_right_phone"
@@ -231,9 +229,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:layout_toStartOf="@id/arrow_right_email"
-                        tools:text="martha@gmail.com"
                         android:textColor="@color/grey"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        tools:text="martha@gmail.com" />
 
                     <ImageView
                         android:id="@+id/arrow_right_email"
@@ -262,7 +260,7 @@
                         android:text="Gender"
                         android:textSize="17sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/gender"
                         style="@style/RegularTextView"
                         android:layout_width="wrap_content"
@@ -270,10 +268,9 @@
                         android:layout_marginEnd="20dp"
                         android:layout_toStartOf="@id/arrow_right_gender"
                         android:background="@null"
-                        android:enabled="false"
-                        tools:text="Female"
                         android:textColor="@color/grey"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        tools:text="Female" />
 
                     <ImageView
                         android:id="@+id/arrow_right_gender"
@@ -302,18 +299,16 @@
                         android:text="Birthday"
                         android:textSize="17sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/birthday"
                         style="@style/RegularTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:layout_toStartOf="@id/arrow_right_birthday"
-                        android:background="@null"
-                        android:enabled="false"
-                        tools:text="April 16, 1988"
                         android:textColor="@color/grey"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        tools:text="April 16, 1988" />
 
                     <ImageView
                         android:id="@+id/arrow_right_birthday"
@@ -339,5 +334,5 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

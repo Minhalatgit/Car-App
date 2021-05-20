@@ -22,7 +22,7 @@ import com.oip.carapp.utils.showProgressBar
 class ServiceListFragment : BaseFragment(), CarServiceAdapter.ServiceListener {
 
     private lateinit var binding: FragmentServiceListBinding
-    lateinit var args: ServiceListFragmentArgs
+    private lateinit var args: ServiceListFragmentArgs
     private lateinit var serviceListRV: RecyclerView
 
     private lateinit var viewModel: ServiceListViewModel
@@ -66,7 +66,9 @@ class ServiceListFragment : BaseFragment(), CarServiceAdapter.ServiceListener {
     override fun onServiceClick(position: Int) {
         Navigation.findNavController(requireActivity(), R.id.navHostFragment)
             .navigate(
-                ServiceListFragmentDirections.actionServiceListFragmentToServiceBookingFragment(list[position].serviceImage)
+                ServiceListFragmentDirections.actionServiceListFragmentToServiceBookingFragment(
+                    list[position]
+                )
             )
     }
 

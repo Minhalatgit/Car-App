@@ -19,6 +19,7 @@ import com.oip.carapp.home.viewmodel.ProfileViewModel
 import com.oip.carapp.utils.*
 import com.squareup.picasso.Picasso
 import java.io.File
+import java.util.*
 
 class ProfileFragment : BaseFragment() {
 
@@ -38,6 +39,8 @@ class ProfileFragment : BaseFragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         window.statusBarColor = requireActivity().getColor(R.color.yellow)
+
+        editModeOff()
 
         binding.edit.setOnClickListener {
             editModeOn()
@@ -98,6 +101,11 @@ class ProfileFragment : BaseFragment() {
         binding.cancel.visibility = View.VISIBLE
         binding.edit.visibility = View.GONE
         binding.profileImage.alpha = 0.5f
+
+        binding.usernameTwo.isEnabled = true
+        binding.phone.isEnabled = true
+
+        binding.birthday.transformIntoDatePicker(requireContext(), "EEE, dd MMM yyyy", Date())
     }
 
     private fun editModeOff() {
@@ -107,6 +115,11 @@ class ProfileFragment : BaseFragment() {
         binding.cancel.visibility = View.GONE
         binding.edit.visibility = View.VISIBLE
         binding.profileImage.alpha = 1.0f
+
+        binding.usernameTwo.isEnabled = false
+        binding.phone.isEnabled = false
+
+        binding.birthday.setOnClickListener(null)
     }
 
     private fun setProfileData(profileData: AuthResponse) {
@@ -115,8 +128,8 @@ class ProfileFragment : BaseFragment() {
             usernameTwo.setText(profileData.name)
             phone.setText(profileData.phone)
             email.text = profileData.email
-            gender.setText(profileData.gender)
-            birthday.setText(profileData.birthday)
+            gender.text = profileData.gender
+            birthday.text = getDate(profileData.birthday)
             Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
                 .placeholder(R.drawable.profile_placeholder).into(profileImage)
         }

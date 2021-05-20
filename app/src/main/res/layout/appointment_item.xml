@@ -34,8 +34,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_toRightOf="@+id/profileImage"
                 android:textSize="17sp"
+                tools:layout_toRightOf="@+id/profileImage"
                 tools:text="Steve Bowen" />
 
             <TextView
@@ -48,7 +48,8 @@
                 android:background="@drawable/yellow_curve_bg"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="ApplePay" />
+                android:text="ApplePay"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/discount"
@@ -61,7 +62,8 @@
                 android:background="@drawable/yellow_curve_bg"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Discount" />
+                android:text="Discount"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/amount"
@@ -119,8 +121,8 @@
                 style="@style/RegularTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tow"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                tools:text="Tow" />
 
             <TextView
                 android:id="@+id/timeText"
@@ -128,8 +130,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="03:00 PM"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                tools:text="03:00 PM" />
 
         </RelativeLayout>
 
@@ -148,8 +150,8 @@
             style="@style/RegularTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Moin Motor Workshop"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            tools:text="Moin Motor Workshop" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

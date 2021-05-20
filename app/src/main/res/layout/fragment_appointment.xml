@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".home.views.AppointmentFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -13,6 +13,7 @@
             android:id="@+id/topLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:padding="10dp">
 
             <ImageView
@@ -42,8 +43,19 @@
             android:id="@+id/historyRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/topLayout"
             android:layout_marginTop="10dp"
             tools:listitem="@layout/appointment_item" />
 
-    </LinearLayout>
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progress"
+            style="@style/SpinKitView.Circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:elevation="2dp"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/dark" />
+
+    </RelativeLayout>
 </layout>

@@ -56,7 +56,7 @@ exports.createService = async (req, res) =>{
     try {
         console.log(req.file.path);
         const body = req.body;
-        sql.query('INSERT INTO service ( cat_id, service_title, service_subtitle, service_image) VALUES (?,?,?,?)', [ body.cat_id, body.service_title, body.service_subtitle, req.file.path ], (err, result) => {
+        sql.query('INSERT INTO service ( cat_id, service_title, service_subtitle, service_amount, service_image) VALUES (?,?,?,?)', [ body.cat_id, body.service_title, body.service_subtitle, body.service_amount, req.file.path ], (err, result) => {
             if(!err) {
                 return res.json({
                     status: true,
@@ -80,7 +80,7 @@ exports.updateService = async (req, res) =>{
 
     try {
         const body = req.body;
-        sql.query('Update service SET cat_id = ? , service_title = ? , service_subtitle = ? , service_image = ? , is_deleted = ? WHERE id = ?', [ body.cat_id, body.service_title, body.service_subtitle, req.file.path, body.is_deleted , body.service_id], (err, result) => {
+        sql.query('Update service SET cat_id = ? , service_title = ? , service_subtitle = ? , service_image = ? , service_amount = ? , is_deleted = ? WHERE id = ?', [ body.cat_id, body.service_title, body.service_subtitle, req.file.path, body.service_amount, body.is_deleted , body.service_id], (err, result) => {
             if(!err) {
                 return res.json({
                     status: true,

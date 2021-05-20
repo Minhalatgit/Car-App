@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="250dp"
-    android:layout_height="wrap_content"
+    android:layout_height="120dp"
     android:layout_marginEnd="10dp"
     app:cardCornerRadius="10dp">
 
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:background="@drawable/yellow_gradient"
-        android:paddingBottom="20dp">
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        tools:background="@drawable/yellow_gradient">
 
         <RelativeLayout
             android:id="@+id/serialNumberMonogram"
@@ -61,7 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/serialNumberMonogram"
             android:layout_marginTop="-20dp"
+            android:layout_toStartOf="@id/distance"
             android:layout_toEndOf="@+id/serialNumberMonogram"
+            android:ellipsize="end"
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/white"
             android:textSize="17sp"

@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
-import com.oip.carapp.home.models.Appointment
+import com.oip.carapp.home.models.AppointmentResponse
 import kotlinx.android.synthetic.main.appointment_item.view.*
 
-class AppointmentAdapter(private val list: ArrayList<Appointment>) :
+class AppointmentAdapter(private val list: List<AppointmentResponse>) :
     RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
 
     inner class AppointmentHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -23,12 +23,12 @@ class AppointmentAdapter(private val list: ArrayList<Appointment>) :
         val appointment = list[position]
 
         holder.itemView.apply {
-            username.text = appointment.username
+            username.text = appointment.title
             amount.text = appointment.amount
-            date.text = appointment.date
-            serviceText.text = appointment.service
-            providerText.text = appointment.provider
-            timeText.text = appointment.time
+            date.text = appointment.appointmentDate
+            serviceText.text = appointment.title
+            providerText.text = "Moin motor"
+            timeText.text = "3:00 PM"
         }
     }
 }

@@ -59,6 +59,8 @@ class ServiceAdapter(
 
             serviceName.text = serviceItem.serviceTitle
             serviceDescription.text = serviceItem.serviceSubtitle
+            ratePrice.text = "$" + serviceItem.serviceAmount
+            distance.text = serviceItem.serviceDistance + " Km"
         }
     }
 

@@ -3,6 +3,7 @@ package com.oip.carapp.utils
 import android.content.Context
 import com.oip.carapp.CarApplication
 import com.oip.carapp.utils.Constants.IS_LOGIN
+import com.oip.carapp.utils.Constants.OFFER
 import com.oip.carapp.utils.Constants.PREF_NAME
 import com.oip.carapp.utils.Constants.PROFILE_IMAGE_URL
 import com.oip.carapp.utils.Constants.TOKEN
@@ -42,6 +43,13 @@ object PreferencesHandler {
     }
 
     fun getUsername() = preferences.getString(USERNAME, "")
+
+    fun setOffer(offer: String) {
+        editor.putString(OFFER, offer)
+        editor.apply()
+    }
+
+    fun getOffer() = preferences.getString(OFFER, "")
 
     fun setToken(token: String) {
         editor.putString(TOKEN, token)

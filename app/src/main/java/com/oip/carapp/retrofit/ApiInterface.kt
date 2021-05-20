@@ -1,10 +1,7 @@
 package com.oip.carapp.retrofit
 
 import com.oip.carapp.authentication.model.AuthResponse
-import com.oip.carapp.home.models.HomeResponse
-import com.oip.carapp.home.models.OfferResponse
-import com.oip.carapp.home.models.ServiceResponse
-import com.oip.carapp.home.models.StoreResponse
+import com.oip.carapp.home.models.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -63,4 +60,7 @@ interface ApiInterface {
 
     @POST("home/gethome")
     fun getHomeData(): Call<BaseResponse<HomeResponse>>
+
+    @POST("appointment/getappointments")
+    fun getAppointments(): Call<BaseResponse<List<AppointmentResponse>>>
 }

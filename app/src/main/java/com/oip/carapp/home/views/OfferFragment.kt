@@ -14,6 +14,7 @@ import com.oip.carapp.databinding.FragmentOfferBinding
 import com.oip.carapp.home.adapters.DiscountAdapter
 import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.home.viewmodel.OfferViewModel
+import com.oip.carapp.utils.PreferencesHandler
 import com.oip.carapp.utils.hideProgressBar
 import com.oip.carapp.utils.showProgressBar
 
@@ -40,6 +41,7 @@ class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
 
         viewModel.offerList.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
+                PreferencesHandler.setOffer(it[0].offerDiscount)
                 binding.offer.text = "FLAT ${it[0].offerDiscount}% OFF"
             }
             hideProgressBar(window, binding.progress)

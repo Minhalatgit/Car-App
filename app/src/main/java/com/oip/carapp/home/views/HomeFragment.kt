@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentHomeBinding
@@ -19,6 +20,8 @@ import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.home.models.Service
 import com.oip.carapp.home.models.ServiceResponse
 import com.oip.carapp.home.viewmodel.HomeViewModel
+import com.oip.carapp.utils.PreferencesHandler
+import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
     UpcomingAppointmentAdapter.AppointmentListener, DiscountAdapter.DiscountListener {
@@ -97,6 +100,7 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
 
         viewModel.homeResponse.observe(viewLifecycleOwner, Observer {
             if (it.offers.isNotEmpty()) {
+                PreferencesHandler.setOffer(it.offers[0].offerDiscount)
                 binding.discount.text = "FLAT ${it.offers[0].offerDiscount}% OFF"
             }
 
@@ -106,6 +110,11 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
 
         binding.appointmentList.adapter =
             UpcomingAppointmentAdapter(appointmentList, requireContext(), this)
+
+        binding.viewAll.setOnClickListener {
+            activity.findViewById<BottomNavigationView>(R.id.bottomView).selectedItemId =
+                R.id.serviceFragment
+        }
 
         return binding.root
     }
