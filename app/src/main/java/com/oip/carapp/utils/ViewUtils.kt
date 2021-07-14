@@ -5,15 +5,30 @@ import android.content.Context
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.github.ybq.android.spinkit.SpinKitView
+import com.oip.carapp.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun ImageView.updateFavouriteIconColor(isFavourite: String, context: Context) {
+    if (isFavourite == "1") {
+        this.setColorFilter(
+            ContextCompat.getColor(context, R.color.red)
+        )
+    } else {
+        this.setColorFilter(
+            ContextCompat.getColor(context, R.color.grey)
+        )
+    }
 }
 
 fun showProgressBar(window: Window, progress: ProgressBar) {
@@ -44,8 +59,10 @@ fun TextView.transformIntoDatePicker(context: Context, format: String, maxDate: 
 
     setOnClickListener {
         DatePickerDialog(
-            context, datePickerOnDataSetListener, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+            context, R.style.DialogTheme,
+            datePickerOnDataSetListener,
+            myCalendar.get(Calendar.YEAR),
+            myCalendar.get(Calendar.MONTH),
             myCalendar.get(Calendar.DAY_OF_MONTH)
         ).run {
             maxDate?.time?.also { datePicker.maxDate = it }

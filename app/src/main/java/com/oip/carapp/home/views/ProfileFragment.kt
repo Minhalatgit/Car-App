@@ -2,12 +2,15 @@ package com.oip.carapp.home.views
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -18,6 +21,7 @@ import com.oip.carapp.databinding.FragmentProfileBinding
 import com.oip.carapp.home.viewmodel.ProfileViewModel
 import com.oip.carapp.utils.*
 import com.squareup.picasso.Picasso
+import me.mutasem.booleanselection.BooleanSelectionView
 import java.io.File
 import java.util.*
 
@@ -33,12 +37,19 @@ class ProfileFragment : BaseFragment() {
 
     private var isEditMode = false
 
+    private lateinit var defaultEditTextBg: Drawable
+    private var selectedGender = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        window.statusBarColor = requireActivity().getColor(R.color.yellow)
+
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel.getProfile()
+
+        defaultEditTextBg = binding.usernameTwo.background
 
         editModeOff()
 
@@ -53,15 +64,13 @@ class ProfileFragment : BaseFragment() {
         }
 
         binding.done.setOnClickListener {
-            editModeOff()
-            showProgressBar(window, binding.progress)
             viewModel.updateProfile(
-                binding.usernameTwo.text.toString(),
-                binding.phone.text.toString(),
-                binding.gender.text.toString(),
+                binding.usernameTwo.text.toString().trim(),
+                binding.phone.text.toString().trim(),
+                selectedGender,
                 binding.birthday.text.toString(),
                 PreferencesHandler.getUserId()!!,
-                File(fileUri?.path!!)
+                if (fileUri == null) null else File(fileUri?.path!!) // if fileuri is empty send null
             )
         }
 
@@ -76,9 +85,6 @@ class ProfileFragment : BaseFragment() {
                 .start()
         }
 
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        viewModel.getProfile()
-
         viewModel.profileData.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: $it")
             profileData = it
@@ -90,6 +96,20 @@ class ProfileFragment : BaseFragment() {
             hideProgressBar(window, binding.progress)
             setProfileData(it)
         })
+        viewModel.result.observe(viewLifecycleOwner, Observer {
+            if (!it.isValid) {
+                requireContext().toast(it.message)
+
+            } else {
+                editModeOff()
+                showProgressBar(window, binding.progress)
+            }
+        })
+
+        binding.gender.setSelectionListener { selection, selectedText ->
+            Log.d(TAG, "Selected text at: $selection is $selectedText")
+            selectedGender = selectedText
+        }
 
         return binding.root
     }
@@ -103,7 +123,15 @@ class ProfileFragment : BaseFragment() {
         binding.profileImage.alpha = 0.5f
 
         binding.usernameTwo.isEnabled = true
+        binding.usernameTwo.requestFocus()
+
         binding.phone.isEnabled = true
+
+        binding.usernameTwo.background = defaultEditTextBg
+        binding.phone.background = defaultEditTextBg
+
+        binding.gender.findViewById<RadioButton>(R.id.viewStart).isEnabled = true
+        binding.gender.findViewById<RadioButton>(R.id.viewEnd).isEnabled = true
 
         binding.birthday.transformIntoDatePicker(requireContext(), "EEE, dd MMM yyyy", Date())
     }
@@ -119,17 +147,32 @@ class ProfileFragment : BaseFragment() {
         binding.usernameTwo.isEnabled = false
         binding.phone.isEnabled = false
 
+        binding.usernameTwo.background = null
+        binding.phone.background = null
+
+        binding.gender.findViewById<RadioButton>(R.id.viewStart).isEnabled = false
+        binding.gender.findViewById<RadioButton>(R.id.viewEnd).isEnabled = false
+
         binding.birthday.setOnClickListener(null)
     }
 
     private fun setProfileData(profileData: AuthResponse) {
+        selectedGender = profileData.gender
         binding.apply {
-            username.text = profileData.name
-            usernameTwo.setText(profileData.name)
-            phone.setText(profileData.phone)
+            username.text = if (profileData.name == "") "N/A" else profileData.name
+            usernameTwo.setText(if (profileData.name == "") "N/A" else profileData.name)
+            phone.setText(if (profileData.phone == "") "N/A" else profileData.phone)
             email.text = profileData.email
-            gender.text = profileData.gender
-            birthday.text = getDate(profileData.birthday)
+            gender.selection = if (profileData.gender.equals(
+                    "male",
+                    true
+                )
+            ) BooleanSelectionView.Selection.Start else BooleanSelectionView.Selection.End
+            birthday.text = if (profileData.birthday == "") "N/A" else getDate(
+                profileData.birthday,
+                SERVER_DATE_FORMAT,
+                BIRTHDAY_DATE_FORMAT
+            )
             Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
                 .placeholder(R.drawable.profile_placeholder).into(profileImage)
         }
@@ -139,12 +182,8 @@ class ProfileFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
             RESULT_OK -> {
-                //Image Uri will not be null for RESULT_OK
                 val uri: Uri = data?.data!!
-
                 fileUri = uri
-
-                // Use Uri object instead of File to avoid storage permissions
                 binding.profileImage.setImageURI(uri)
             }
             ImagePicker.RESULT_ERROR -> {

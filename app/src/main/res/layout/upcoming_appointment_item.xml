@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="20dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,7 +14,7 @@
         android:padding="10dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/appointmentImage"
+            android:id="@+id/serviceImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/appointment" />
@@ -25,9 +27,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_toStartOf="@id/appointmentDate"
-            android:layout_toEndOf="@id/appointmentImage"
-            android:text="Engine Replacement"
-            android:textSize="17sp" />
+            android:layout_toEndOf="@id/serviceImage"
+            android:textSize="17sp"
+            tools:text="Engine Replacement" />
 
         <TextView
             android:id="@+id/appointmentDate"
@@ -45,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/appointmentName"
-            android:layout_alignBottom="@id/appointmentImage"
+            android:layout_alignBottom="@id/serviceImage"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 

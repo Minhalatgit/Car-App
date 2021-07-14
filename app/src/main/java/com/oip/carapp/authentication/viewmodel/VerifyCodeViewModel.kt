@@ -44,10 +44,18 @@ class VerifyCodeViewModel : ViewModel() {
                     ) {
                         response.body()?.apply {
                             if (status) {
-                                Log.d(TAG, msg)
-                                _result.value =
-                                    Result(true, msg)
-                                PreferencesHandler.setIsLogin(true)
+                                if (data.status == 1){
+                                    Log.d(TAG, msg)
+                                    _result.value =
+                                        Result(true, msg)
+                                    PreferencesHandler.apply {
+                                        setUsername(data.name)
+                                        setProfileImageUrl(data.image)
+                                        //setToken(data.token)
+                                        setUserId(data.id)
+                                        setIsLogin(true)
+                                    }
+                                }
                             } else {
                                 Log.d(TAG, msg)
                                 _result.value =

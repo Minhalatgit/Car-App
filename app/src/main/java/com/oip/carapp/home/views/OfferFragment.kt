@@ -31,7 +31,6 @@ class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentOfferBinding.inflate(layoutInflater, container, false)
-        window.statusBarColor = requireActivity().getColor(R.color.white)
         binding.offerList.layoutManager = LinearLayoutManager(activity)
 
         viewModel = ViewModelProvider(this).get(OfferViewModel::class.java)

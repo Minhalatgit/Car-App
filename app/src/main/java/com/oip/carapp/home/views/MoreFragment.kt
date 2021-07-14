@@ -23,7 +23,6 @@ class MoreFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMoreBinding.inflate(layoutInflater, container, false)
-        window.statusBarColor = requireActivity().getColor(R.color.yellow)
 
         Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
             .placeholder(R.drawable.profile_placeholder).into(binding.profileImage)
@@ -44,6 +43,7 @@ class MoreFragment : BaseFragment() {
         }
         binding.logout.setOnClickListener {
             PreferencesHandler.setIsLogin(false)
+            PreferencesHandler.clearPreferences()
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

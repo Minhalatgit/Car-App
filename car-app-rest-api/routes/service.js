@@ -25,6 +25,7 @@ var router = function(){
     Router.post('/getclientservices', serviceController.getClientServices);
     Router.post('/getadminservices', serviceController.getAdminServices);
     Router.post('/deleteservice', serviceController.deleteService);
+    Router.post('/favouriteservice', serviceController.favoriteService);
 
     return Router
 }

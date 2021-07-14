@@ -5,6 +5,7 @@ exports.getProfile = async (req, res) =>{
 
     try {
         const body = req.body;
+        console.log(body)
         sql.query('SELECT * FROM user WHERE user_id = ? ', [ body.profile_id ], (err, result) => {
             if(!err) {
                 console.log(result[0])
@@ -34,13 +35,26 @@ exports.getProfile = async (req, res) =>{
     }
 };
 
-exports.updateProfile = async (req, res) =>{
+exports.updateProfile = (req, res) =>{
 
     try {
-        const body = req.body;
-        console.log(body);
-        sql.query('UPDATE user SET user_name = ? , user_number = ? , gender = ? , birthday = ? , user_img = ? WHERE user_id = ?', [ body.user_name, body.user_number, body.gender, body.birthday, req.file.path , body.profile_id], (err, row) => {
-            if(!err) {
+        const body = JSON.parse(JSON.stringify(req.body));
+        
+        let query
+        if (req.file) {
+            let path = req.file.path
+            path = path.replace("\\", "\\\\")
+            console.log(path);
+
+            query = `UPDATE user SET user_name = '${body.user_name}' , user_number = '${body.user_number}' , gender = '${body.gender}' , birthday = '${body.birthday}' , user_img = '${path}' WHERE user_id = '${body.profile_id}'`
+        } else {
+            query = `UPDATE user SET user_name = '${body.user_name}' , user_number = '${body.user_number}' , gender = '${body.gender}' , birthday = '${body.birthday}' WHERE user_id = '${body.profile_id}'`
+        }
+
+        console.log("query", query)
+
+        sql.query(query, (updateError, row) => {
+            if(!updateError) {
                 console.log(row)
                 sql.query('SELECT * FROM user WHERE user_id = ? ', [ body.profile_id ], (err, result) => {
                     if(!err) {
@@ -58,12 +72,13 @@ exports.updateProfile = async (req, res) =>{
                                 user_img : result[0].user_img
                             }
                         })
-                    } else{
+                    } else {
                         res.send(err);
                     }
                 })
             } else{
-                res.send(err);
+                console.log(updateError)
+                res.send(updateError);
             }
         })
     } catch(e) {

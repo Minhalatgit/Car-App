@@ -4,10 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.oip.carapp.BaseViewModel
 import com.oip.carapp.authentication.model.AuthResponse
+import com.oip.carapp.authentication.model.Result
 import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
 import com.oip.carapp.utils.PreferencesHandler
+import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -18,9 +21,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import kotlin.math.log
 
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel : BaseViewModel() {
 
     private val TAG = "ProfileViewModel"
 
@@ -32,26 +36,23 @@ class ProfileViewModel : ViewModel() {
     val updatedProfileData: LiveData<AuthResponse>
         get() = _updatedProfileData
 
-    fun getProfile() {
-        RetrofitClient.apiInterface.getProfile(PreferencesHandler.getUserId()!!)
-            .enqueue(object : Callback<BaseResponse<AuthResponse>> {
-                override fun onResponse(
-                    call: Call<BaseResponse<AuthResponse>>,
-                    response: Response<BaseResponse<AuthResponse>>
-                ) {
-                    Log.d(TAG, "onResponse: ${response.body()?.data}")
-                    response.body()?.apply {
-                        _profileData.value = data!!
-                    }
-                }
+    private val _result = MutableLiveData<Result>()
+    val result: LiveData<Result>
+        get() = _result
 
-                override fun onFailure(
-                    call: Call<BaseResponse<AuthResponse>>,
-                    t: Throwable
-                ) {
-                    Log.e(TAG, "onFailure: ${t.message}")
+    fun getProfile() {
+        coroutineScope.launch {
+            try {
+                val getProfileResult =
+                    RetrofitClient.apiInterface.getProfile(PreferencesHandler.getUserId()!!)
+                Log.d(TAG, "onResponse: ${getProfileResult.data}")
+                getProfileResult.apply {
+                    _profileData.value = data!!
                 }
-            })
+            } catch (t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message}")
+            }
+        }
     }
 
     fun updateProfile(
@@ -60,46 +61,70 @@ class ProfileViewModel : ViewModel() {
         gender: String,
         birthday: String,
         profileId: String,
-        profileImage: File
+        profileImage: File?
     ) {
-        val usernameReq = username.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val phoneReq = phone.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val genderReq = gender.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val birthdayReq = birthday.toRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val profileIdReq = profileId.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
-        val imageFile = profileImage.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val multipartBody =
-            MultipartBody.Part.createFormData("profile_image", profileImage.name, imageFile)
+        if (username.isEmpty()) {
+            _result.value = Result(false, "Username must not be empty")
+        } else if (phone.isEmpty()) {
+            _result.value = Result(false, "Phone number must not be empty")
+        } else if (phone.length < 9) {
+            _result.value = Result(false, "Phone number is not complete")
+        } else {
+            _result.value = Result(true, "")
+            val usernameReq = username.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val phoneReq = phone.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val genderReq = gender.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val birthdayReq = birthday.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val profileIdReq = profileId.toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
-        RetrofitClient.apiInterface.updateProfile(
-            usernameReq,
-            phoneReq,
-            genderReq,
-            birthdayReq,
-            multipartBody,
-            profileIdReq
-        )
-            .enqueue(object : Callback<BaseResponse<AuthResponse>> {
-                override fun onResponse(
-                    call: Call<BaseResponse<AuthResponse>>,
-                    response: Response<BaseResponse<AuthResponse>>
-                ) {
-                    Log.d(TAG, "onResponse: ${response.body()?.data}")
-                    response.body()?.apply {
-                        PreferencesHandler.setUsername(data.name)
-                        PreferencesHandler.setProfileImageUrl(data.image)
-                        _updatedProfileData.value = data!!
+            var multipartBody: MultipartBody.Part? = null
+            if (profileImage != null) {
+                Log.d(TAG, "Profile image is not null")
+                val imageFile =
+                    profileImage.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                multipartBody =
+                    MultipartBody.Part.createFormData("profile_image", profileImage.name, imageFile)
+            }
+
+            coroutineScope.launch {
+                try {
+                    val updateProfileResult: BaseResponse<AuthResponse>
+                    if (multipartBody == null) {
+                        updateProfileResult = RetrofitClient.apiInterface.updateProfile(
+                            usernameReq,
+                            phoneReq,
+                            genderReq,
+                            birthdayReq,
+                            profileIdReq
+                        )
+                    } else {
+                        updateProfileResult = RetrofitClient.apiInterface.updateProfile(
+                            usernameReq,
+                            phoneReq,
+                            genderReq,
+                            birthdayReq,
+                            multipartBody,
+                            profileIdReq
+                        )
                     }
-                }
 
-                override fun onFailure(
-                    call: Call<BaseResponse<AuthResponse>>,
-                    t: Throwable
-                ) {
+                    if (updateProfileResult.status) {
+                        Log.d(TAG, "onResponse: ${updateProfileResult.data}")
+                        updateProfileResult.apply {
+                            PreferencesHandler.setUsername(data.name)
+                            PreferencesHandler.setProfileImageUrl(data.image)
+                            _updatedProfileData.value = data!!
+                        }
+                    } else {
+                        Log.e(TAG, "Error: ${updateProfileResult.msg}")
+                    }
+
+                } catch (t: Throwable) {
                     Log.e(TAG, "onFailure: ${t.message}")
                 }
-            })
+            }
+        }
     }
 
     init {
@@ -108,6 +133,7 @@ class ProfileViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        viewModelJob.cancel()
         Log.d(TAG, "onCleared: ViewModel destroyed")
     }
 }

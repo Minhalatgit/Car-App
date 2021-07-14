@@ -133,7 +133,6 @@
                     android:layout_below="@id/info"
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
-                    android:paddingTop="15dp"
                     android:paddingBottom="15dp">
 
                     <TextView
@@ -141,28 +140,25 @@
                         style="@style/RegularTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:text="Username"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/usernameTwo"
                         style="@style/RegularTextView"
-                        android:layout_width="wrap_content"
+                        android:backgroundTint="@color/yellow"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_toStartOf="@id/arrow_right"
-                        android:background="@null"
+                        android:layout_below="@id/usernameLabel"
+                        android:layout_marginTop="10dp"
+                        android:inputType="textPersonName"
+                        android:maxLength="20"
+                        android:maxLines="1"
                         android:textColor="@color/grey"
                         android:textSize="17sp"
                         tools:text="Martha Banks" />
-
-                    <ImageView
-                        android:id="@+id/arrow_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_icon" />
 
                 </RelativeLayout>
 
@@ -172,7 +168,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/usernameLayout"
                     android:gravity="center_vertical"
-                    android:paddingTop="15dp"
                     android:paddingBottom="15dp">
 
                     <TextView
@@ -181,27 +176,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Phone number"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/phone"
                         style="@style/RegularTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_toStartOf="@id/arrow_right_phone"
-                        android:background="@null"
+                        android:backgroundTint="@color/yellow"
+                        android:layout_below="@id/phoneLabel"
+                        android:layout_marginTop="10dp"
+                        android:inputType="phone"
+                        android:maxLength="15"
+                        android:maxLines="1"
                         android:textColor="@color/grey"
                         android:textSize="17sp"
                         tools:text="584-490-9153" />
-
-                    <ImageView
-                        android:id="@+id/arrow_right_phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_icon" />
 
                 </RelativeLayout>
 
@@ -211,7 +201,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/phoneLayout"
                     android:gravity="center_vertical"
-                    android:paddingTop="15dp"
                     android:paddingBottom="15dp">
 
                     <TextView
@@ -220,26 +209,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Email"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/email"
                         style="@style/RegularTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_toStartOf="@id/arrow_right_email"
+                        android:layout_below="@id/emailLabel"
+                        android:layout_marginTop="10dp"
                         android:textColor="@color/grey"
                         android:textSize="17sp"
                         tools:text="martha@gmail.com" />
-
-                    <ImageView
-                        android:id="@+id/arrow_right_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_icon" />
 
                 </RelativeLayout>
 
@@ -249,7 +230,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/emailLayout"
                     android:gravity="center_vertical"
-                    android:paddingTop="15dp"
                     android:paddingBottom="15dp">
 
                     <TextView
@@ -258,27 +238,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Gender"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
 
-                    <TextView
+                    <me.mutasem.booleanselection.BooleanSelectionView
                         android:id="@+id/gender"
-                        style="@style/RegularTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_toStartOf="@id/arrow_right_gender"
-                        android:background="@null"
-                        android:textColor="@color/grey"
-                        android:textSize="17sp"
-                        tools:text="Female" />
-
-                    <ImageView
-                        android:id="@+id/arrow_right_gender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_icon" />
+                        android:layout_below="@id/genderLabel"
+                        android:layout_marginTop="10dp"
+                        app:endText="Female"
+                        app:selectedColor="@color/yellow"
+                        app:startText="Male"
+                        app:textColor="@color/dark"
+                        app:unSelectedColor="@color/grey" />
 
                 </RelativeLayout>
 
@@ -288,7 +260,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/genderLayout"
                     android:gravity="center_vertical"
-                    android:paddingTop="15dp"
                     android:paddingBottom="15dp">
 
                     <TextView
@@ -297,26 +268,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Birthday"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/birthday"
                         style="@style/RegularTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_toStartOf="@id/arrow_right_birthday"
+                        android:layout_below="@id/birthdayLabel"
+                        android:layout_marginTop="10dp"
                         android:textColor="@color/grey"
                         android:textSize="17sp"
                         tools:text="April 16, 1988" />
-
-                    <ImageView
-                        android:id="@+id/arrow_right_birthday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_icon" />
 
                 </RelativeLayout>
 

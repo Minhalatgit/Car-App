@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
 import com.oip.carapp.home.models.ServiceResponse
 import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
+import com.oip.carapp.utils.updateFavouriteIconColor
 import com.squareup.picasso.Picasso
 
 class CarServiceAdapter(
@@ -31,6 +32,9 @@ class CarServiceAdapter(
         init {
             itemView.setOnClickListener {
                 listener.onServiceClick(adapterPosition)
+            }
+            favourite.setOnClickListener {
+                listener.onFavouriteClick(adapterPosition)
             }
         }
     }
@@ -53,20 +57,13 @@ class CarServiceAdapter(
             subtitle.text = service.serviceSubtitle
             distance.text = "${service.serviceDistance} Km"
 
-            if (service.isFavourite == "1") {
-                favourite.setColorFilter(
-                    ContextCompat.getColor(context, R.color.red)
-                )
-            } else {
-                favourite.setColorFilter(
-                    ContextCompat.getColor(context, R.color.grey)
-                )
-            }
+            favourite.updateFavouriteIconColor(service.isFavourite, context)
         }
     }
 
     interface ServiceListener {
         fun onServiceClick(position: Int)
+        fun onFavouriteClick(position: Int)
     }
 
 }

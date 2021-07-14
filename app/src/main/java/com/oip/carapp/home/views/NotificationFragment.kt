@@ -23,7 +23,6 @@ class NotificationFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNotificationBinding.inflate(inflater, container, false)
-        window.statusBarColor = requireActivity().getColor(R.color.yellow)
 
         val list = ArrayList<Notification>()
         list.apply {

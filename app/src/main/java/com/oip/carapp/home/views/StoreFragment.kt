@@ -36,12 +36,15 @@ class StoreFragment : BaseFragment() {
     ): View {
         binding =
             FragmentStoreBinding.inflate(inflater, container, false)
-        window.statusBarColor = requireActivity().getColor(R.color.white)
 
         viewModel = ViewModelProvider(this).get(StoreViewModel::class.java)
 
-        supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         supportFragment.getMapAsync {
             Log.d(TAG, "Map is ready")
             googleMap = it
@@ -84,7 +87,5 @@ class StoreFragment : BaseFragment() {
                 googleMap.addMarker(options)
             }
         })
-
-        return binding.root
     }
 }

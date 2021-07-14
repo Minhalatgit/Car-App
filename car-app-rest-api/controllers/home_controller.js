@@ -14,14 +14,21 @@ exports.getHomeData = async (req, res) =>{
                     if (!serviceError) {
                         console.log('Service result', serviceResult);
                         
-                        return res.json({
-                            status: true,
-                            msg: "Home data fetched successfully",
-                            data: {
-                                offers: offerResult,
-                                services: serviceResult
+                        sql.query('SELECT * FROM appointment as a INNER JOIN service as s ON a.service_id = s.id INNER JOIN store as st ON a.store_id = st.id LIMIT 2', (appointmentError, appointmentResult) =>{
+                            if (!appointmentError) {
+                                return res.json({
+                                    status: true,
+                                    msg: "Home data fetched successfully",
+                                    data: {
+                                        offers: offerResult,
+                                        services: serviceResult,
+                                        appointments: appointmentResult
+                                    }
+                                })  
+                            } else{
+                                res.send(appointmentError);
                             }
-                        })      
+                        })    
                     } else{
                         res.send(serviceError);
                     }

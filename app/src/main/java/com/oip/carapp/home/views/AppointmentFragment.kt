@@ -29,7 +29,6 @@ class AppointmentFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAppointmentBinding.inflate(inflater, container, false)
-        window.statusBarColor = requireActivity().getColor(R.color.white)
 
         viewModel = ViewModelProvider(this).get(AppointmentViewModel::class.java)
         showProgressBar(window, binding.progress)

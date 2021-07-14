@@ -11,6 +11,10 @@ import com.oip.carapp.authentication.model.Result
 import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
 import com.oip.carapp.utils.PreferencesHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +27,9 @@ class SignUpViewModel : ViewModel() {
     val result: LiveData<Result>
         get() = _result
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
     init {
         Log.d(TAG, "SignUp view model initialized")
     }
@@ -31,33 +38,24 @@ class SignUpViewModel : ViewModel() {
         val validity = checkForValidity(email, password, confirmPassword)
         if (validity.isValid) {
             Log.d(TAG, validity.message)
-            RetrofitClient.apiInterface.register(email, password, confirmPassword)
-                .enqueue(object : Callback<BaseResponse<AuthResponse>> {
-                    override fun onFailure(
-                        call: Call<BaseResponse<AuthResponse>>,
-                        t: Throwable
-                    ) {
-                        Log.e(TAG, t.message!!)
-                        _result.value = Result(false, t.message!!)
-                    }
-
-                    override fun onResponse(
-                        call: Call<BaseResponse<AuthResponse>>,
-                        response: Response<BaseResponse<AuthResponse>>
-                    ) {
-                        response.body()?.apply {
-                            if (status) {
-                                Log.d(TAG, msg)
-                                _result.value =
-                                    Result(true, msg)
-                            } else {
-                                Log.d(TAG, msg)
-                                _result.value =
-                                    Result(false, msg)
-                            }
+            coroutineScope.launch {
+                try {
+                    val registerResult =
+                        RetrofitClient.apiInterface.register(email, password, confirmPassword)
+                    registerResult.apply {
+                        if (status) {
+                            Log.d(TAG, msg)
+                            _result.value = Result(true, msg)
+                        } else {
+                            Log.d(TAG, msg)
+                            _result.value = Result(false, msg)
                         }
                     }
-                })
+                } catch (t: Throwable) {
+                    Log.e(TAG, t.message!!)
+                    _result.value = Result(false, t.message!!)
+                }
+            }
         } else {
             Log.d(TAG, validity.message)
             _result.value = validity
@@ -80,13 +78,14 @@ class SignUpViewModel : ViewModel() {
         } else if (confirmPassword.length < 6) {
             return Result(false, "Confirm Password is short")
         } else if (password != confirmPassword) {
-            return Result(false, "Password and confirm password must same")
+            return Result(false, "Password and confirm password must be same")
         }
         return Result(true, "Success")
     }
 
     override fun onCleared() {
         super.onCleared()
+        viewModelJob.cancel()
         Log.d(TAG, "onCleared: ")
     }
 }

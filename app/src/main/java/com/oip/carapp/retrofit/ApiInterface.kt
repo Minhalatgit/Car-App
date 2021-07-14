@@ -2,6 +2,7 @@ package com.oip.carapp.retrofit
 
 import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.home.models.*
+import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -11,18 +12,18 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @POST("auth/login")
-    fun login(
+    suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<BaseResponse<AuthResponse>>
+    ): BaseResponse<AuthResponse>
 
     @FormUrlEncoded
     @POST("auth/register")
-    fun register(
+    suspend fun register(
         @Field("email") email: String,
         @Field("password") password: String,
         @Field("confirm_password") confirmPassword: String
-    ): Call<BaseResponse<AuthResponse>>
+    ): BaseResponse<AuthResponse>
 
     @FormUrlEncoded
     @POST("auth/verify")
@@ -33,34 +34,51 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @POST("service/getClientServices")
-    fun getServices(
+    suspend fun getServices(
         @Field("cat_id") catId: String
-    ): Call<BaseResponse<List<ServiceResponse>>>
+    ): BaseResponse<ArrayList<ServiceResponse>>
+
+    @FormUrlEncoded
+    @POST("service/favouriteservice")
+    suspend fun updateFavourite(
+        @Field("service_id") serviceId: String,
+        @Field("is_favourite") isFavourite: String
+    ): BaseResponse<Unit>
 
     @POST("offer/getclientoffers")
-    fun getOffers(): Call<BaseResponse<List<OfferResponse>>>
+    suspend fun getOffers(): BaseResponse<List<OfferResponse>>
 
     @POST("store/getclientstores")
-    fun getStores(): Call<BaseResponse<List<StoreResponse>>>
+    suspend fun getStores(): BaseResponse<List<StoreResponse>>
 
     @FormUrlEncoded
     @POST("profile/getprofile")
-    fun getProfile(@Field("profile_id") userId: String): Call<BaseResponse<AuthResponse>>
+    suspend fun getProfile(@Field("profile_id") userId: String): BaseResponse<AuthResponse>
 
     @Multipart
     @POST("profile/updateprofile")
-    fun updateProfile(
+    suspend fun updateProfile(
         @Part("user_name") username: RequestBody,
         @Part("user_number") phone: RequestBody,
         @Part("gender") gender: RequestBody,
         @Part("birthday") birthday: RequestBody,
         @Part image: MultipartBody.Part,
         @Part("profile_id") profileId: RequestBody
-    ): Call<BaseResponse<AuthResponse>>
+    ): BaseResponse<AuthResponse>
+
+    @Multipart
+    @POST("profile/updateprofile")
+    suspend fun updateProfile(
+        @Part("user_name") username: RequestBody,
+        @Part("user_number") phone: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part("birthday") birthday: RequestBody,
+        @Part("profile_id") profileId: RequestBody
+    ): BaseResponse<AuthResponse>
 
     @POST("home/gethome")
-    fun getHomeData(): Call<BaseResponse<HomeResponse>>
+    suspend fun getHomeData(): BaseResponse<HomeResponse>
 
     @POST("appointment/getappointments")
-    fun getAppointments(): Call<BaseResponse<List<AppointmentResponse>>>
+    suspend fun getAppointments(): BaseResponse<List<AppointmentResponse>>
 }

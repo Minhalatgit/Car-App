@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
 import com.oip.carapp.home.models.AppointmentResponse
+import com.oip.carapp.utils.*
+import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.appointment_item.view.*
 
 class AppointmentAdapter(private val list: List<AppointmentResponse>) :
@@ -23,12 +26,19 @@ class AppointmentAdapter(private val list: List<AppointmentResponse>) :
         val appointment = list[position]
 
         holder.itemView.apply {
+            Picasso.get().load(BASE_URL_IMAGES + appointment.serviceImage).into(storeImage)
             username.text = appointment.title
-            amount.text = appointment.amount
-            date.text = appointment.appointmentDate
-            serviceText.text = appointment.title
-            providerText.text = "Moin motor"
-            timeText.text = "3:00 PM"
+            amount.text = "$${appointment.amount}"
+            date.text = getDate(
+                appointment.createdAt, SERVER_DATE_FORMAT,
+                APPOINTMENT_DATE_FORMAT
+            )
+            serviceText.text = appointment.serviceTitle
+            providerText.text = appointment.storeTitle
+            timeText.text = getDate(
+                appointment.createdAt, SERVER_DATE_FORMAT,
+                APPOINTMENT_TIME_FORMAT
+            )
         }
     }
 }

@@ -22,11 +22,11 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
+                android:id="@+id/storeImage"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/profile" />
+                tools:src="@drawable/profile" />
 
             <TextView
                 android:id="@+id/username"
@@ -34,6 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/storeImage"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textSize="17sp"
                 tools:layout_toRightOf="@+id/profileImage"
                 tools:text="Steve Bowen" />
@@ -71,6 +74,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_marginStart="102dp"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/username"
                 android:textSize="17sp"
                 tools:text="$25.00" />
 

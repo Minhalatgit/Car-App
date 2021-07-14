@@ -5,17 +5,13 @@ import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.oip.carapp.authentication.model.AuthResponse
+import com.oip.carapp.BaseViewModel
 import com.oip.carapp.authentication.model.Result
-import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
 import com.oip.carapp.utils.PreferencesHandler
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel : BaseViewModel() {
 
     private val TAG = "LoginViewModel"
 
@@ -31,47 +27,40 @@ class LoginViewModel : ViewModel() {
         val validity = checkForValidity(email, password)
         if (validity.isValid) {
             Log.d(TAG, validity.message)
-            RetrofitClient.apiInterface.login(email, password)
-                .enqueue(object : Callback<BaseResponse<AuthResponse>> {
-                    override fun onFailure(
-                        call: Call<BaseResponse<AuthResponse>>,
-                        t: Throwable
-                    ) {
-                        _result.value = Result(false, t.message!!)
-                        Log.e(TAG, t.message!!)
-                    }
-
-                    override fun onResponse(
-                        call: Call<BaseResponse<AuthResponse>>,
-                        response: Response<BaseResponse<AuthResponse>>
-                    ) {
-                        response.body()?.apply {
-                            if (status) {
-                                if (data.status == 1) {
-                                    //verified account
-                                    Log.d(TAG, "Account verified")
-                                } else {
-                                    //Not verified account
-                                    Log.d(TAG, "Not Verified")
-                                }
-                                _result.value =
-                                    Result(true, msg)
-                                Log.d(TAG, msg)
-                                PreferencesHandler.apply {
-                                    setUsername(data.name)
-                                    setProfileImageUrl(data.image)
-                                    setToken(data.token)
-                                    setUserId(data.id)
-                                    setIsLogin(true)
-                                }
+            coroutineScope.launch {
+                try {
+                    val loginResult = RetrofitClient.apiInterface.login(email, password)
+                    loginResult.apply {
+                        if (status) {
+                            if (data.status == 1) {
+                                //verified account
+                                Log.d(TAG, "Account verified")
                             } else {
-                                _result.value =
-                                    Result(false, msg)
-                                Log.d(TAG, msg)
+                                //Not verified account
+                                Log.d(TAG, "Not Verified")
                             }
+                            _result.value = Result(true, msg)
+                            Log.d(TAG, msg)
+                            PreferencesHandler.apply {
+                                setUsername(data.name)
+                                setProfileImageUrl(data.image)
+                                //setToken(data.token)
+                                setUserId(data.id)
+                                setIsLogin(true)
+                            }
+                        } else {
+                            // server response
+                            _result.value = Result(false, msg)
+                            Log.d(TAG, msg)
                         }
                     }
-                })
+
+                } catch (t: Throwable) {
+                    // server error
+                    _result.value = Result(false, t.message!!)
+                    Log.e(TAG, t.message!!)
+                }
+            }
         } else {
             Log.d(TAG, validity.message)
             _result.value = validity
@@ -95,6 +84,7 @@ class LoginViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        viewModelJob.cancel()
         Log.d(TAG, "onCleared: ")
     }
 }

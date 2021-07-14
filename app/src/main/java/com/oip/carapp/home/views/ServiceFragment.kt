@@ -19,7 +19,6 @@ class ServiceFragment : BaseFragment() {
     ): View {
         binding =
             FragmentServiceBinding.inflate(inflater, container, false)
-        window.statusBarColor = requireActivity().getColor(R.color.white)
 
         binding.mechanic.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.navHostFragment)

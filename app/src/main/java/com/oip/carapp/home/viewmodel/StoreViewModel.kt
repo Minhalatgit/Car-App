@@ -4,14 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.oip.carapp.BaseViewModel
 import com.oip.carapp.home.models.StoreResponse
 import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StoreViewModel : ViewModel() {
+class StoreViewModel : BaseViewModel() {
 
     private val TAG = "StoreViewModel"
 
@@ -20,25 +22,17 @@ class StoreViewModel : ViewModel() {
         get() = _storeList
 
     fun getStores() {
-        RetrofitClient.apiInterface.getStores()
-            .enqueue(object : Callback<BaseResponse<List<StoreResponse>>> {
-                override fun onResponse(
-                    call: Call<BaseResponse<List<StoreResponse>>>,
-                    response: Response<BaseResponse<List<StoreResponse>>>
-                ) {
-                    Log.d(TAG, "onResponse: ${response.body()?.data}")
-                    response.body()?.apply {
-                        _storeList.value = data!!
-                    }
+        coroutineScope.launch {
+            try {
+                val getStoresResult = RetrofitClient.apiInterface.getStores()
+                Log.d(TAG, "onResponse: ${getStoresResult.data}")
+                getStoresResult.apply {
+                    _storeList.value = data!!
                 }
-
-                override fun onFailure(
-                    call: Call<BaseResponse<List<StoreResponse>>>,
-                    t: Throwable
-                ) {
-                    Log.e(TAG, "onFailure: ${t.message}")
-                }
-            })
+            } catch (t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message}")
+            }
+        }
     }
 
     init {
@@ -47,6 +41,7 @@ class StoreViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        viewModelJob.cancel()
         Log.d(TAG, "onCleared: ViewModel destroyed")
     }
 }

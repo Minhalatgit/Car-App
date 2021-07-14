@@ -1,5 +1,6 @@
 package com.oip.carapp.retrofit
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.oip.carapp.BuildConfig
 import com.oip.carapp.utils.Constants.BASE_URL
 import okhttp3.OkHttpClient
@@ -20,6 +21,7 @@ object RetrofitClient {
         okHttpClient.addInterceptor(logging)
 
         Retrofit.Builder()
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .baseUrl(BASE_URL)
             .client(okHttpClient.build())
             .addConverterFactory(GsonConverterFactory.create())

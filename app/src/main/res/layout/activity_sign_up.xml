@@ -111,14 +111,15 @@
                 android:text="Sign In" />
         </LinearLayout>
 
-        <ProgressBar
+        <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/progress"
+            style="@style/SpinKitView.Circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:elevation="2dp"
-            android:indeterminateTint="@color/dark"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:SpinKit_Color="@color/dark" />
 
     </RelativeLayout>
 </layout>

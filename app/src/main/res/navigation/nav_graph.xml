@@ -37,7 +37,11 @@
         android:id="@+id/homeFragment"
         android:name="com.oip.carapp.home.views.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/offerFragment"
         android:name="com.oip.carapp.home.views.OfferFragment"

@@ -4,14 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.oip.carapp.BaseViewModel
 import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OfferViewModel : ViewModel() {
+class OfferViewModel : BaseViewModel() {
 
     private val TAG = "OfferListViewModel"
 
@@ -24,26 +26,18 @@ class OfferViewModel : ViewModel() {
         get() = _noOffer
 
     fun getOffers() {
-        RetrofitClient.apiInterface.getOffers()
-            .enqueue(object : Callback<BaseResponse<List<OfferResponse>>> {
-                override fun onResponse(
-                    call: Call<BaseResponse<List<OfferResponse>>>,
-                    response: Response<BaseResponse<List<OfferResponse>>>
-                ) {
-                    Log.d(TAG, "onResponse: ${response.body()?.data}")
-                    response.body()?.apply {
-                        _offerList.value = data!!
-                        _noOffer.value = data.isEmpty()
-                    }
+        coroutineScope.launch {
+            try {
+                val getOffersResult = RetrofitClient.apiInterface.getOffers()
+                Log.d(TAG, "onResponse: ${getOffersResult.data}")
+                getOffersResult.apply {
+                    _offerList.value = data!!
+                    _noOffer.value = data.isEmpty()
                 }
-
-                override fun onFailure(
-                    call: Call<BaseResponse<List<OfferResponse>>>,
-                    t: Throwable
-                ) {
-                    Log.e(TAG, "onFailure: ${t.message}")
-                }
-            })
+            } catch (t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message}")
+            }
+        }
     }
 
     init {
@@ -52,6 +46,7 @@ class OfferViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        viewModelJob.cancel()
         Log.d(TAG, "onCleared: ViewModel destroyed")
     }
 }

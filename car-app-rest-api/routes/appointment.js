@@ -6,6 +6,8 @@ var router = function(){
 
     Router.post('/getappointments', apppointmentController.getAppointments);
     Router.post('/createappointment', apppointmentController.createAppointment);
+    Router.post('/updateappointment', apppointmentController.updateAppointment);
+    Router.post('/deleteappointment', apppointmentController.deleteAppointment);
 
     return Router
 }

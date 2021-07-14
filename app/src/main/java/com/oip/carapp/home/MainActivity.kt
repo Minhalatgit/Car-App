@@ -48,16 +48,32 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.moreFragment -> toolbar.visibility = View.GONE
+                R.id.moreFragment -> {
+                    window.statusBarColor = getColor(R.color.yellow)
+                    toolbar.visibility = View.GONE
+                }
                 R.id.serviceBookingFragment -> {
+                    window.statusBarColor = getColor(R.color.white)
                     toolbar.visibility = View.GONE
                     bottomView.visibility = View.GONE
                 }
-                R.id.profileFragment -> toolbar.visibility = View.GONE
-                R.id.notificationFragment -> toolbar.visibility = View.GONE
-                R.id.appointmentFragment -> toolbar.visibility = View.GONE
-                R.id.settingsFragment -> toolbar.visibility = View.GONE
+                R.id.profileFragment -> {
+                    window.statusBarColor = getColor(R.color.yellow)
+                    toolbar.visibility = View.GONE
+                }
+                R.id.notificationFragment -> {
+                    window.statusBarColor = getColor(R.color.yellow)
+                    toolbar.visibility = View.GONE
+                }
+                R.id.appointmentFragment -> {
+                    window.statusBarColor = getColor(R.color.white)
+                    toolbar.visibility = View.GONE
+                }
+                R.id.settingsFragment -> {
+                    toolbar.visibility = View.GONE
+                }
                 else -> {
+                    window.statusBarColor = getColor(R.color.white)
                     toolbar.visibility = View.VISIBLE
                     bottomView.visibility = View.VISIBLE
                 }

@@ -4,12 +4,18 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun getDate(date: String): String {
-    val formatIn = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    val formatOut = SimpleDateFormat("EEE, dd MMM yyyy")
+const val SERVER_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+const val BIRTHDAY_DATE_FORMAT = "EEE, dd MMM yyyy"
+const val APPOINTMENT_DATE_FORMAT = "dd-MM-yyyy"
+const val APPOINTMENT_TIME_FORMAT = "hh:mm:ss a"
+const val UPCOMING_APPOINTMENT_TIME_FORMAT = "dd/MM/yyyy"
+
+fun getDate(date: String, formatIn: String, formatOut: String): String {
+    val spdIn = SimpleDateFormat(formatIn)
+    val sdpOut = SimpleDateFormat(formatOut)
     var formattedDate: Date? = null
     try {
-        formattedDate = formatIn.parse(date)
+        formattedDate = spdIn.parse(date)
     } catch (e: ParseException) {
         e.printStackTrace()
     }
@@ -17,6 +23,7 @@ fun getDate(date: String): String {
     return if (formattedDate == null) {
         date
     } else {
-        formatOut.format(formattedDate)
+        sdpOut.format(formattedDate)
     }
 }
+

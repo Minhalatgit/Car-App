@@ -6,5 +6,7 @@ data class HomeResponse(
     @SerializedName("offers")
     val offers: List<OfferResponse>,
     @SerializedName("services")
-    val services: List<ServiceResponse>
+    val services: List<ServiceResponse>,
+    @SerializedName("appointments")
+    val appointments: List<AppointmentResponse>
 )

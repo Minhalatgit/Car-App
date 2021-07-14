@@ -57,4 +57,9 @@ object PreferencesHandler {
     }
 
     fun getToken() = preferences.getString(TOKEN, "")
+
+    fun clearPreferences(){
+        editor.clear()
+        editor.commit()
+    }
 }

@@ -54,9 +54,11 @@ exports.getAdminServices = async (req, res) =>{
 exports.createService = async (req, res) =>{
 
     try {
-        console.log(req.file.path);
-        const body = req.body;
-        sql.query('INSERT INTO service ( cat_id, service_title, service_subtitle, service_amount, service_image) VALUES (?,?,?,?)', [ body.cat_id, body.service_title, body.service_subtitle, body.service_amount, req.file.path ], (err, result) => {
+
+        const body = JSON.parse(JSON.stringify(req.body));
+        const path = req.file.path;
+        console.log(path);
+        sql.query('INSERT INTO service ( cat_id, service_title, service_subtitle, service_amount, service_image) VALUES (?,?,?,?,?)', [ body.cat_id, body.service_title, body.service_subtitle, body.service_amount, path ], (err, result) => {
             if(!err) {
                 return res.json({
                     status: true,
@@ -109,6 +111,30 @@ exports.deleteService = async (req, res) =>{
                 return res.json({
                     status: true,
                     msg: "Service deleted successfully"
+                })
+            } else{
+                res.send(err);
+            }
+        })
+    } catch(e) {
+        console.log('Catch an error: ', e)
+        return res.json({
+            status: false,
+            msg: "Something went wrong",
+        }) 
+    }
+};
+
+exports.favoriteService = async (req, res) =>{
+
+    try {
+        const body = req.body;
+        sql.query('UPDATE service SET is_favourite = ? WHERE id = ? ', [ body.is_favourite, body.service_id ], (err, result) => {
+            if(!err) {
+                console.log(result)
+                return res.json({
+                    status: true,
+                    msg: "Service favourite updated successfully"
                 })
             } else{
                 res.send(err);

@@ -33,10 +33,8 @@ class LoginActivity : AppCompatActivity() {
             Log.d(TAG, "Observer called")
             hideProgressBar(window, progress)
             if (it.isValid) {
-                val intent =
-                    Intent(this@LoginActivity, MainActivity::class.java)
-                intent.flags =
-                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 Log.d(TAG, it.message)
             } else {
