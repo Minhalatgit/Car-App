@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_homeFragment_to_appointmentFragment"
             app:destination="@id/appointmentFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_serviceBookingFragment"
+            app:destination="@id/serviceBookingFragment" />
     </fragment>
     <fragment
         android:id="@+id/offerFragment"

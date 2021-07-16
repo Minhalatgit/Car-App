@@ -4,128 +4,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".authentication.views.LoginActivity">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/sign_in_background"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/app_logo" />
-
-            <TextView
-                android:id="@+id/emailLabel"
-                style="@style/BoldTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="40dp"
-                android:text="Email"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/email"
-                style="@style/LightTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/tick_icon"
-                android:inputType="textEmailAddress"
-                android:padding="15dp"
-                android:textSize="14sp"
-                tools:text="xyz@gmail.com" />
-
-            <TextView
-                android:id="@+id/passwordLabel"
-                style="@style/BoldTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="10dp"
-                android:text="Password"
-                android:textSize="12sp" />
-
-            <EditText
-                android:id="@+id/password"
-                style="@style/LightTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:padding="15dp"
-                android:textSize="14sp"
-                tools:text="123456" />
-
-            <TextView
-                android:id="@+id/forgotPassword"
-                style="@style/LightTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginTop="10dp"
-                android:text="Forgot Password?"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/signIn"
-                style="@style/SemiBolTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/sign_in_button_background"
-                android:text="Sign In"
-                android:textAllCaps="false" />
-
-            <TextView
-                android:id="@+id/signUp"
-                style="@style/LightTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Don't have an account? SignUp!"
-                android:textSize="14sp" />
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:background="@drawable/sign_in_background"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <Button
-                    android:id="@+id/google"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/google" />
+                    android:src="@drawable/app_logo" />
 
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent" />
-
-                <Button
-                    android:id="@+id/facebook"
+                <TextView
+                    android:id="@+id/emailLabel"
+                    style="@style/BoldTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/facebook" />
+                    android:layout_gravity="start"
+                    android:layout_marginTop="40dp"
+                    android:text="Email"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/email"
+                    style="@style/LightTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/tick_icon"
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp"
+                    android:textSize="14sp"
+                    tools:text="xyz@gmail.com" />
+
+                <TextView
+                    android:id="@+id/passwordLabel"
+                    style="@style/BoldTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="10dp"
+                    android:text="Password"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/password"
+                    style="@style/LightTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:padding="15dp"
+                    android:textSize="14sp"
+                    tools:text="123456" />
+
+                <TextView
+                    android:id="@+id/forgotPassword"
+                    style="@style/LightTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="10dp"
+                    android:text="Forgot Password?"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/signIn"
+                    style="@style/SemiBolTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/sign_in_button_background"
+                    android:text="Sign In"
+                    android:textAllCaps="false" />
+
+                <TextView
+                    android:id="@+id/signUp"
+                    style="@style/LightTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Don't have an account? SignUp!"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/google"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/google" />
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent" />
+
+                    <Button
+                        android:id="@+id/facebook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/facebook" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progress"
+                style="@style/SpinKitView.Circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:elevation="2dp"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/dark" />
 
-        <com.github.ybq.android.spinkit.SpinKitView
-            android:id="@+id/progress"
-            style="@style/SpinKitView.Circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:elevation="2dp"
-            android:visibility="gone"
-            app:SpinKit_Color="@color/dark" />
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </ScrollView>
+
 </layout>

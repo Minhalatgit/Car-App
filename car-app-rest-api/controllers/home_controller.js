@@ -6,15 +6,15 @@ exports.getHomeData = async (req, res) =>{
     try {
         let offers, services;
         const body = req.body;
-        sql.query('SELECT * FROM offer LIMIT 2', (offerError, offerResult) => {
+        sql.query('SELECT * FROM offer WHERE is_deleted = 0 LIMIT 3', (offerError, offerResult) => {
             if(!offerError) {
                 console.log('Offer result', offerResult);
 
-                sql.query('SELECT * FROM service LIMIT 2', (serviceError, serviceResult) =>{
+                sql.query('SELECT * FROM service WHERE is_deleted = 0 LIMIT 3', (serviceError, serviceResult) =>{
                     if (!serviceError) {
                         console.log('Service result', serviceResult);
                         
-                        sql.query('SELECT * FROM appointment as a INNER JOIN service as s ON a.service_id = s.id INNER JOIN store as st ON a.store_id = st.id LIMIT 2', (appointmentError, appointmentResult) =>{
+                        sql.query('SELECT * FROM appointment as a INNER JOIN service as s ON a.service_id = s.id INNER JOIN store as st ON a.store_id = st.id WHERE a.appointment_is_deleted = 0  LIMIT 3', (appointmentError, appointmentResult) =>{
                             if (!appointmentError) {
                                 return res.json({
                                     status: true,

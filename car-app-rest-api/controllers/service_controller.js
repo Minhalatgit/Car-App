@@ -81,8 +81,22 @@ exports.createService = async (req, res) =>{
 exports.updateService = async (req, res) =>{
 
     try {
-        const body = req.body;
-        sql.query('Update service SET cat_id = ? , service_title = ? , service_subtitle = ? , service_image = ? , service_amount = ? , is_deleted = ? WHERE id = ?', [ body.cat_id, body.service_title, body.service_subtitle, req.file.path, body.service_amount, body.is_deleted , body.service_id], (err, result) => {
+        const body = JSON.parse(JSON.stringify(req.body));
+        
+        let query
+        if (req.file) {
+            let path = req.file.path
+            path = path.replace("\\", "\\\\")
+            console.log(path);
+
+            query = `UPDATE service SET cat_id = '${body.cat_id}' , service_title = '${body.service_title}' , service_subtitle = '${body.service_subtitle}' , service_image = '${path}' , service_amount = '${body.service_amount}' WHERE id = '${body.service_id}'`
+        } else {
+            query = `UPDATE service SET cat_id = '${body.cat_id}' , service_title = '${body.service_title}' , service_subtitle = '${body.service_subtitle}' , service_amount = '${body.service_amount}' WHERE id = '${body.service_id}'`
+        }
+
+        console.log("query", query)
+
+        sql.query(query, (err, result) => {
             if(!err) {
                 return res.json({
                     status: true,
@@ -105,12 +119,22 @@ exports.deleteService = async (req, res) =>{
 
     try {
         const body = req.body;
-        sql.query('UPDATE service SET is_deleted = 1 WHERE id = ? ', [ body.service_id ], (err, result) => {
+        const is_deleted = req.body.is_deleted
+        console.log(body)
+
+        let msg = ""
+        if (is_deleted == "1") {
+            msg = 'Service disabled successfully'
+        } else{
+            msg = 'Service enabled successfully'
+        }
+
+        sql.query('UPDATE service SET is_deleted = ? WHERE id = ? ', [ body.is_deleted, body.service_id ], (err, result) => {
             if(!err) {
                 console.log(result)
                 return res.json({
                     status: true,
-                    msg: "Service deleted successfully"
+                    msg: msg
                 })
             } else{
                 res.send(err);
@@ -137,6 +161,32 @@ exports.favoriteService = async (req, res) =>{
                     msg: "Service favourite updated successfully"
                 })
             } else{
+                res.send(err);
+            }
+        })
+    } catch(e) {
+        console.log('Catch an error: ', e)
+        return res.json({
+            status: false,
+            msg: "Something went wrong",
+        }) 
+    }
+};
+
+exports.getService = async (req, res) =>{
+
+    try {
+        const service_id = req.body.service_id;
+        
+        sql.query('SELECT * from service WHERE id = ?',[ service_id ], (err, result) => {
+            if(!err) {
+                console.log(result)
+                return res.json({
+                    status: true,
+                    msg: "Service fetched successfully",
+                    data: result[0]
+                })
+            } else {
                 res.send(err);
             }
         })

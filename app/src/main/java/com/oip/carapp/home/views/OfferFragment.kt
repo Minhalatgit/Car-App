@@ -42,6 +42,9 @@ class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
             if (it.isNotEmpty()) {
                 PreferencesHandler.setOffer(it[0].offerDiscount)
                 binding.offer.text = "FLAT ${it[0].offerDiscount}% OFF"
+                binding.noOffer.visibility = View.GONE
+            } else {
+                binding.noOffer.visibility = View.VISIBLE
             }
             hideProgressBar(window, binding.progress)
             binding.offerList.adapter =

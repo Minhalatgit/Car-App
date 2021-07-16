@@ -48,6 +48,12 @@ class ServiceListFragment : BaseFragment(), CarServiceAdapter.ServiceListener {
 
         // Observing service list and updating Recycler view
         viewModel.serviceList.observe(viewLifecycleOwner, Observer {
+            if (it.isEmpty()) {
+                binding.noService.visibility = View.VISIBLE
+            } else {
+                binding.noService.visibility = View.GONE
+            }
+
             list.clear()
             list.addAll(it)
             adapter.notifyDataSetChanged()

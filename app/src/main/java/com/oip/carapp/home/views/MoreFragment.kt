@@ -12,6 +12,7 @@ import com.oip.carapp.authentication.views.LoginActivity
 import com.oip.carapp.databinding.FragmentMoreBinding
 import com.oip.carapp.utils.Constants
 import com.oip.carapp.utils.PreferencesHandler
+import com.oip.carapp.utils.unsubscribeToAllTopic
 import com.squareup.picasso.Picasso
 
 class MoreFragment : BaseFragment() {
@@ -42,6 +43,7 @@ class MoreFragment : BaseFragment() {
             it.findNavController().navigate(R.id.action_moreFragment_to_settingsFragment)
         }
         binding.logout.setOnClickListener {
+            unsubscribeToAllTopic()//FCM unsubscribe
             PreferencesHandler.setIsLogin(false)
             PreferencesHandler.clearPreferences()
             val intent = Intent(requireActivity(), LoginActivity::class.java)

@@ -74,7 +74,6 @@
                     android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="70dp"
-                    android:src="@drawable/profile_history"
                     app:civ_border_color="@color/yellow"
                     app:civ_border_width="2dp">
 
@@ -85,7 +84,7 @@
                         android:layout_centerInParent="true"
                         app:civ_border_color="@color/yellow"
                         app:civ_border_width="2dp"
-                        tools:src="@drawable/profile_history" />
+                        tools:src="@drawable/profile_placeholder" />
 
                     <ImageView
                         android:id="@+id/uploadIcon"

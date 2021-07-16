@@ -15,6 +15,7 @@ import com.oip.carapp.CustomTypefaceSpan
 import com.oip.carapp.R
 import com.oip.carapp.authentication.viewmodel.SignUpViewModel
 import com.oip.carapp.databinding.ActivitySignUpBinding
+import com.oip.carapp.utils.hideKeyboard
 import com.oip.carapp.utils.hideProgressBar
 import com.oip.carapp.utils.showProgressBar
 import com.oip.carapp.utils.toast
@@ -53,6 +54,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         signUp.setOnClickListener {
+            hideKeyboard()
             showProgressBar(window, progress)
             viewModel.register(
                 email.text.toString().trim(),

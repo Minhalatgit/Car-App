@@ -25,6 +25,7 @@ var router = function(){
     Router.post('/getclientstores', storeController.getClientStores);
     Router.post('/getadminstores', storeController.getAdminStores);
     Router.post('/deletestore', storeController.deleteStore);
+    Router.post('/getstore', storeController.getStore)
 
     return Router
 }

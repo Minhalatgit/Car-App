@@ -59,5 +59,14 @@
             android:visibility="gone"
             app:SpinKit_Color="@color/dark" />
 
+        <TextView
+            android:id="@+id/noAppointment"
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No Appointment Available"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/dark" />
     </RelativeLayout>
 </layout>

@@ -81,4 +81,7 @@ interface ApiInterface {
 
     @POST("appointment/getappointments")
     suspend fun getAppointments(): BaseResponse<List<AppointmentResponse>>
+
+    @POST("notification/getnotifications")
+    suspend fun getNotifications(): BaseResponse<List<NotificationResponse>>
 }

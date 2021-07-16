@@ -77,9 +77,20 @@ exports.createStore = async (req, res) =>{
 exports.updateStore = async (req, res) =>{
 
     try {
-        const body = req.body;
-        console.log(body);
-        sql.query('UPDATE store SET store_title = ? , store_address = ? , store_lat = ? , store_long = ? , store_image = ? , is_deleted = ? WHERE id = ?', [ body.store_title, body.store_address, body.store_lat, body.store_long, req.file.path, body.is_deleted , body.store_id], (err, result) => {
+        const body = JSON.parse(JSON.stringify(req.body));
+        
+        let query
+        if (req.file) {
+            let path = req.file.path
+            path = path.replace("\\", "\\\\")
+            console.log(path);
+
+            query = `UPDATE store SET store_title = '${body.store_title}' , store_address = '${body.store_address}' , store_lat = '${body.store_lat}' , store_long = '${body.store_long}' , store_image = '${path}' WHERE id = '${body.store_id}'`
+        } else {
+            query = `UPDATE store SET store_title = '${body.store_title}' , store_address = '${body.store_address}' , store_lat = '${body.store_lat}' , store_long = '${body.store_long}' WHERE id = '${body.store_id}'`
+        }
+     
+        sql.query(query, (err, result) => {
             if(!err) {
                 return res.json({
                     status: true,
@@ -102,14 +113,50 @@ exports.deleteStore = async (req, res) =>{
 
     try {
         const body = req.body;
-        sql.query('UPDATE store SET is_deleted = 1 WHERE id = ? ', [ body.store_id ], (err, result) => {
+        const is_deleted = req.body.is_deleted
+        console.log(body)
+
+        let msg = ""
+        if (is_deleted == "1") {
+            msg = 'Store disabled successfully'
+        } else{
+            msg = 'Store enabled successfully'
+        }
+
+        sql.query('UPDATE store SET is_deleted = ? WHERE id = ? ', [ is_deleted, body.store_id ], (err, result) => {
             if(!err) {
                 console.log(result)
                 return res.json({
                     status: true,
-                    msg: "Store deleted successfully"
+                    msg: msg
                 })
             } else{
+                res.send(err);
+            }
+        })
+    } catch(e) {
+        console.log('Catch an error: ', e)
+        return res.json({
+            status: false,
+            msg: "Something went wrong",
+        }) 
+    }
+};
+
+exports.getStore = async (req, res) =>{
+
+    try {
+        const store_id = req.body.store_id;
+        
+        sql.query('SELECT * from store WHERE id = ?',[ store_id ], (err, result) => {
+            if(!err) {
+                console.log(result)
+                return res.json({
+                    status: true,
+                    msg: "Store fetched successfully",
+                    data: result[0]
+                })
+            } else {
                 res.send(err);
             }
         })

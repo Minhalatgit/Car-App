@@ -13,8 +13,8 @@
             style="@style/BoldTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Flat OFF"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            tools:text="Flat OFF" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/offerList"
@@ -33,5 +33,14 @@
             android:visibility="gone"
             app:SpinKit_Color="@color/dark" />
 
+        <TextView
+            android:id="@+id/noOffer"
+            style="@style/MediumTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No Offer Available"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/dark" />
     </RelativeLayout>
 </layout>

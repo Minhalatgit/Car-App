@@ -1,22 +1,36 @@
 package com.oip.carapp.utils
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.view.View
 import android.view.Window
-import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.github.ybq.android.spinkit.SpinKitView
 import com.oip.carapp.R
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Activity.hideKeyboard(): Boolean {
+    return (getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+        .hideSoftInputFromWindow((currentFocus ?: View(this)).windowToken, 0)
+}
+
+fun Activity.updateProfilePicture() {
+    Picasso.get()
+        .load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
+        .placeholder(R.drawable.profile_placeholder)
+        .into(this.profileImage)
 }
 
 fun ImageView.updateFavouriteIconColor(isFavourite: String, context: Context) {

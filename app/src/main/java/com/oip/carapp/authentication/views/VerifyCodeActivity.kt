@@ -14,6 +14,7 @@ import com.oip.carapp.R
 import com.oip.carapp.authentication.viewmodel.VerifyCodeViewModel
 import com.oip.carapp.databinding.ActivityVerifyCodeBinding
 import com.oip.carapp.home.MainActivity
+import com.oip.carapp.utils.hideKeyboard
 import com.oip.carapp.utils.hideProgressBar
 import com.oip.carapp.utils.showProgressBar
 import com.oip.carapp.utils.toast
@@ -53,6 +54,7 @@ class VerifyCodeActivity : AppCompatActivity() {
         initViews()
 
         verify.setOnClickListener {
+            hideKeyboard()
             val code = otpOne.text.toString() + otpTwo.text + otpThree.text + otpFour.text
             Log.d(TAG, code)
             if (this::email.isInitialized) {

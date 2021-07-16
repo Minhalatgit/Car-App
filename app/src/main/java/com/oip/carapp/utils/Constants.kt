@@ -2,10 +2,10 @@ package com.oip.carapp.utils
 
 object Constants {
 
-    const val BASE_URL = "http://10.0.2.2:5000/api/"
-    //const val BASE_URL = "http://webprojectmockup.com:9446/api/"
-    const val BASE_URL_IMAGES = "http://10.0.2.2:5000/"
-    //const val BASE_URL_IMAGES = "http://webprojectmockup.com:9446/"
+//    const val BASE_URL = "http://10.0.2.2:5000/api/"
+    const val BASE_URL = "http://webprojectmockup.com:9446/api/"
+//    const val BASE_URL_IMAGES = "http://10.0.2.2:5000/"
+    const val BASE_URL_IMAGES = "http://webprojectmockup.com:9446/"
 
     // SP
     const val PREF_NAME = "car_app_preferences"
@@ -15,8 +15,5 @@ object Constants {
     const val PROFILE_IMAGE_URL = "profile_image_url"
     const val USERNAME = "username"
     const val OFFER = "offer"
-
-    //Date formats
-
-
+    
 }

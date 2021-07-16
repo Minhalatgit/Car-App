@@ -175,6 +175,7 @@ class ProfileFragment : BaseFragment() {
             )
             Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
                 .placeholder(R.drawable.profile_placeholder).into(profileImage)
+            requireActivity().updateProfilePicture()
         }
     }
 

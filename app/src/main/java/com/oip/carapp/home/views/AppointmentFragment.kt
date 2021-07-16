@@ -38,6 +38,12 @@ class AppointmentFragment : BaseFragment() {
         historyRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         viewModel.appointmentList.observe(viewLifecycleOwner, Observer {
+            if (it.isEmpty()) {
+                binding.noAppointment.visibility = View.VISIBLE
+            } else {
+                binding.noAppointment.visibility = View.GONE
+            }
+
             hideProgressBar(window, binding.progress)
             historyRecyclerView.adapter = AppointmentAdapter(it)
         })

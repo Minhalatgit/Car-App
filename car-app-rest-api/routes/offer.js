@@ -25,6 +25,7 @@ var router = function(){
     Router.post('/getclientoffers', offerController.getClientOffers);
     Router.post('/getadminoffers', offerController.getAdminOffers);
     Router.post('/deleteoffer', offerController.deleteOffer);
+    Router.post('/getoffer', offerController.getOffer);
 
     return Router
 }

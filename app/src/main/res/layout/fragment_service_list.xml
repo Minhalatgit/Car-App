@@ -34,15 +34,14 @@
             app:SpinKit_Color="@color/dark" />
 
         <TextView
-            android:id="@+id/notAvailable"
-            style="@style/RegularTextView"
+            android:id="@+id/noService"
+            style="@style/MediumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="17sp"
+            android:text="No service Available"
             android:visibility="gone"
-            tools:text="No service available" />
-
+            app:SpinKit_Color="@color/dark" />
     </RelativeLayout>
 
 </layout>

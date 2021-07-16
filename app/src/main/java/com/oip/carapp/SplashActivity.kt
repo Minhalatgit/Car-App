@@ -8,11 +8,14 @@ import android.os.Looper
 import com.oip.carapp.authentication.views.LoginActivity
 import com.oip.carapp.home.MainActivity
 import com.oip.carapp.utils.PreferencesHandler
+import com.oip.carapp.utils.createNotificationChannel
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        createNotificationChannel(this)
 
         Handler(Looper.getMainLooper()).postDelayed({
 

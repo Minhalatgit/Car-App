@@ -11,9 +11,7 @@ import com.oip.carapp.R
 import com.oip.carapp.authentication.viewmodel.LoginViewModel
 import com.oip.carapp.databinding.ActivityLoginBinding
 import com.oip.carapp.home.MainActivity
-import com.oip.carapp.utils.hideProgressBar
-import com.oip.carapp.utils.showProgressBar
-import com.oip.carapp.utils.toast
+import com.oip.carapp.utils.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -33,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d(TAG, "Observer called")
             hideProgressBar(window, progress)
             if (it.isValid) {
+                subscribeToAllTopic()//FCM subscription
                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
@@ -43,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
         })
 
         signIn.setOnClickListener {
+            hideKeyboard()
             showProgressBar(window, progress)
             viewModel.login(email.text.toString().trim(), password.text.toString().trim())
         }

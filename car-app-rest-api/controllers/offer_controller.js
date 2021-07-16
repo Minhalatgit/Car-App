@@ -78,9 +78,20 @@ exports.createOffer = async (req, res) =>{
 exports.updateOffer = async (req, res) =>{
 
     try {
-        const body = req.body;
-        console.log(body);
-        sql.query('UPDATE offer SET offer_title = ? , offer_discount = ? , offer_image = ? , is_deleted = ? WHERE id = ?', [ body.offer_title, body.offer_discount, req.file.path, body.is_deleted , body.offer_id], (err, result) => {
+        const body = JSON.parse(JSON.stringify(req.body));
+        
+        let query
+        if (req.file) {
+            let path = req.file.path
+            path = path.replace("\\", "\\\\")
+            console.log(path);
+
+            query = `UPDATE offer SET offer_title = '${body.offer_title}' , offer_discount = '${body.offer_discount}' , offer_image = '${path}' WHERE id = '${body.offer_id}'`
+        } else {
+            query = `UPDATE offer SET offer_title = '${body.offer_title}' , offer_discount = '${body.offer_discount}' WHERE id = '${body.offer_id}'`
+        }
+     
+        sql.query(query, (err, result) => {
             if(!err) {
                 return res.json({
                     status: true,
@@ -103,14 +114,50 @@ exports.deleteOffer = async (req, res) =>{
 
     try {
         const body = req.body;
-        sql.query('UPDATE offer SET is_deleted = 1 WHERE id = ?', [ body.offer_id ], (err, result) => {
+        const is_deleted = req.body.is_deleted
+        console.log(body)
+
+        let msg = ""
+        if (is_deleted == "1") {
+            msg = 'Offer disabled successfully'
+        } else{
+            msg = 'Offer enabled successfully'
+        }
+
+        sql.query('UPDATE offer SET is_deleted = ? WHERE id = ?', [ is_deleted, body.offer_id ], (err, result) => {
             if(!err) {
                 console.log(result)
                 return res.json({
                     status: true,
-                    msg: "Offer deleted successfully"
+                    msg: msg
                 })
             } else{
+                res.send(err);
+            }
+        })
+    } catch(e) {
+        console.log('Catch an error: ', e)
+        return res.json({
+            status: false,
+            msg: "Something went wrong",
+        }) 
+    }
+};
+
+exports.getOffer = async (req, res) =>{
+
+    try {
+        const offer_id = req.body.offer_id;
+        
+        sql.query('SELECT * from offer WHERE id = ?',[ offer_id ], (err, result) => {
+            if(!err) {
+                console.log(result)
+                return res.json({
+                    status: true,
+                    msg: "Offer fetched successfully",
+                    data: result[0]
+                })
+            } else {
                 res.send(err);
             }
         })
