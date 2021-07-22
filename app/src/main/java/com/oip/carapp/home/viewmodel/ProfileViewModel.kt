@@ -3,7 +3,6 @@ package com.oip.carapp.home.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.oip.carapp.BaseViewModel
 import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.authentication.model.Result
@@ -11,18 +10,11 @@ import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
 import com.oip.carapp.utils.PreferencesHandler
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
-import kotlin.math.log
-
 
 class ProfileViewModel : BaseViewModel() {
 
@@ -112,8 +104,8 @@ class ProfileViewModel : BaseViewModel() {
                     if (updateProfileResult.status) {
                         Log.d(TAG, "onResponse: ${updateProfileResult.data}")
                         updateProfileResult.apply {
-                            PreferencesHandler.setUsername(data.name)
-                            PreferencesHandler.setProfileImageUrl(data.image)
+                            PreferencesHandler.setUsername(data.name ?: "")
+                            PreferencesHandler.setProfileImageUrl(data.image ?: "")
                             _updatedProfileData.value = data!!
                         }
                     } else {

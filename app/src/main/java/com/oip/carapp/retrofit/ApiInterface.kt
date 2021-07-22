@@ -1,8 +1,8 @@
 package com.oip.carapp.retrofit
 
+import com.oip.carapp.Campaign
 import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.home.models.*
-import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -84,4 +84,14 @@ interface ApiInterface {
 
     @POST("notification/getnotifications")
     suspend fun getNotifications(): BaseResponse<List<NotificationResponse>>
+
+    @FormUrlEncoded
+    @POST("service/bookservice")
+    suspend fun bookService(
+        @Field("service_id") serviceId: String,
+        @Field("appointment_date") appointmentDate: String
+    ): BaseResponse<Unit>
+
+    @GET("campaign-pagination")
+    fun getCampaigns(@Query("page") page: String): Call<Campaign>
 }

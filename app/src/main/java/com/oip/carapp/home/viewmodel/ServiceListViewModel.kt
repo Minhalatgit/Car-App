@@ -3,15 +3,11 @@ package com.oip.carapp.home.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.oip.carapp.BaseViewModel
+import com.oip.carapp.authentication.model.Result
 import com.oip.carapp.home.models.ServiceResponse
-import com.oip.carapp.retrofit.BaseResponse
 import com.oip.carapp.retrofit.RetrofitClient
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ServiceListViewModel : BaseViewModel() {
 
@@ -29,9 +25,12 @@ class ServiceListViewModel : BaseViewModel() {
     val favouriteUpdated: LiveData<Boolean>
         get() = _favouriteUpdated
 
+    private val _bookingResult = MutableLiveData<Result>()
+    val bookingResult: LiveData<Result>
+        get() = _bookingResult
+
     init {
         Log.d(TAG, "ViewModel initialized")
-        //_favouriteUpdated.value = false
     }
 
     fun getServices(catId: String) {
@@ -64,9 +63,21 @@ class ServiceListViewModel : BaseViewModel() {
         }
     }
 
-    fun favouriteEventCompleted() {
-
+    fun bookService(serviceId: String, appointmentDate: String) {
+        coroutineScope.launch {
+            try {
+                val bookingServiceResult =
+                    RetrofitClient.apiInterface.bookService(serviceId, appointmentDate)
+                bookingServiceResult.apply {
+                    _bookingResult.value = Result(status, msg)
+                    Log.d(TAG, "bookService: $msg")
+                }
+            } catch (t: Throwable) {
+                Log.e(TAG, "onFailure: ${t.message}")
+            }
+        }
     }
+
 
     override fun onCleared() {
         super.onCleared()

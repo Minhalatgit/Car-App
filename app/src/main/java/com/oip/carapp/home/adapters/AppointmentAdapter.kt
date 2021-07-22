@@ -30,13 +30,13 @@ class AppointmentAdapter(private val list: List<AppointmentResponse>) :
             username.text = appointment.title
             amount.text = "$${appointment.amount}"
             date.text = getDate(
-                appointment.createdAt, SERVER_DATE_FORMAT,
+                appointment.appointmentDate, SERVER_DATE_FORMAT,
                 APPOINTMENT_DATE_FORMAT
             )
             serviceText.text = appointment.serviceTitle
             providerText.text = appointment.storeTitle
             timeText.text = getDate(
-                appointment.createdAt, SERVER_DATE_FORMAT,
+                appointment.appointmentDate, SERVER_DATE_FORMAT,
                 APPOINTMENT_TIME_FORMAT
             )
         }

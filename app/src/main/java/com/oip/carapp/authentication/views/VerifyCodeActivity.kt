@@ -42,7 +42,7 @@ class VerifyCodeActivity : AppCompatActivity() {
             Log.d(TAG, "Result observer called")
             hideProgressBar(window, progress)
             if (it.isValid) {
-                toast(it.message)
+                //toast(it.message)
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

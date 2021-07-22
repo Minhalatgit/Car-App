@@ -68,7 +68,10 @@ class ProfileFragment : BaseFragment() {
                 binding.usernameTwo.text.toString().trim(),
                 binding.phone.text.toString().trim(),
                 selectedGender,
-                binding.birthday.text.toString(),
+                getDate(
+                    binding.birthday.text.toString(), BIRTHDAY_DATE_FORMAT,
+                    SERVER_BIRTHDAY_DATE_FORMAT
+                ),
                 PreferencesHandler.getUserId()!!,
                 if (fileUri == null) null else File(fileUri?.path!!) // if fileuri is empty send null
             )
@@ -159,22 +162,27 @@ class ProfileFragment : BaseFragment() {
     private fun setProfileData(profileData: AuthResponse) {
         selectedGender = profileData.gender
         binding.apply {
-            username.text = if (profileData.name == "") "N/A" else profileData.name
-            usernameTwo.setText(if (profileData.name == "") "N/A" else profileData.name)
-            phone.setText(if (profileData.phone == "") "N/A" else profileData.phone)
+            username.text = profileData.name ?: "N/A"
+            usernameTwo.setText(profileData.name ?: "N/A")
+            phone.setText(profileData.phone ?: "N/A")
             email.text = profileData.email
             gender.selection = if (profileData.gender.equals(
                     "male",
                     true
                 )
             ) BooleanSelectionView.Selection.Start else BooleanSelectionView.Selection.End
-            birthday.text = if (profileData.birthday == "") "N/A" else getDate(
-                profileData.birthday,
-                SERVER_DATE_FORMAT,
-                BIRTHDAY_DATE_FORMAT
-            )
-            Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
-                .placeholder(R.drawable.profile_placeholder).into(profileImage)
+            if (profileData.birthday == null) {
+                birthday.text = "N/A"
+            } else {
+                birthday.text = getDate(
+                    profileData.birthday,
+                    SERVER_BIRTHDAY_DATE_FORMAT,
+                    BIRTHDAY_DATE_FORMAT
+                )
+            }
+            Picasso.get().load(profileData.image).error(R.drawable.profile_placeholder)
+                .placeholder(R.drawable.profile_placeholder)
+                .into(binding.profileImage)
             requireActivity().updateProfilePicture()
         }
     }

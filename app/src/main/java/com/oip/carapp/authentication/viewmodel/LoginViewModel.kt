@@ -42,8 +42,8 @@ class LoginViewModel : BaseViewModel() {
                             _result.value = Result(true, msg)
                             Log.d(TAG, msg)
                             PreferencesHandler.apply {
-                                setUsername(data.name)
-                                setProfileImageUrl(data.image)
+                                setUsername(data.name?:"")
+                                setProfileImageUrl(data.image?:"")
                                 //setToken(data.token)
                                 setUserId(data.id)
                                 setIsLogin(true)

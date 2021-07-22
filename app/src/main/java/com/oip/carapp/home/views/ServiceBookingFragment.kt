@@ -1,5 +1,6 @@
 package com.oip.carapp.home.views
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -10,18 +11,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentServiceBookingBinding
 import com.oip.carapp.home.models.ServiceResponse
 import com.oip.carapp.home.viewmodel.ServiceListViewModel
+import com.oip.carapp.utils.*
 import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
-import com.oip.carapp.utils.PreferencesHandler
-import com.oip.carapp.utils.toast
-import com.oip.carapp.utils.updateFavouriteIconColor
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
+import kotlinx.android.synthetic.main.fragment_service_booking.*
+import java.util.*
 
 class ServiceBookingFragment : BaseFragment() {
 
@@ -58,10 +60,30 @@ class ServiceBookingFragment : BaseFragment() {
                 binding.favourite.updateFavouriteIconColor("0", requireContext())
             }
         })
+        viewModel.bookingResult.observe(viewLifecycleOwner, Observer {
+            hideProgressBar(window, binding.progress)
+            if (it.isValid) {
+                //Booking success
+                Navigation.findNavController(requireActivity(), R.id.navHostFragment)
+                    .navigate(ServiceBookingFragmentDirections.actionServiceBookingFragmentToHomeFragment())
+            }
+            requireActivity().toast(it.message)
+        })
 
         binding.bookService.setOnClickListener {
-            //viewModel.bookService("")
-            requireContext().toast("Book service")
+
+            if (binding.bookingDate.text == "Select date" || binding.bookingTime.text == "Select time") {
+                return@setOnClickListener
+            }
+
+            val bookingDateTime = getDate(
+                "${binding.bookingDate.text} ${binding.bookingTime.text}",
+                SERVICE_BOOKING_DATE_TIME_FORMAT, SERVER_DATE_FORMAT
+            )
+            Log.d(TAG, bookingDateTime)
+            showProgressBar(window, binding.progress)
+
+            viewModel.bookService(serviceData.id, bookingDateTime)
         }
 
         binding.favourite.setOnClickListener {
@@ -75,6 +97,13 @@ class ServiceBookingFragment : BaseFragment() {
         binding.back.setOnClickListener {
             it.findNavController().popBackStack()
         }
+
+        binding.bookingDate.transformIntoDatePicker(
+            requireContext(),
+            APPOINTMENT_DATE_FORMAT,
+            Date()
+        )
+        binding.bookingTime.transformIntoTimePicker(requireContext())
 
         return binding.root
     }

@@ -79,6 +79,10 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
             intent.data = Uri.parse("tel:+923312226066")
             startActivity(intent)
         }
+        binding.discount.setOnClickListener {
+            Navigation.findNavController(requireActivity(), R.id.navHostFragment)
+                .navigate(HomeFragmentDirections.actionHomeFragmentToTestFragment2())
+        }
 
         return binding.root
     }

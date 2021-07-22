@@ -109,13 +109,46 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/dateTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/offerLayout"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bookingDate"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_border_bg"
+                    android:padding="10dp"
+                    android:text="Select date" />
+
+                <TextView
+                    android:id="@+id/bookingTime"
+                    style="@style/RegularTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_border_bg"
+                    android:padding="10dp"
+                    android:text="Select time" />
+
+            </LinearLayout>
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileImage"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_below="@+id/offerLayout"
                 android:layout_marginTop="30dp"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/username"
@@ -126,7 +159,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/profileImage"
                 android:text="Shin Ryujin"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/designation"
@@ -137,7 +171,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/profileImage"
                 android:text="Owner"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/distance"
@@ -147,7 +182,8 @@
                 android:layout_alignTop="@id/designation"
                 android:layout_alignParentEnd="true"
                 android:text="2.5 Km"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/description"
@@ -157,16 +193,27 @@
                 android:layout_below="@id/profileImage"
                 android:layout_marginTop="20dp"
                 android:text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in... Read More"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/bookService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/description"
+                android:layout_below="@id/dateTimeLayout"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/sign_in_button_background"
                 android:text="Book Service" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/progress"
+                style="@style/SpinKitView.Circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:elevation="2dp"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/dark" />
 
         </RelativeLayout>
     </LinearLayout>

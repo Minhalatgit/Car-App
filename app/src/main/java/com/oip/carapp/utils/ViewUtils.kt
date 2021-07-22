@@ -2,14 +2,13 @@ package com.oip.carapp.utils
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import com.oip.carapp.R
 import com.squareup.picasso.Picasso
@@ -83,4 +82,52 @@ fun TextView.transformIntoDatePicker(context: Context, format: String, maxDate: 
             show()
         }
     }
+}
+
+fun TextView.transformIntoTimePicker(context: Context) {
+    val currentTime = Calendar.getInstance()
+    val hour = currentTime.get(Calendar.HOUR_OF_DAY)
+    val minute = currentTime.get(Calendar.MINUTE)
+
+    val timePickerListener = TimePickerDialog.OnTimeSetListener { _, selectedHour, selectedMinute ->
+        Log.d(
+            "TIME",
+            "Selected hour: $selectedHour and Selected minute: $selectedMinute"
+        )
+        text = "$selectedHour:$selectedMinute"
+//        text = if (selectedHour < 12) {
+//            "$selectedHour:$selectedMinute AM"
+//        } else {
+//            "$selectedHour:$selectedMinute PM"
+//        }
+    }
+
+    setOnClickListener {
+        TimePickerDialog(
+            context, R.style.DialogTheme,
+            timePickerListener,
+            hour, minute, true
+        ).run {
+//            maxDate?.time?.also { datePicker.maxDate = it }
+            show()
+        }
+    }
+}
+
+fun showTimePickerDialog(context: Context): TimePickerDialog {
+    val currentTime = Calendar.getInstance()
+    val hour = currentTime.get(Calendar.HOUR_OF_DAY)
+    val minute = currentTime.get(Calendar.MINUTE)
+    val timePickerDialog = TimePickerDialog(
+        context,
+        { _, selectedHour, selectedMinute ->
+            Log.d(
+                "TIME",
+                "Selected hour: $selectedHour and Selected minute: $selectedMinute"
+            )
+        }, hour, minute, true
+    )
+    timePickerDialog.setTitle("Select Time")
+    timePickerDialog.show()
+    return timePickerDialog
 }

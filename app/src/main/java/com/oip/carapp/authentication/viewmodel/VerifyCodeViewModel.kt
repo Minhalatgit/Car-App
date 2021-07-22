@@ -2,7 +2,6 @@ package com.oip.carapp.authentication.viewmodel
 
 import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,13 +43,13 @@ class VerifyCodeViewModel : ViewModel() {
                     ) {
                         response.body()?.apply {
                             if (status) {
-                                if (data.status == 1){
+                                if (data.status == 1) {
                                     Log.d(TAG, msg)
                                     _result.value =
                                         Result(true, msg)
                                     PreferencesHandler.apply {
-                                        setUsername(data.name)
-                                        setProfileImageUrl(data.image)
+                                        setUsername(data.name ?: "")
+                                        setProfileImageUrl(data.image ?: "")
                                         //setToken(data.token)
                                         setUserId(data.id)
                                         setIsLogin(true)
