@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.oip.carapp.R
+import com.oip.carapp.retrofit.RetrofitClient
+import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
@@ -26,10 +28,22 @@ fun Activity.hideKeyboard(): Boolean {
 }
 
 fun Activity.updateProfilePicture() {
-    Picasso.get()
+    Picasso.Builder(this)
+        .downloader(OkHttp3Downloader(RetrofitClient.unSafeOkHttpClient().build()))
+        .build()
         .load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
         .placeholder(R.drawable.profile_placeholder)
         .into(this.profileImage)
+}
+
+fun Context.loadImage(imageView: ImageView, imagePath: String) {
+    Picasso.Builder(this)
+        .downloader(OkHttp3Downloader(RetrofitClient.unSafeOkHttpClient().build()))
+        .build()
+        .load(Constants.BASE_URL_IMAGES + imagePath)
+        .placeholder(R.drawable.profile_placeholder)
+        .error(R.drawable.profile_placeholder)
+        .into(imageView)
 }
 
 fun ImageView.updateFavouriteIconColor(isFavourite: String, context: Context) {

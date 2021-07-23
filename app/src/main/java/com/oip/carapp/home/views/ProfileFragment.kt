@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -20,10 +19,13 @@ import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.databinding.FragmentProfileBinding
 import com.oip.carapp.home.viewmodel.ProfileViewModel
 import com.oip.carapp.utils.*
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import me.mutasem.booleanselection.BooleanSelectionView
 import java.io.File
+import java.lang.Exception
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ProfileFragment : BaseFragment() {
 
@@ -39,6 +41,9 @@ class ProfileFragment : BaseFragment() {
 
     private lateinit var defaultEditTextBg: Drawable
     private var selectedGender = ""
+
+    val RESULT_IMAGE_MULTIPLE = 1
+    private var imageUris = ArrayList<Uri>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,12 +85,15 @@ class ProfileFragment : BaseFragment() {
         binding.uploadIcon.setOnClickListener {
             ImagePicker.with(this)
                 .crop()                    //Crop image(Optional), Check Customization for more option
-                .compress(1024)            //Final image size will be less than 1 MB(Optional)
+                .compress(1024) //Final image size will be less than 1 MB(Optional)
                 .maxResultSize(
                     1080,
                     1080
                 )    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start()
+
+//            pickImagesIntent()
+
         }
 
         viewModel.profileData.observe(viewLifecycleOwner, Observer {
@@ -180,15 +188,45 @@ class ProfileFragment : BaseFragment() {
                     BIRTHDAY_DATE_FORMAT
                 )
             }
-            Picasso.get().load(profileData.image).error(R.drawable.profile_placeholder)
-                .placeholder(R.drawable.profile_placeholder)
-                .into(binding.profileImage)
+            requireContext().loadImage(binding.profileImage, profileData.image!!)
+
             requireActivity().updateProfilePicture()
         }
     }
 
+    private fun pickImagesIntent() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(
+            Intent.createChooser(intent, "Select images"),
+            RESULT_IMAGE_MULTIPLE
+        )
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        Log.d(TAG, "onActivityResult: Called $data")
+//        if (resultCode == RESULT_OK && requestCode == RESULT_IMAGE_MULTIPLE) {
+//            if (data?.clipData != null) {
+//                //picked multiple images
+//                val selectedImageCount = data.clipData?.itemCount
+//                imageUris.clear()
+//                for (i in 0 until selectedImageCount!!) {
+//                    val imagerUri = data.clipData?.getItemAt(i)?.uri
+//                    imageUris.add(imagerUri!!)
+//                }
+//
+//                binding.profileImage.setImageURI(imageUris[0])
+//
+//            } else {
+//                //picked single image
+//            }
+//        }
+
+
         when (resultCode) {
             RESULT_OK -> {
                 val uri: Uri = data?.data!!

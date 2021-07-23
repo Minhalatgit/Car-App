@@ -11,6 +11,7 @@ import com.oip.carapp.R
 import com.oip.carapp.databinding.ActivityMainBinding
 import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
 import com.oip.carapp.utils.PreferencesHandler
+import com.oip.carapp.utils.loadImage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,8 +38,7 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.profileFragment)    // navigate to profile fragment
         }
 
-        Picasso.get().load(BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
-            .placeholder(R.drawable.profile_placeholder).into(profileImage)
+       loadImage(binding.profileImage, PreferencesHandler.getProfileImageUrl()!!)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment

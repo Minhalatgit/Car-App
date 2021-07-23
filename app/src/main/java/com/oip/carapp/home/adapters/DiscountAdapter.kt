@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oip.carapp.R
 import com.oip.carapp.home.models.OfferResponse
 import com.oip.carapp.utils.Constants.BASE_URL_IMAGES
+import com.oip.carapp.utils.loadImage
 import com.squareup.picasso.Picasso
 
 class DiscountAdapter(
@@ -46,8 +47,7 @@ class DiscountAdapter(
         holder.apply {
             name.text = discount.offerTitle
             percentage.text = discount.offerDiscount + "%"
-            Picasso.get().load(BASE_URL_IMAGES + discount.offerImage)
-                .placeholder(R.drawable.discount).into(image)
+            context.loadImage(image, discount.offerImage)
         }
 
     }
