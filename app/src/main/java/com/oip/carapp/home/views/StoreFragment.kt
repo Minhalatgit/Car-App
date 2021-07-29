@@ -1,5 +1,6 @@
 package com.oip.carapp.home.views
 
+import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
@@ -8,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.oip.carapp.BaseFragment
@@ -30,6 +35,7 @@ class StoreFragment : BaseFragment() {
 
     private val TAG = "MapFragment"
 
+    @SuppressLint("MissingPermission")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,11 +45,6 @@ class StoreFragment : BaseFragment() {
 
         viewModel = ViewModelProvider(this).get(StoreViewModel::class.java)
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         supportFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         supportFragment.getMapAsync {
             Log.d(TAG, "Map is ready")
@@ -81,11 +82,14 @@ class StoreFragment : BaseFragment() {
                 }
 
                 val options = MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon))
                     .position(LatLng(item.storeLatitude, item.storeLongitude))
                     .title(item.storeAddress)
 
                 googleMap.addMarker(options)
             }
         })
+
+        return binding.root
     }
 }

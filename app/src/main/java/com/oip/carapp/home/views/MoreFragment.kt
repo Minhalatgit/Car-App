@@ -12,6 +12,7 @@ import com.oip.carapp.authentication.views.LoginActivity
 import com.oip.carapp.databinding.FragmentMoreBinding
 import com.oip.carapp.utils.Constants
 import com.oip.carapp.utils.PreferencesHandler
+import com.oip.carapp.utils.loadImage
 import com.oip.carapp.utils.unsubscribeToAllTopic
 import com.squareup.picasso.Picasso
 
@@ -25,8 +26,7 @@ class MoreFragment : BaseFragment() {
     ): View {
         binding = FragmentMoreBinding.inflate(layoutInflater, container, false)
 
-        Picasso.get().load(Constants.BASE_URL_IMAGES + PreferencesHandler.getProfileImageUrl())
-            .placeholder(R.drawable.profile_placeholder).into(binding.profileImage)
+        requireContext().loadImage(binding.profileImage, PreferencesHandler.getProfileImageUrl()!!)
 
         binding.username.text = PreferencesHandler.getUsername()
 

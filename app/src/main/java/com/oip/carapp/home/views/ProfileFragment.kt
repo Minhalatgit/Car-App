@@ -1,7 +1,6 @@
 package com.oip.carapp.home.views
 
 import android.app.Activity.RESULT_OK
-import android.content.ContentResolver
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -10,33 +9,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.RadioButton
-import androidx.core.net.toFile
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.asksira.bsimagepicker.BSImagePicker
-import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.oip.carapp.BaseFragment
-import com.oip.carapp.BuildConfig
 import com.oip.carapp.R
 import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.databinding.FragmentProfileBinding
 import com.oip.carapp.home.viewmodel.ProfileViewModel
 import com.oip.carapp.utils.*
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import me.mutasem.booleanselection.BooleanSelectionView
 import java.io.File
-import java.lang.Exception
 import java.util.*
-import kotlin.collections.ArrayList
 
-class ProfileFragment : BaseFragment(), BSImagePicker.OnSingleImageSelectedListener,
-    BSImagePicker.OnMultiImageSelectedListener,
-    BSImagePicker.ImageLoaderDelegate,
-    BSImagePicker.OnSelectImageCancelledListener {
+class ProfileFragment : BaseFragment() {
 
     private val TAG = "ProfileFragment"
 
@@ -50,9 +37,6 @@ class ProfileFragment : BaseFragment(), BSImagePicker.OnSingleImageSelectedListe
 
     private lateinit var defaultEditTextBg: Drawable
     private var selectedGender = ""
-
-    val RESULT_IMAGE_MULTIPLE = 1
-    private var imageUris = ArrayList<Uri>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,16 +76,14 @@ class ProfileFragment : BaseFragment(), BSImagePicker.OnSingleImageSelectedListe
         }
 
         binding.uploadIcon.setOnClickListener {
-//            ImagePicker.with(this)
-//                .crop()                    //Crop image(Optional), Check Customization for more option
-//                .compress(1024) //Final image size will be less than 1 MB(Optional)
-//                .maxResultSize(
-//                    1080,
-//                    1080
-//                )    //Final image resolution will be less than 1080 x 1080(Optional)
-//                .start()
-
-            pickImagesIntent()
+            ImagePicker.with(this)
+                .crop()                    //Crop image(Optional), Check Customization for more option
+                .compress(1024) //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(
+                    1080,
+                    1080
+                )    //Final image resolution will be less than 1080 x 1080(Optional)
+                .start()
 
         }
 
@@ -203,51 +185,10 @@ class ProfileFragment : BaseFragment(), BSImagePicker.OnSingleImageSelectedListe
         }
     }
 
-    private fun pickImagesIntent() {
-//        val intent = Intent()
-//        intent.type = "image/*"
-//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-//        intent.action = Intent.ACTION_GET_CONTENT
-//        startActivityForResult(
-//            Intent.createChooser(intent, "Select images"),
-//            RESULT_IMAGE_MULTIPLE
-//        )
-
-        BSImagePicker.Builder("${BuildConfig.APPLICATION_ID}.fileprovider")
-            .isMultiSelect() //Set this if you want to use multi selection mode.
-            .setMinimumMultiSelectCount(2) //Default: 1.
-            .setMaximumMultiSelectCount(6) //Default: Integer.MAX_VALUE (i.e. User can select as many images as he/she wants)
-            .setMultiSelectBarBgColor(android.R.color.white) //Default: #FFFFFF. You can also set it to a translucent color.
-            .setMultiSelectTextColor(R.color.primary_text) //Default: #212121(Dark grey). This is the message in the multi-select bottom bar.
-            .setMultiSelectDoneTextColor(R.color.colorAccent) //Default: #388e3c(Green). This is the color of the "Done" TextView.
-            .setOverSelectTextColor(R.color.error_text) //Default: #b71c1c. This is the color of the message shown when user tries to select more than maximum select count.
-//            .disableOverSelectionMessage() //You can also decide not to show this over select message.
-            .build()
-            .show(childFragmentManager, "Picker")
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         Log.d(TAG, "onActivityResult: Called $data")
-//        if (resultCode == RESULT_OK && requestCode == RESULT_IMAGE_MULTIPLE) {
-//            if (data?.clipData != null) {
-//                //picked multiple images
-//                val selectedImageCount = data.clipData?.itemCount
-//                imageUris.clear()
-//                for (i in 0 until selectedImageCount!!) {
-//                    val imagerUri = data.clipData?.getItemAt(i)?.uri
-//                    imageUris.add(imagerUri!!)
-//                }
-//
-//                binding.profileImage.setImageURI(imageUris[0])
-//
-//            } else {
-//                //picked single image
-//            }
-//        }
-
-
         when (resultCode) {
             RESULT_OK -> {
                 val uri: Uri = data?.data!!
@@ -261,30 +202,5 @@ class ProfileFragment : BaseFragment(), BSImagePicker.OnSingleImageSelectedListe
                 Log.d(TAG, "onActivityResult: Task Cancelled")
             }
         }
-    }
-
-    override fun onSingleImageSelected(uri: Uri?, tag: String?) {
-
-    }
-
-    override fun onMultiImageSelected(uriList: MutableList<Uri>?, tag: String?) {
-        Log.d(TAG, "onMultiImageSelected: $uriList")
-        if (uriList != null) {
-            imageUris.addAll(uriList)
-        }
-        fileUri = imageUris[0]
-
-       requireContext().contentResolver.openInputStream(fileUri!!)
-        binding.profileImage.setImageURI(fileUri)
-    }
-
-    override fun loadImage(imageUri: Uri?, ivImage: ImageView?) {
-        Log.d(TAG, "loadImage: ")
-        if (ivImage != null)
-            Glide.with(requireActivity()).load(imageUri).into(ivImage)
-    }
-
-    override fun onCancelled(isMultiSelecting: Boolean, tag: String?) {
-        Log.d(TAG, "onCancelled: ")
     }
 }
