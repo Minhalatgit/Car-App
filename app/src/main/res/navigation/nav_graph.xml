@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/testFragment"
-        android:name="com.oip.carapp.TestFragment"
+        android:name="com.oip.carapp.pagination.TestFragment"
         android:label="fragment_test"
         tools:layout="@layout/fragment_test" />
 </navigation>

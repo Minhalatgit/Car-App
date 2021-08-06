@@ -1,4 +1,4 @@
-package com.oip.carapp
+package com.oip.carapp.pagination
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

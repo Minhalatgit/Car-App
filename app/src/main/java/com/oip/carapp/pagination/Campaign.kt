@@ -1,4 +1,4 @@
-package com.oip.carapp
+package com.oip.carapp.pagination
 
 import com.google.gson.annotations.SerializedName
 

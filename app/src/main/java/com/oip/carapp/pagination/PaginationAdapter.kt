@@ -1,4 +1,4 @@
-package com.oip.carapp
+package com.oip.carapp.pagination
 
 import android.content.Context
 import android.util.Log
@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.oip.carapp.R
 import com.squareup.picasso.Picasso
 
 class PaginationAdapter(private var context: Context, private var campaignList: ArrayList<CampaignData>) :

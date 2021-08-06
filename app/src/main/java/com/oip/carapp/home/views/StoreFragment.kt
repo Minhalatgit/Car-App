@@ -1,6 +1,7 @@
 package com.oip.carapp.home.views
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
@@ -9,19 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentStoreBinding
 import com.oip.carapp.home.viewmodel.StoreViewModel
+import com.oip.carapp.utils.toast
 import java.lang.Exception
 
 class StoreFragment : BaseFragment() {
@@ -55,18 +52,21 @@ class StoreFragment : BaseFragment() {
         viewModel.storeList.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "onCreateView: $it")
 
+            val latLngList = mutableListOf<LatLng>()
+
             if (it.isNotEmpty()) {
                 googleMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(
                             it[0].storeLatitude,
                             it[0].storeLongitude
-                        ), 8f
+                        ), 5f
                     )
                 )
             }
 
             for (item in it) {
+                latLngList.add(LatLng(item.storeLatitude, item.storeLongitude))
 
                 var address: String? = null
                 val addresses = Geocoder(requireContext())
@@ -82,11 +82,23 @@ class StoreFragment : BaseFragment() {
                 }
 
                 val options = MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon))
+                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_icon))
                     .position(LatLng(item.storeLatitude, item.storeLongitude))
-                    .title(item.storeAddress)
+                    .title(address ?: item.storeAddress)
 
                 googleMap.addMarker(options)
+            }
+
+            googleMap.addPolyline(PolylineOptions().apply {
+                addAll(latLngList)
+                width(15f)
+                color(Color.RED)
+                geodesic(true)
+                clickable(true)
+            })
+
+            googleMap.setOnPolylineClickListener {
+                requireContext().toast("Polyline")
             }
         })
 

@@ -5,7 +5,7 @@ var cors = require('cors')
 
 app.use(cors());
 app.options('*', cors())
-app.use('/uploads', express.static('uploads'));
+app.use(express.static('uploads'));
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
 

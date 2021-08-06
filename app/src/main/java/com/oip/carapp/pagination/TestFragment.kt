@@ -1,11 +1,11 @@
-package com.oip.carapp
+package com.oip.carapp.pagination
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.oip.carapp.R
 import com.oip.carapp.retrofit.RetrofitClient
 import kotlinx.android.synthetic.main.fragment_test.*
 import retrofit2.Call

@@ -1,6 +1,6 @@
 package com.oip.carapp.retrofit
 
-import com.oip.carapp.Campaign
+import com.oip.carapp.pagination.Campaign
 import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.home.models.*
 import okhttp3.MultipartBody

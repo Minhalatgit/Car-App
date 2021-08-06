@@ -13,7 +13,8 @@
             android:layout_height="wrap_content"
             android:background="@color/yellow"
             android:orientation="horizontal"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <TextView
                 style="@style/BoldTextView"
