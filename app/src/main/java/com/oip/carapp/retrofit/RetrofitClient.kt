@@ -42,7 +42,7 @@ object RetrofitClient {
         okHttpClient.addInterceptor(logging)
 
         Retrofit.Builder()
-            .baseUrl("https://webprojectmockup.com/custom/raisemefunds/public/api/")
+            .baseUrl("https://foody.activageshropshire.co.uk")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient.build())
             .build()

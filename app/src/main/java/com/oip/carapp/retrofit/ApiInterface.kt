@@ -5,6 +5,7 @@ import com.oip.carapp.authentication.model.AuthResponse
 import com.oip.carapp.home.models.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -94,4 +95,7 @@ interface ApiInterface {
 
     @GET("campaign-pagination")
     fun getCampaigns(@Query("page") page: String): Call<Campaign>
+
+    @GET("/foodapi/6065c3d41fc5e515ee7b1078/rec/food")
+    fun getTest(@Query("meal_type") mealType: String): Call<Any>
 }

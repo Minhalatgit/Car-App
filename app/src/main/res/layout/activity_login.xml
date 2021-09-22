@@ -62,6 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:drawableEnd="@drawable/eye"
                     android:padding="15dp"
                     android:textSize="14sp"
                     tools:text="123456" />

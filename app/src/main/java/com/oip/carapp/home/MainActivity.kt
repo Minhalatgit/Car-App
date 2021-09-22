@@ -2,6 +2,7 @@ package com.oip.carapp.home
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -35,6 +36,9 @@ class MainActivity : AppCompatActivity() {
             this,
             R.layout.activity_main
         )
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navController = navHostFragment.navController
 
         if (isLocationPermissionGranted()) {
             //Permission is already granted
@@ -60,10 +64,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         loadImage(binding.profileImage, PreferencesHandler.getProfileImageUrl()!!)
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        navController = navHostFragment.navController
 
         bottomView.setupWithNavController(navController)
 
@@ -100,7 +100,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
 

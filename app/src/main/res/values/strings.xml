@@ -4,4 +4,5 @@
     <string name="fb_login_protocol_scheme">fb260738538966444</string>
     <string name="account_key_client_token">4675e7469b9459f24371129b1e54ce47</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="shortcut_short_label">Notification</string>
 </resources>

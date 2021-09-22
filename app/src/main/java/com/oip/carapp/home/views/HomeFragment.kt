@@ -22,6 +22,8 @@ import com.oip.carapp.home.adapters.ServiceAdapter
 import com.oip.carapp.home.models.ServiceResponse
 import com.oip.carapp.home.viewmodel.HomeViewModel
 import com.oip.carapp.utils.PreferencesHandler
+import com.ramotion.cardslider.CardSliderLayoutManager
+import com.ramotion.cardslider.CardSnapHelper
 import java.util.ArrayList
 
 class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
@@ -41,8 +43,11 @@ class HomeFragment : BaseFragment(), ServiceAdapter.ServiceListener,
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-        binding.discountList.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+//        binding.discountList.layoutManager =
+//            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
+        binding.discountList.layoutManager = CardSliderLayoutManager(activity)
+        CardSnapHelper().attachToRecyclerView(binding.discountList)
         binding.serviceList.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         binding.appointmentList.layoutManager =

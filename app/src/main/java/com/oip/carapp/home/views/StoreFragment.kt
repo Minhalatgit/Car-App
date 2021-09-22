@@ -14,11 +14,18 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.oip.carapp.BaseFragment
 import com.oip.carapp.R
 import com.oip.carapp.databinding.FragmentStoreBinding
 import com.oip.carapp.home.viewmodel.StoreViewModel
 import com.oip.carapp.utils.toast
+import org.json.JSONObject
 import java.lang.Exception
 
 class StoreFragment : BaseFragment() {
@@ -31,6 +38,8 @@ class StoreFragment : BaseFragment() {
     private lateinit var viewModel: StoreViewModel
 
     private val TAG = "MapFragment"
+
+    private lateinit var database: DatabaseReference
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -46,7 +55,8 @@ class StoreFragment : BaseFragment() {
         supportFragment.getMapAsync {
             Log.d(TAG, "Map is ready")
             googleMap = it
-            viewModel.getStores()
+            //viewModel.getStores()
+//            getLocationFromFirebase()
         }
 
         viewModel.storeList.observe(viewLifecycleOwner, Observer {
@@ -103,5 +113,43 @@ class StoreFragment : BaseFragment() {
         })
 
         return binding.root
+    }
+
+    fun getLocationFromFirebase() {
+        val latLngList = mutableListOf<LatLng>()
+        database = Firebase.database.reference.child("location");
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val location = JSONObject(snapshot.value.toString())
+                val lat = location.getString("lat").toDouble()
+                val long = location.getString("long").toDouble()
+
+                val latLng = LatLng(lat, long)
+
+                latLngList.add(latLng)
+
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5f))
+
+                val options = MarkerOptions()
+                    .draggable(true)
+                    .position(latLng)
+                    .title("Title")
+
+                googleMap.addPolyline(PolylineOptions().apply {
+                    addAll(latLngList)
+                    width(15f)
+                    color(Color.BLUE)
+                    geodesic(true)
+                    clickable(true)
+                })
+
+                googleMap.addMarker(options)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "onCancelled: ${error.message}")
+            }
+
+        })
     }
 }

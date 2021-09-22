@@ -18,6 +18,8 @@ import com.oip.carapp.home.viewmodel.OfferViewModel
 import com.oip.carapp.utils.PreferencesHandler
 import com.oip.carapp.utils.hideProgressBar
 import com.oip.carapp.utils.showProgressBar
+import com.ramotion.cardslider.CardSliderLayoutManager
+import com.ramotion.cardslider.CardSnapHelper
 
 class OfferFragment : BaseFragment(), DiscountAdapter.DiscountListener {
 
