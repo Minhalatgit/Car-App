@@ -55,7 +55,7 @@ class StoreFragment : BaseFragment() {
         supportFragment.getMapAsync {
             Log.d(TAG, "Map is ready")
             googleMap = it
-            //viewModel.getStores()
+            viewModel.getStores()
 //            getLocationFromFirebase()
         }
 

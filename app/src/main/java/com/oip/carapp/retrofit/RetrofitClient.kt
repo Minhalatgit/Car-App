@@ -32,23 +32,6 @@ object RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create())
     }
 
-    val retrofitClientTwo: ApiInterface by lazy {
-
-        val levelType: Level = if (BuildConfig.BUILD_TYPE.contentEquals("debug"))
-            Level.BODY else Level.NONE
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(levelType)
-        val okHttpClient = OkHttpClient.Builder()
-        okHttpClient.addInterceptor(logging)
-
-        Retrofit.Builder()
-            .baseUrl("https://foody.activageshropshire.co.uk")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient.build())
-            .build()
-            .create(ApiInterface::class.java)
-    }
-
     val apiInterface: ApiInterface by lazy {
         retrofitClient
             .build()
